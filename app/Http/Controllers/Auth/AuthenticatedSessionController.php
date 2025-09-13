@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request): \Symfony\Component\HttpFoundation\Response
     {
         $user = $request->validateCredentials();
 
@@ -45,7 +45,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $intended = $request->session()->pull(
+            'url.intended',
+            route('filament.siimut.pages.dashboard', absolute: true)
+        );
+
+        return Inertia::location($intended);
     }
 
     /**

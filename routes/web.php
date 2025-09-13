@@ -7,7 +7,10 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
-Route::get('dashboard', function () {
+// Optional: maintain backward compatibility for old /dashboard URL
+Route::redirect('dashboard', 'vue/dashboard')->middleware(['auth', 'verified']);
+
+Route::get('vue/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

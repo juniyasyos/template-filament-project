@@ -51,7 +51,7 @@ class SiimutPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                \App\Http\Middleware\Authenticate::class,
             ]);
     }
 }
