@@ -1,0 +1,55 @@
+/* Scoped design tokens for the Siimut panel, Tailwind v4 compatible */
+
+/* Light mode tokens */
+.fi-panel-siimut {
+  /* Surfaces */
+  --bg: hsl(0 0% 98%);
+  --bg-elev: hsl(0 0% 100%);
+  --bg-panel: hsl(0 0% 100%);
+  --bg-hover: hsl(0 0% 96%);
+
+  /* Borders & Rings */
+  --border: hsl(0 0% 90%);
+  --border-soft: hsl(0 0% 92%);
+  --ring: hsl(217 91% 60%);
+
+  /* Text */
+  --text: hsl(0 0% 15%);
+  --text-dim: hsl(0 0% 38%);
+
+  /* Accent */
+  --primary: hsl(35 94% 50%); /* warm amber */
+  --primary-contrast: hsl(0 0% 0%);
+
+  /* Rounding */
+  --radius-xl: 14px;
+  --radius-lg: 12px;
+  --radius-md: 10px;
+
+  /* Optional pattern control */
+  --panel-pattern-opacity: 0.02; /* set to 0 to disable */
+
+  /* Font */
+  --font-sans: Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* Dark mode tokens */
+.dark .fi-panel-siimut {
+  --bg: hsl(0 0% 6%);
+  --bg-elev: hsl(0 0% 8.5%);
+  --bg-panel: hsl(0 0% 10%);
+  --bg-hover: hsl(0 0% 13%);
+
+  --border: hsl(0 0% 18%);
+  --border-soft: hsl(0 0% 12%);
+  --ring: hsl(217 91% 60%);
+
+  --text: hsl(0 0% 90%);
+  --text-dim: hsl(0 0% 70%);
+
+  --primary: hsl(35 94% 50%);
+  --primary-contrast: hsl(0 0% 10%);
+
+  --panel-pattern-opacity: 0.025;
+}
+

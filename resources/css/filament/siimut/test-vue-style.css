@@ -1,0 +1,136 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import './tokens.css';
+
+@source '../../../../app/Filament/Siimut/**/*';
+@source '../../../../resources/views/filament/siimut/**/*';
+
+/*
+  Vue-style theme for Filament (elegant, modern, dark)
+  - Keep Filament class names; override via CSS only
+  - Tailwind v4-compatible tokens & utilities
+  - Font matches Vue dashboard (Instrument Sans)
+*/
+
+/* Design tokens (dark-first) */
+:root {
+  --bg: hsl(0 0% 6%);               /* App background */
+  --bg-elev: hsl(0 0% 8.5%);        /* Elevated surfaces */
+  --bg-panel: hsl(0 0% 10%);        /* Panels (topbar/sidebar/cards) */
+  --bg-hover: hsl(0 0% 13%);
+  --border: hsl(0 0% 18%);
+  --border-soft: hsl(0 0% 12%);
+  --text: hsl(0 0% 90%);
+  --text-dim: hsl(0 0% 70%);
+  --ring: hsl(217 91% 60%);
+  --primary: hsl(30 100% 45%);      /* Amber-ish like your Vue header */
+  --primary-contrast: hsl(0 0% 10%);
+  --radius-xl: 14px;
+  --radius-lg: 12px;
+  --radius-md: 10px;
+}
+
+/* Base (scoped to siimut panel) */
+.fi-panel-siimut { font-family: var(--font-sans); }
+.fi-panel-siimut.fi-body { background-color: var(--bg); color: var(--text); }
+
+/* Topbar unified with body */
+.fi-panel-siimut .fi-topbar-ctn { position: sticky; top: 0; z-index: 30; }
+.fi-panel-siimut .fi-topbar {
+  background: var(--bg);
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+.fi-panel-siimut .fi-topbar-item-btn:hover,
+.fi-panel-siimut .fi-topbar-item-btn:focus-visible { background-color: var(--bg-hover); }
+.fi-panel-siimut .fi-topbar-item.fi-active .fi-topbar-item-label,
+.fi-panel-siimut .fi-topbar-item.fi-active .fi-icon { color: var(--text); }
+
+/* Sidebar parity */
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open { background-color: var(--bg-panel); color: var(--text); border-right: 1px solid var(--border); }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-header { background-color: var(--bg-panel); border-bottom: 1px solid var(--border); }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-nav { padding: 10px 12px; }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-group-label { color: var(--text-dim); }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-item-btn { border-radius: var(--radius-md); padding: 10px 12px; }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-item-btn:hover,
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-item-btn:focus-visible { background-color: var(--bg-hover); }
+.fi-panel-siimut .use-custom-sidebar .fi-sidebar.fi-sidebar-open .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--primary) 18%, transparent), transparent);
+  outline: 1px solid var(--border);
+}
+
+/* Sidebar transitions */
+.fi-panel-siimut .fi-sidebar,
+.fi-panel-siimut .fi-sidebar + .fi-main-ctn {
+  transition: left .3s cubic-bezier(.22,.61,.36,1), right .3s cubic-bezier(.22,.61,.36,1), width .3s cubic-bezier(.22,.61,.36,1);
+}
+
+/* Subtle motion on topbar toggle buttons */
+.fi-panel-siimut .fi-topbar-open-sidebar-btn,
+.fi-panel-siimut .fi-topbar-close-sidebar-btn,
+.fi-panel-siimut .fi-topbar-open-collapse-sidebar-btn,
+.fi-panel-siimut .fi-topbar-close-collapse-sidebar-btn {
+  transition: transform .25s ease, background-color .2s ease, color .2s ease;
+}
+.fi-panel-siimut .fi-topbar-open-sidebar-btn:hover,
+.fi-panel-siimut .fi-topbar-open-collapse-sidebar-btn:hover { transform: translateX(1px); }
+.fi-panel-siimut .fi-topbar-close-sidebar-btn:hover,
+.fi-panel-siimut .fi-topbar-close-collapse-sidebar-btn:hover { transform: translateX(-1px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fi-panel-siimut .fi-sidebar,
+  .fi-panel-siimut .fi-sidebar + .fi-main-ctn,
+  .fi-panel-siimut .fi-topbar-open-sidebar-btn,
+  .fi-panel-siimut .fi-topbar-close-sidebar-btn,
+  .fi-panel-siimut .fi-topbar-open-collapse-sidebar-btn,
+  .fi-panel-siimut .fi-topbar-close-collapse-sidebar-btn { transition: none; }
+}
+
+/* Page wrapper */
+.fi-panel-siimut .fi-main-ctn { background: var(--bg); }
+.fi-panel-siimut .fi-main { color: var(--text); }
+
+/* Page header */
+.fi-panel-siimut .fi-header { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 18px; }
+.fi-panel-siimut .fi-header-heading { font-weight: 700; letter-spacing: -0.01em; }
+
+/* Cards / sections / widgets — softened stripe pattern */
+.fi-panel-siimut .fi-page,
+.fi-panel-siimut .fi-section,
+.fi-panel-siimut .fi-card,
+.fi-panel-siimut .fi-wi-widget > .fi-section {
+  background:
+    linear-gradient(var(--bg-panel), var(--bg-panel)),
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in oklab, var(--bg-panel) 100%, transparent) 0px,
+      color-mix(in oklab, var(--bg-panel) 100%, transparent) 8px,
+      color-mix(in oklab, var(--text) calc(var(--panel-pattern-opacity) * 100%), transparent) 8px,
+      color-mix(in oklab, var(--text) calc(var(--panel-pattern-opacity) * 100%), transparent) 16px
+    );
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+}
+
+/* Buttons */
+.fi-panel-siimut .fi-btn, .fi-panel-siimut .fi-ac-btn { border-radius: var(--radius-md); }
+.fi-panel-siimut .fi-btn-primary, .fi-panel-siimut .fi-ac-btn[data-color='primary'] { background-color: var(--primary); color: white; }
+.fi-panel-siimut .fi-btn-primary:hover, .fi-panel-siimut .fi-ac-btn[data-color='primary']:hover { filter: brightness(1.02); }
+
+/* Inputs */
+.fi-panel-siimut .fi-fo-field-wrp, .fi-panel-siimut .fi-input-wrp, .fi-panel-siimut .fi-ta-table { --tw-ring-color: var(--ring); }
+.fi-panel-siimut .fi-input-wrp { background-color: color-mix(in oklab, var(--bg-panel) 95%, transparent); }
+.fi-panel-siimut .fi-input { border-color: var(--border); }
+
+/* Tables */
+.fi-panel-siimut .fi-ta-content > .fi-ta-table thead tr th { background-color: color-mix(in oklab, var(--bg-panel) 104%, transparent); }
+.fi-panel-siimut .fi-ta-record { background-color: var(--bg-panel); }
+.fi-panel-siimut .fi-ta-record:hover { background-color: var(--bg-hover); }
+
+/* Modals */
+.fi-panel-siimut .fi-modal-window { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+
+/* Scrollbars (subtle) */
+.fi-panel-siimut ::-webkit-scrollbar { width: 8px; height: 8px; }
+.fi-panel-siimut ::-webkit-scrollbar-thumb { background-color: color-mix(in oklab, var(--bg-panel) 60%, black); border-radius: 9999px; }
+.fi-panel-siimut ::-webkit-scrollbar-track { background-color: var(--bg); }

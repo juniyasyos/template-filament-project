@@ -26,6 +26,9 @@ class SiimutPanelProvider extends PanelProvider
         return $panel
             ->id('siimut')
             ->path('siimut')
+            ->sidebarCollapsibleOnDesktop()
+            ->sidebarWidth('16rem')
+            ->collapsedSidebarWidth('3rem')
             ->viteTheme('resources/css/filament/siimut/theme.css')
             ->colors([
                 'primary' => Color::Amber,
