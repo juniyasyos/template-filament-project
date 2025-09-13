@@ -1,0 +1,5 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/Siimut/**/*';
+@source '../../../../resources/views/filament/siimut/**/*';
+

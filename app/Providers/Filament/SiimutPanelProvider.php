@@ -26,6 +26,7 @@ class SiimutPanelProvider extends PanelProvider
         return $panel
             ->id('siimut')
             ->path('siimut')
+            ->viteTheme('resources/css/filament/siimut/theme.css')
             ->colors([
                 'primary' => Color::Amber,
             ])
