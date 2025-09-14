@@ -14,6 +14,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Hexters\HexaLite\HexaLite;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -28,6 +29,7 @@ class SiimutPanelProvider extends PanelProvider
         return $panel
             ->id('siimut')
             ->path('siimut')
+            ->authGuard('web')
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('18rem')
             ->collapsedSidebarWidth('7rem')
@@ -50,6 +52,7 @@ class SiimutPanelProvider extends PanelProvider
                 FilamentMediaManagerPlugin::make()
                     ->allowUserAccess(true)
                     ->allowSubFolders(true),
+                HexaLite::make(),
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')

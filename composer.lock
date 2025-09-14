@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "634b08e5c466545387ab19043ad73b45",
+    "content-hash": "a8a0925d460c8ef18051221ec7c90395",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -2422,6 +2422,86 @@
             "time": "2025-08-22T14:27:06+00:00"
         },
         {
+            "name": "hexters/hexa-lite",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexters/hexa-lite.git",
+                "reference": "760e1664efc89689dd2127d0acd0530e16dad850"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexters/hexa-lite/zipball/760e1664efc89689dd2127d0acd0530e16dad850",
+                "reference": "760e1664efc89689dd2127d0acd0530e16dad850",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hexters\\HexaLite\\HexaLiteServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Hexters\\HexaLite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Asep",
+                    "email": "hexters@gmail.com"
+                }
+            ],
+            "description": "Filament Hexa Lite is a effortless role and permission management plugin for Filament",
+            "keywords": [
+                "Filament access control",
+                "Filament integration",
+                "Filament panel",
+                "Filament permission setup",
+                "Filament resource access",
+                "Filament widget permissions",
+                "Hexa Filament",
+                "Hexa installation",
+                "Hexa plugin",
+                "access permissions Filament",
+                "hexters ladmin",
+                "role and permission Filament",
+                "role management Filament",
+                "role management PHP"
+            ],
+            "support": {
+                "issues": "https://github.com/hexters/hexa-lite/issues",
+                "source": "https://github.com/hexters/hexa-lite/tree/3.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/hexters",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/hexters",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://www.patreon.com/hexters",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-09-08T08:15:37+00:00"
+        },
+        {
             "name": "inertiajs/inertia-laravel",
             "version": "v2.0.6",
             "source": {
@@ -2497,7 +2577,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/juniyasyos/filament-media-manager",
-                "reference": "5ad7c041d0ebb3fffdf3d32759359f76d0dd216c"
+                "reference": "526f622da37c46fc521db902d190c64ff513ac3a"
             },
             "require": {
                 "bezhansalleh/filament-shield": "^4.0",
@@ -2531,11 +2611,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fady Mondy",
-                    "email": "info@3x1.io"
-                },
-                {
-                    "name": "Ahmad Ilyas",
+                    "name": "Fady Mondy x Ahmad Ilyas",
                     "email": "ahmadilyasdahlan@gmail.com"
                 }
             ],
