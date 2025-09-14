@@ -356,9 +356,41 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
 /* Topbar End */
 
-/* Sidebar Start (disabled by default; add .use-custom-sidebar on a parent to enable) */
+/* Sidebar Colors (always on; do not scope) */
+.fi-sidebar-header {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
 
-.fi-sidebar.fi-sidebar-open {
+.fi-sidebar-nav {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+    @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+}
+
+.fi-sidebar-item > .fi-sidebar-item-btn {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-sidebar-item > .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item > .fi-sidebar-item-btn .fi-sidebar-item-label {
+    @apply text-gray-800 dark:text-white;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    @apply bg-primary-600;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label {
+    @apply text-white;
+}
+
+.fi-sidebar-item.fi-active .fi-badge {
+    @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold;
+}
+
+/* Sidebar Start (behaviour tweaks; opt-in via .use-custom-sidebar-legacy) */
+
+.use-custom-sidebar-legacy .fi-sidebar.fi-sidebar-open {
     .fi-sidebar-header {
         @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
         @apply justify-center;
@@ -372,15 +404,19 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
     .fi-sidebar-nav {
         @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
-        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
-        @apply py-4 px-0;
+        border-inline-end: 1px solid var(--border);
+        padding-block: calc(var(--spacing)*4);
+        padding-inline: 0;
 
         >.fi-sidebar-nav-groups {
-            @apply gap-y-4 -mr-4;
+            row-gap: var(--fi-sidebar-group-gap, calc(var(--spacing)*4));
+            margin-inline-end: 0;
 
             >.fi-sidebar-group {
                 >.fi-sidebar-group-button {
-                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+                    @apply mt-2; /* keep compact vertical rhythm */
+                    padding-inline-start: var(--fi-sidebar-indent, calc(var(--spacing)*6));
+                    padding-inline-end: var(--fi-sidebar-padding-end, calc(var(--spacing)*4));
 
                     >.fi-icon-btn,
                     >.fi-sidebar-group-label {
@@ -390,7 +426,9 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
                 >.fi-sidebar-group-items {
                     >.fi-sidebar-item {
-                        @apply relative px-10 rtl:pr-14 rtl:pl-6;
+                        @apply relative;
+                        padding-inline-start: var(--fi-sidebar-item-indent, calc(var(--spacing)*5));
+                        padding-inline-end: var(--fi-sidebar-item-padding-end, calc(var(--spacing)*3));
 
                         /* Hover effect */
                         &:hover::after {
@@ -399,7 +437,9 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
                         >.fi-sidebar-item-btn {
                             @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
-                            @apply px-4 py-3 gap-x-6;
+                            gap: var(--fi-sidebar-item-gap, calc(var(--spacing)*3));
+                            padding-block: var(--fi-sidebar-item-py, calc(var(--spacing)*3));
+                            padding-inline: var(--fi-sidebar-item-px, calc(var(--spacing)*3));
 
                             >.fi-sidebar-item-icon,
                             >.fi-sidebar-item-label {
@@ -425,9 +465,13 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
                     >.fi-sidebar-item::after {
                         content: '';
-                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
-                        @apply bg-transparent;
-                        transition: background-color 0.3s ease;
+                        position: absolute;
+                        inset-block: 0;
+                        inset-inline-start: 0;
+                        width: var(--fi-sidebar-active-indicator, calc(var(--spacing)*2));
+                        border-radius: var(--radius-md, 0.5rem);
+                        background: transparent;
+                        transition: background-color .25s ease;
                     }
 
                     >.fi-sidebar-item.fi-active::after {
@@ -448,7 +492,7 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
 }
 
-.fi-sidebar:not(.fi-sidebar-open) {
+.use-custom-sidebar-legacy .fi-sidebar:not(.fi-sidebar-open) {
     .fi-sidebar-header {
         @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
         @apply justify-center;
@@ -462,11 +506,12 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 
     .fi-sidebar-nav {
         @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
-        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
-
+        border-inline-end: 1px solid var(--border);
+        padding-inline: 0;
 
         >.fi-sidebar-nav-groups {
-            @apply gap-y-4 -mr-4;
+            row-gap: var(--fi-sidebar-group-gap, calc(var(--spacing)*4));
+            margin-inline-end: 0;
 
             /* >.fi-sidebar-group {
                 >.fi-sidebar-group-button {

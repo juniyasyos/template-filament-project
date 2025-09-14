@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Plugins\SiimutTheme;
 // use App\Filament\Siimut\Pages\Login as SiimutLogin; // no longer used when delegating auth to Vue
+use Juniyasyos\FilamentMediaManager\FilamentMediaManagerPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -46,6 +47,9 @@ class SiimutPanelProvider extends PanelProvider
             // Use a plugin-based theme API similar to `resmatech/filament-awin-theme`.
             ->plugins([
                 SiimutTheme::make(),
+                FilamentMediaManagerPlugin::make()
+                    ->allowUserAccess(true)
+                    ->allowSubFolders(true),
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
