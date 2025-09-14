@@ -15,7 +15,7 @@
         @if ($hasNavigation)
             <x-filament::icon-button
                 color="gray"
-                :icon="$isRtl ? \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleLeft : \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleRight"
+                :icon="'ri-sidebar-unfold-line'"
                 :icon-alias="\Filament\View\PanelsIconAlias::TOPBAR_OPEN_SIDEBAR_BUTTON"
                 icon-size="lg"
                 :label="__('filament-panels::layout.actions.sidebar.expand.label')"
@@ -28,7 +28,7 @@
 
             <x-filament::icon-button
                 color="gray"
-                :icon="$isRtl ? \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleRight : \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleLeft"
+                :icon="'ri-sidebar-fold-line'"
                 :icon-alias="\Filament\View\PanelsIconAlias::TOPBAR_CLOSE_SIDEBAR_BUTTON"
                 icon-size="lg"
                 :label="__('filament-panels::layout.actions.sidebar.collapse.label')"
@@ -44,7 +44,7 @@
             @if ($isSidebarCollapsibleOnDesktop)
                 <x-filament::icon-button
                     color="gray"
-                    :icon="$isRtl ? \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleLeft : \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleRight"
+                    :icon="'ri-sidebar-unfold-line'"
                     {{-- @deprecated Use `PanelsIconAlias::SIDEBAR_EXPAND_BUTTON_RTL` instead of `PanelsIconAlias::SIDEBAR_EXPAND_BUTTON` for RTL. --}}
                     :icon-alias="
                         $isRtl
@@ -67,7 +67,7 @@
             @if ($isSidebarCollapsibleOnDesktop || $isSidebarFullyCollapsibleOnDesktop)
                 <x-filament::icon-button
                     color="gray"
-                    :icon="$isRtl ? \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleRight : \Filament\Support\Icons\Heroicon::OutlinedChevronDoubleLeft"
+                    :icon="'ri-sidebar-fold-line'"
                     {{-- @deprecated Use `PanelsIconAlias::SIDEBAR_COLLAPSE_BUTTON_RTL` instead of `PanelsIconAlias::SIDEBAR_COLLAPSE_BUTTON` for RTL. --}}
                     :icon-alias="
                         $isRtl

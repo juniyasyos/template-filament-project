@@ -9,7 +9,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
+use Filament\Enums\ThemeMode;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -27,12 +27,16 @@ class SiimutPanelProvider extends PanelProvider
             ->id('siimut')
             ->path('siimut')
             ->sidebarCollapsibleOnDesktop()
-            ->sidebarWidth('16rem')
+            ->sidebarWidth('18rem')
             ->collapsedSidebarWidth('3rem')
+            // Use the PHP-registered colors via FilamentColor, and keep Vite theme for CSS.
             ->viteTheme('resources/css/filament/siimut/theme.css')
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->colors(fn () => (array) config('siimut-theme.colors'))
+            ->defaultThemeMode(match (strtolower((string) config('siimut-theme.default_mode'))){
+                'light' => ThemeMode::Light,
+                'dark' => ThemeMode::Dark,
+                default => ThemeMode::System,
+            })
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
             ->pages([

@@ -61,7 +61,8 @@
 /* Sidebar transitions */
 .fi-panel-siimut .fi-sidebar,
 .fi-panel-siimut .fi-sidebar + .fi-main-ctn {
-  transition: left .3s cubic-bezier(.22,.61,.36,1), right .3s cubic-bezier(.22,.61,.36,1), width .3s cubic-bezier(.22,.61,.36,1);
+  transition: left .35s cubic-bezier(.22,.61,.36,1), right .35s cubic-bezier(.22,.61,.36,1), width .35s cubic-bezier(.22,.61,.36,1), transform .35s cubic-bezier(.22,.61,.36,1);
+  will-change: left, right, width, transform;
 }
 
 /* Subtle motion on topbar toggle buttons */

@@ -97,6 +97,49 @@ html.fi, .fi-body {
     max-width: min(100%, var(--fi-main-max, 100rem));
 }
 
+/* ------------------------------
+   Responsive/Fluid type & layout
+   ------------------------------ */
+
+/* Fluid type scale tokens */
+:root {
+    --fluid-1: clamp(0.875rem, 0.82rem + 0.30vw, 1rem);
+    --fluid-2: clamp(1rem, 0.92rem + 0.60vw, 1.25rem);
+    --fluid-3: clamp(1.125rem, 0.95rem + 1.10vw, 1.5rem);
+    --fluid-4: clamp(1.5rem, 1.1rem + 2.2vw, 2.5rem);
+}
+
+/* Topbar height & spacing scale with viewport */
+.fi-topbar { min-height: clamp(3rem, 2.3rem + 1.2vw, 4rem); }
+
+/* Main container padding becomes fluid across breakpoints */
+.fi-main { padding-inline: clamp(0.75rem, 1.2vw, 2rem); }
+
+/* Page header: fluid heading size and compact spacing on small screens */
+.fi-header-heading { font-size: var(--fluid-4); line-height: 1.2; }
+.fi-simple-header-heading { font-size: var(--fluid-3); }
+.fi-header { gap: clamp(0.75rem, 0.6rem + 0.6vw, 1.25rem); }
+
+/* Section and widget header titles scale slightly */
+.fi-section-header-heading,
+.fi-wi-widget .fi-section .fi-section-header .fi-section-header-heading { font-size: var(--fluid-2); }
+
+/* Button sizing adapts a bit for small screens */
+@media (max-width: 640px) {
+    .fi-btn, .fi-ac-btn { padding: 0.375rem 0.75rem; }
+}
+
+/* Reduce visual weight of cards/sections on very small screens */
+@media (max-width: 480px) {
+    .fi-section, .fi-card { border-radius: calc(var(--radius, 0.5rem) - 4px); }
+}
+
+/* Large displays: slightly increase max content width and tighten grid gaps */
+@media (min-width: 1536px) {
+    .fi-panel-siimut { --fi-main-max: 110rem; } /* ~1760px */
+    .fi-page-content, .fi-simple-page-content { row-gap: 1.75rem; }
+}
+
 /* Progres Bar */
 .progress-bar {
     @apply h-4 w-full bg-gray-100 dark:bg-gray-800 rounded-full shadow-inner overflow-hidden
@@ -250,6 +293,170 @@ html.fi, .fi-body {
 /* Topbar End */
 
 /* Sidebar Start (disabled by default; add .use-custom-sidebar on a parent to enable) */
+
+.fi-sidebar.fi-sidebar-open {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+        @apply py-4 px-0;
+
+        >.fi-sidebar-nav-groups {
+            @apply gap-y-4 -mr-4;
+
+            >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative px-10 rtl:pr-14 rtl:pl-6;
+
+                        /* Hover effect */
+                        &:hover::after {
+                            @apply bg-primary-600;
+                        }
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            @apply px-4 py-3 gap-x-6;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+                            @apply bg-primary-600;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-white;
+                            }
+
+                            .fi-badge {
+                                @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
+                        @apply bg-transparent;
+                        transition: background-color 0.3s ease;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+
+                    >.fi-sidebar-item:hover::after {
+                        @apply bg-primary-600;
+                    }
+                }
+            }
+
+            >.fi-sidebar-group:not(:first-child) {
+                @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-white/10;
+            }
+        }
+    }
+
+}
+
+.fi-sidebar:not(.fi-sidebar-open) {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+
+
+        >.fi-sidebar-nav-groups {
+            @apply gap-y-4 -mr-4;
+
+            /* >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative rtl:pr-8;
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            @apply px-4 py-3 gap-x-6;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-primary-600;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+                }
+
+                &:not(:first-child) {
+                    @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-none;
+                }
+            } */
+        }
+    }
+}
+
 .use-custom-sidebar .fi-sidebar.fi-sidebar-open {
     .fi-sidebar-header {
         @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
@@ -768,5 +975,5 @@ html.fi, .fi-body {
 }
 
 .fi-header-heading {
-    @apply text-3xl font-bold tracking-tight;
+    @apply text-2xl font-bold tracking-tight;
 }
