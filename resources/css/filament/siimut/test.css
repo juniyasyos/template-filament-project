@@ -78,14 +78,11 @@
     --sidebar: hsl(240 5.9% 10%);
 }
 
-/* Modern dark palette (gentle slate + blue accents) */
+/* Softer dark palette (eye-friendly slate + blue accents) */
 :root {
-    --ds-dark-bg-primary-color: #0f172a;
-    /* slate-900 */
-    --ds-dark-bg-secondary-color: #111827;
-    /* gray-900 */
-    --ds-dark-bg-tertiary-color: #1f2937;
-    /* gray-800 */
+    --ds-dark-bg-primary-color: #111827; /* gray-900, but not pitch-black */
+    --ds-dark-bg-secondary-color: #1f2937; /* gray-800 */
+    --ds-dark-bg-tertiary-color: #273449; /* soft blue-slate surface */
 }
 
 /* Base layout harmonization */
@@ -233,6 +230,11 @@ html.fi,
 
 .fi-main {
     @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)];
+}
+
+/* Smooth transitions between modes for core surfaces */
+html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-wrp, .fi-modal-window, .fi-dropdown-panel {
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease;
 }
 
 .fi-wi-widget {
