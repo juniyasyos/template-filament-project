@@ -3,7 +3,7 @@
     use Filament\Support\Enums\VerticalAlignment;
     use Filament\Support\Enums\Width;
     use Filament\Support\Facades\FilamentView;
-    use Filament\Tables\Actions\HeaderActionsPosition;
+    use Filament\Actions\HeaderActionsPosition;
     use Filament\Tables\Columns\Column;
     use Filament\Tables\Columns\ColumnGroup;
     use Filament\Tables\Enums\FiltersLayout;
