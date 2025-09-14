@@ -997,6 +997,19 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
 /* Checkbox Component End */
 
 /* Brand logo/name styles: keep on one line and ellipsize if too long */
+
+/* ------------------------------
+   Sidebar Navigation Group Separator
+   ------------------------------ */
+/* Add a subtle top border before each navigation group (except the first)
+   Scoped to this panel only via .fi-panel-siimut */
+.fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+    border-top: 0.6px solid #E0E0E0;
+}
+
+.dark .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
 .fi-logo {
     @apply text-xl font-bold;
     line-height: 1;

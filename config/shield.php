@@ -31,7 +31,7 @@ return [
     // Navigation settings (label & group for the plugin menu item)
     'navigation' => [
         'label' => 'Role & Permissions',
-        'group' => 'Settings',
+        'group' => 'User Managements',
     ],
 
     // Super admin defaults for example seeder
