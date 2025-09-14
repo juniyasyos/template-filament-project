@@ -8,6 +8,7 @@ namespace App\Filament\Siimut\Resources\Roles;
  */
 class RoleResource extends \juniyasyos\ShieldLite\Resources\Roles\RoleResource
 {
+    // protected static bool $shouldRegisterNavigation = false;
     protected static ?int $navigationSort = 10;
     // Example override:
     // public static function getModelLabel(): string

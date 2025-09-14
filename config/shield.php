@@ -3,6 +3,7 @@
 return [
     'models' => [
         'role' => \juniyasyos\ShieldLite\Models\ShieldRole::class,
+        'user' => \App\Models\User::class,
     ],
 
     // Optional: define custom permissions to appear under the "Custom" tab
@@ -30,14 +31,23 @@ return [
 
     // Navigation settings (label & group for the plugin menu item)
     'navigation' => [
-        'label' => 'Role & Permissions',
-        'group' => 'User Managements',
+        'role_label' => 'Role & Permissions',
+        'role_group' => 'User Managements',
+        'users_label' => 'Users',
+        'users_group' => 'User Managements',
     ],
 
-    // Toggle auto-registration of package Filament resources
+    // Toggle auto-registration of Filament resources
     'register_resources' => [
-        'roles' => false,
-        'users' => false,
+        'roles' => true,
+        'users' => true,
+    ],
+
+    // Which Resource classes to register on the Panel.
+    // You can point these to App\Filament\Resources\... after publishing stubs.
+    'resources' => [
+        'roles' => \App\Filament\Siimut\Resources\Roles\RoleResource::class,
+        'users' => \App\Filament\Siimut\Resources\Users\UserResource::class,
     ],
 
     // Super admin defaults for example seeder
