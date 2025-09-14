@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d4c2917a4f154eae17934a4475e2904",
+    "content-hash": "988578fe260e65f49d2e09f5d04c46c3",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -2422,65 +2422,6 @@
             "time": "2025-08-22T14:27:06+00:00"
         },
         {
-            "name": "hexters/hexa-lite",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "packages/hexters/hexa-lite",
-                "reference": "760e1664efc89689dd2127d0acd0530e16dad850"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Hexters\\HexaLite\\HexaLiteServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hexters\\HexaLite\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Asep",
-                    "email": "hexters@gmail.com"
-                }
-            ],
-            "description": "Filament Hexa Lite is a effortless role and permission management plugin for Filament",
-            "keywords": [
-                "Filament access control",
-                "Filament integration",
-                "Filament panel",
-                "Filament permission setup",
-                "Filament resource access",
-                "Filament widget permissions",
-                "Hexa Filament",
-                "Hexa installation",
-                "Hexa plugin",
-                "Hexa plugin",
-                "access permissions Filament",
-                "hexters ladmin",
-                "role and permission Filament",
-                "role management Filament",
-                "role management PHP"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "inertiajs/inertia-laravel",
             "version": "v2.0.6",
             "source": {
@@ -2603,6 +2544,65 @@
                 "media-library",
                 "php",
                 "spatie"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "juniyasyos/shield-lite",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/juniyasyos/shield-lite",
+                "reference": "440e884f05208895a4969e3bdead368f377efe82"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "juniyasyos\\ShieldLite\\ShieldLiteServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "juniyasyos\\ShieldLite\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Asep",
+                    "email": "juniyasyos@gmail.com"
+                }
+            ],
+            "description": "Filament Shield Lite is an effortless role and permission management plugin for Filament",
+            "keywords": [
+                "Filament access control",
+                "Filament integration",
+                "Filament panel",
+                "Filament permission setup",
+                "Filament resource access",
+                "Filament widget permissions",
+                "Hexa installation",
+                "Shield Filament",
+                "Shield plugin",
+                "Shield plugin",
+                "access permissions Filament",
+                "juniyasyos ladmin",
+                "role and permission Filament",
+                "role management Filament",
+                "role management PHP"
             ],
             "transport-options": {
                 "symlink": true,
@@ -11730,16 +11730,16 @@
         },
         {
             "name": "sebastian/cli-parser",
-            "version": "4.0.0",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/cli-parser.git",
-                "reference": "6d584c727d9114bcdc14c86711cd1cad51778e7c"
+                "reference": "90f41072d220e5c40df6e8635f5dafba2d9d4d04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/6d584c727d9114bcdc14c86711cd1cad51778e7c",
-                "reference": "6d584c727d9114bcdc14c86711cd1cad51778e7c",
+                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/90f41072d220e5c40df6e8635f5dafba2d9d4d04",
+                "reference": "90f41072d220e5c40df6e8635f5dafba2d9d4d04",
                 "shasum": ""
             },
             "require": {
@@ -11751,7 +11751,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "4.0-dev"
+                    "dev-main": "4.2-dev"
                 }
             },
             "autoload": {
@@ -11775,15 +11775,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/cli-parser/issues",
                 "security": "https://github.com/sebastianbergmann/cli-parser/security/policy",
-                "source": "https://github.com/sebastianbergmann/cli-parser/tree/4.0.0"
+                "source": "https://github.com/sebastianbergmann/cli-parser/tree/4.2.0"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/cli-parser",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-07T04:53:50+00:00"
+            "time": "2025-09-14T09:36:45+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -12842,8 +12854,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "hexters/hexa-lite": 20,
-        "juniyasyos/filament-media-manager": 20
+        "juniyasyos/filament-media-manager": 20,
+        "juniyasyos/shield-lite": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
