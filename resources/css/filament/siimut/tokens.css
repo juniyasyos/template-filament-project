@@ -33,23 +33,26 @@
   --font-sans: Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
-/* Dark mode tokens */
+/* Dark mode tokens — modern, low-strain slate with blue accents */
 .dark .fi-panel-siimut {
-  --bg: hsl(0 0% 6%);
-  --bg-elev: hsl(0 0% 8.5%);
-  --bg-panel: hsl(0 0% 10%);
-  --bg-hover: hsl(0 0% 13%);
+  /* Slightly lifted dark background to reduce eye strain */
+  --bg: hsl(222 47% 11%);       /* ~slate-900 */
+  --bg-elev: hsl(222 47% 13%);  /* ~slate-850 */
+  --bg-panel: hsl(222 47% 15%); /* ~slate-800 */
+  --bg-hover: hsl(222 47% 18%);
 
-  --border: hsl(0 0% 18%);
-  --border-soft: hsl(0 0% 12%);
-  --ring: hsl(217 91% 60%);
+  /* Softer borders for dark mode */
+  --border: hsl(222 32% 28%);
+  --border-soft: hsl(222 32% 20%);
+  --ring: hsl(217 91% 60%);     /* accessible modern blue ring */
 
-  --text: hsl(0 0% 90%);
-  --text-dim: hsl(0 0% 70%);
+  /* Comfortable contrast */
+  --text: hsl(0 0% 95%);
+  --text-dim: hsl(0 0% 75%);
 
-  --primary: hsl(35 94% 50%);
+  /* Primary accent is handled by Filament palette; keep contrast mapping */
+  --primary: hsl(217 91% 60%);
   --primary-contrast: hsl(0 0% 10%);
 
-  --panel-pattern-opacity: 0.025;
+  --panel-pattern-opacity: 0.02;
 }
-

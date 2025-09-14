@@ -78,11 +78,11 @@
     --sidebar: hsl(240 5.9% 10%);
 }
 
-/* Legacy dark palette (kept for compatibility with existing rules) */
+/* Modern dark palette (gentle slate + blue accents) */
 :root {
-    --ds-dark-bg-primary-color: #1B2431;
-    --ds-dark-bg-secondary-color: #273142;
-    --ds-dark-bg-tertiary-color: #323D4E;
+    --ds-dark-bg-primary-color: #0f172a;   /* slate-900 */
+    --ds-dark-bg-secondary-color: #111827; /* gray-900 */
+    --ds-dark-bg-tertiary-color: #1f2937;  /* gray-800 */
 }
 
 /* Base layout harmonization */
@@ -194,11 +194,11 @@ html.fi, .fi-body {
 /* Scrollbar End */
 
 .fi-body {
-    @apply bg-[#F5F6FA] dark:bg-[var(--ds-dark-bg-primary-color)];
+    @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)];
 }
 
 .fi-main {
-    @apply bg-[#F5F6FA] dark:bg-[var(--ds-dark-bg-primary-color)];
+    @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)];
 }
 
 .fi-wi-widget {

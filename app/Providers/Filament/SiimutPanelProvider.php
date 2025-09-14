@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Plugins\SiimutTheme;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -9,7 +10,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Enums\ThemeMode;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -29,14 +29,10 @@ class SiimutPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('18rem')
             ->collapsedSidebarWidth('3rem')
-            // Use the PHP-registered colors via FilamentColor, and keep Vite theme for CSS.
-            ->viteTheme('resources/css/filament/siimut/theme.css')
-            ->colors(fn () => (array) config('siimut-theme.colors'))
-            ->defaultThemeMode(match (strtolower((string) config('siimut-theme.default_mode'))){
-                'light' => ThemeMode::Light,
-                'dark' => ThemeMode::Dark,
-                default => ThemeMode::System,
-            })
+            // Use a plugin-based theme API similar to `resmatech/filament-awin-theme`.
+            ->plugins([
+                SiimutTheme::make(),
+            ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
             ->pages([

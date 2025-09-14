@@ -1,18 +1,22 @@
 <?php
 
+use Filament\Support\Colors\Color;
+
 return [
     // The ID of the theme (used if you ever register a Theme asset by name)
     'id' => 'siimut',
 
     // Brand + status colors. You can use hex (e.g. '#f59e0b') or full palettes.
     // Passing a single hex will generate the full palette automatically.
+    // Modern, health-friendly palette defaults using Filament Colors.
+    // You can still override `primary` via env (hex), but palettes are recommended.
     'colors' => [
-        'primary' => env('SIIMUT_THEME_PRIMARY', '#f59e0b'), // amber-like
-        'gray' => env('SIIMUT_THEME_GRAY', '#3f3f46'),
-        'success' => env('SIIMUT_THEME_SUCCESS', '#16a34a'),
-        'warning' => env('SIIMUT_THEME_WARNING', '#f59e0b'),
-        'danger' => env('SIIMUT_THEME_DANGER', '#dc2626'),
-        'info' => env('SIIMUT_THEME_INFO', '#2563eb'),
+        'primary' => env('SIIMUT_THEME_PRIMARY') ?: Color::Blue,
+        'gray' => Color::Slate,
+        'success' => Color::Emerald,
+        'warning' => Color::Amber,
+        'danger' => Color::Rose,
+        'info' => Color::Sky,
     ],
 
     // Optional: register extra CSS variables usable inside your CSS.
@@ -23,4 +27,16 @@ return [
 
     // system | light | dark
     'default_mode' => env('SIIMUT_THEME_MODE', 'system'),
+
+    // Branding settings for logo, name, favicon, etc.
+    // You can pass absolute URLs (https://...), root-relative paths (/images/logo.svg),
+    // or public-relative paths (images/logo.svg) which will be wrapped with asset().
+    'brand' => [
+        'name' => env('SIIMUT_BRAND_NAME'),
+        'logo' => env('SIIMUT_BRAND_LOGO'),
+        'logo_dark' => env('SIIMUT_BRAND_LOGO_DARK'),
+        // Default height used by Filament is 1.5rem if null; set to override.
+        'logo_height' => env('SIIMUT_BRAND_LOGO_HEIGHT'),
+        'favicon' => env('SIIMUT_BRAND_FAVICON'),
+    ],
 ];
