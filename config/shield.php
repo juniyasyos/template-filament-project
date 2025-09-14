@@ -34,6 +34,12 @@ return [
         'group' => 'User Managements',
     ],
 
+    // Toggle auto-registration of package Filament resources
+    'register_resources' => [
+        'roles' => false,
+        'users' => false,
+    ],
+
     // Super admin defaults for example seeder
     'superadmin' => [
         'name' => 'Super Admin',

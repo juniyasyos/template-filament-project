@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Filament\Facades\Filament;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 use juniyasyos\ShieldLite\Models\ShieldRole;
 
 class ShieldSuperAdminSeeder extends Seeder
@@ -29,7 +30,7 @@ class ShieldSuperAdminSeeder extends Seeder
         // Store as a single flattened group for efficiency
         $access = [$gates];
 
-        ShieldRole::query()->updateOrCreate(
+        $role = ShieldRole::query()->updateOrCreate(
             [
                 'name' => $name,
                 'guard' => $guard,
@@ -39,6 +40,17 @@ class ShieldSuperAdminSeeder extends Seeder
                 'access' => $access,
             ]
         );
+
+        // Assign the Super Admin role to the Admin user if present
+        $admin = User::query()->where('email', 'admin@gmail.com')->first();
+        if ($admin && $role) {
+            $admin->roles()->syncWithoutDetaching([$role->id]);
+
+            // Optionally mark role as default if column exists
+            if (Schema::hasColumn('users', 'default_role_id')) {
+                $admin->forceFill(['default_role_id' => $role->id])->save();
+            }
+        }
     }
 }
 

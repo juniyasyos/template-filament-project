@@ -1003,13 +1003,36 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
    ------------------------------ */
 /* Add a subtle top border before each navigation group (except the first)
    Scoped to this panel only via .fi-panel-siimut */
-.fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+/* .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
     border-top: 0.6px solid #E0E0E0;
 }
 
 .dark .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
     border-top-color: rgba(255, 255, 255, 0.1);
+} */
+
+/* Hide the separator when the group is collapsed (folded) */
+/* .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
+/* Ensure override also applies when using legacy/custom sidebar wrappers */
+/* .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
+/* .use-custom-sidebar-legacy .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
 }
+
+.use-custom-sidebar .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
 .fi-logo {
     @apply text-xl font-bold;
     line-height: 1;

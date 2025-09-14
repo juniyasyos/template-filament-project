@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
                 'name' => 'Admin User',
                 'email' => 'admin@gmail.com',
                 'password' => 'password',
-                'role' => 'Admin',
+                'role' => 'Super Admin',
             ],
             [
                 'name' => 'Manager User',
