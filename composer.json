@@ -9,7 +9,7 @@
         "php": "^8.2",
         "andreiio/blade-remix-icon": "^3.6",
         "filament/filament": "~4.0",
-        "hexters/hexa-lite": "^3.0",
+        "hexters/hexa-lite": "dev-main",
         "inertiajs/inertia-laravel": "^2.0",
         "juniyasyos/filament-media-manager": "dev-main",
         "laravel/fortify": "^1.30",
@@ -79,6 +79,11 @@
         {
             "type": "path",
             "url": "packages/juniyasyos/filament-media-manager",
+            "options": { "symlink": true }
+        },
+        {
+            "type": "path",
+            "url": "packages/hexters/hexa-lite",
             "options": { "symlink": true }
         }
     ],

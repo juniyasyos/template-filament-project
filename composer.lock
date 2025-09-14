@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8a0925d460c8ef18051221ec7c90395",
+    "content-hash": "6d4c2917a4f154eae17934a4475e2904",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -2423,38 +2423,31 @@
         },
         {
             "name": "hexters/hexa-lite",
-            "version": "3.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hexters/hexa-lite.git",
-                "reference": "760e1664efc89689dd2127d0acd0530e16dad850"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hexters/hexa-lite/zipball/760e1664efc89689dd2127d0acd0530e16dad850",
-                "reference": "760e1664efc89689dd2127d0acd0530e16dad850",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/hexters/hexa-lite",
+                "reference": "760e1664efc89689dd2127d0acd0530e16dad850"
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                },
                 "laravel": {
                     "providers": [
                         "Hexters\\HexaLite\\HexaLiteServiceProvider"
                     ]
-                },
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
                 "psr-4": {
                     "Hexters\\HexaLite\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2475,31 +2468,17 @@
                 "Hexa Filament",
                 "Hexa installation",
                 "Hexa plugin",
+                "Hexa plugin",
                 "access permissions Filament",
                 "hexters ladmin",
                 "role and permission Filament",
                 "role management Filament",
                 "role management PHP"
             ],
-            "support": {
-                "issues": "https://github.com/hexters/hexa-lite/issues",
-                "source": "https://github.com/hexters/hexa-lite/tree/3.0.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/hexters",
-                    "type": "github"
-                },
-                {
-                    "url": "https://ko-fi.com/hexters",
-                    "type": "ko_fi"
-                },
-                {
-                    "url": "https://www.patreon.com/hexters",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2025-09-08T08:15:37+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -12863,6 +12842,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "hexters/hexa-lite": 20,
         "juniyasyos/filament-media-manager": 20
     },
     "prefer-stable": true,
