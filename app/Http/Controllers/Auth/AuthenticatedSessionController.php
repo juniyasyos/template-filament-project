@@ -22,6 +22,10 @@ class AuthenticatedSessionController extends Controller
         return Inertia::render('auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => $request->session()->get('status'),
+            'devAutofill' => app()->environment('local') ? [
+                'email' => 'admin@gmail.com',
+                'password' => 'password',
+            ] : null,
         ]);
     }
 

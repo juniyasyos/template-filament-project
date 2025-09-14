@@ -15,6 +15,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 defineProps<{
     status?: string;
     canResetPassword: boolean;
+    devAutofill?: { email?: string; password?: string } | null;
 }>();
 </script>
 
@@ -44,6 +45,7 @@ defineProps<{
                         :tabindex="1"
                         autocomplete="email"
                         placeholder="email@example.com"
+                        :default-value="devAutofill?.email"
                     />
                     <InputError :message="errors.email" />
                 </div>
@@ -61,6 +63,7 @@ defineProps<{
                         :tabindex="2"
                         autocomplete="current-password"
                         placeholder="Password"
+                        :default-value="devAutofill?.password"
                     />
                     <InputError :message="errors.password" />
                 </div>

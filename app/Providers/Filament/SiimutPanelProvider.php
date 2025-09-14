@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Plugins\SiimutTheme;
+// use App\Filament\Siimut\Pages\Login as SiimutLogin; // no longer used when delegating auth to Vue
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -28,7 +29,20 @@ class SiimutPanelProvider extends PanelProvider
             ->path('siimut')
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('18rem')
-            ->collapsedSidebarWidth('3rem')
+            ->collapsedSidebarWidth('7rem')
+            // Delegate authentication to Vue / Fortify routes
+            ->login(fn () => redirect()->to(url('/login')))
+            ->passwordReset(
+                fn () => redirect()->to(url('/forgot-password')),
+                fn () => redirect()->to(url('/reset-password')),
+            )
+            ->registration(fn () => redirect()->to(url('/register')))
+            // Enable database notifications in the topbar
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
+            // Enable global search UI + keyboard shortcut
+            ->globalSearch()
+            ->globalSearchKeyBindings(['cmd+k', 'ctrl+k'])
             // Use a plugin-based theme API similar to `resmatech/filament-awin-theme`.
             ->plugins([
                 SiimutTheme::make(),
