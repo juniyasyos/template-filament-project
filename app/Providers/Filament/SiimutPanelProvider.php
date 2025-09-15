@@ -3,7 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Plugins\SiimutTheme;
-// use App\Filament\Siimut\Pages\Login as SiimutLogin; // no longer used when delegating auth to Vue
 use Juniyasyos\FilamentMediaManager\FilamentMediaManagerPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -21,6 +20,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Juniyasyos\FilamentLaravelBackup\FilamentLaravelBackupPlugin;
 
 class SiimutPanelProvider extends PanelProvider
 {
@@ -49,10 +49,11 @@ class SiimutPanelProvider extends PanelProvider
             // Use a plugin-based theme API similar to `resmatech/filament-awin-theme`.
             ->plugins([
                 SiimutTheme::make(),
+                ShieldLite::make(),
+                FilamentLaravelBackupPlugin::make(),
                 FilamentMediaManagerPlugin::make()
                     ->allowUserAccess(true)
                     ->allowSubFolders(true),
-                ShieldLite::make(),
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
