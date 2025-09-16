@@ -10,49 +10,39 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class SiimutTheme implements Plugin
 {
-    /**
-     * Theme ID used by Filament.
-     */
     protected string $id = 'siimut-theme';
-
-    /**
-     * Path to the theme CSS used by Vite.
-     */
     protected string $viteThemePath = 'resources/css/filament/siimut/theme.css';
-
-    /**
-     * Map of colors accepted by Filament's Panel::colors().
-     * Accepts either full palettes or hex values.
-     *
-     * @var array<string, array<string,string>|string>
-     */
     protected array $colors = [];
-
-    /**
-     * Default theme mode.
-     */
     protected ThemeMode $defaultMode;
 
-    /**
-     * Branding options
-     */
+    // Branding properties
     protected string | Htmlable | Closure | null $brandName = null;
-
-    /** @var string|Htmlable|Closure|null */
     protected $brandLogo = null;
-
-    /** @var string|Htmlable|Closure|null */
     protected $darkBrandLogo = null;
-
-    /** @var string|Closure|null */
     protected $brandLogoHeight = null;
-
-    /** @var string|Closure|null */
     protected $favicon = null;
+
+    // Sidebar properties
+    protected bool $sidebarCollapsibleOnDesktop = true;
+    protected string $sidebarWidth = '18rem';
+    protected string $collapsedSidebarWidth = '7rem';
+
+    // Authentication properties
+    protected string | Closure | null $loginUrl = null;
+    protected string | Closure | null $passwordResetUrl = null;
+    protected string | Closure | null $passwordResetResponseUrl = null;
+    protected string | Closure | null $registrationUrl = null;
+
+    // Notifications properties
+    protected bool $databaseNotifications = true;
+    protected string $databaseNotificationsPolling = '30s';
+
+    // Global search properties
+    protected bool $globalSearch = true;
+    protected array $globalSearchKeyBindings = ['cmd+k', 'ctrl+k'];
 
     public function __construct()
     {
-        // Initialize from config to mirror plugin-style configurability with env support.
         $this->colors = (array) config('siimut-theme.colors', []);
 
         $this->defaultMode = match (strtolower((string) config('siimut-theme.default_mode', 'system'))) {
@@ -61,13 +51,36 @@ class SiimutTheme implements Plugin
             default => ThemeMode::System,
         };
 
-        // Branding
+        // Load branding configuration
         $brand = (array) config('siimut-theme.brand', []);
         $this->brandName = $brand['name'] ?? null;
         $this->brandLogo = $this->resolveAssetUrl($brand['logo'] ?? null);
         $this->darkBrandLogo = $this->resolveAssetUrl($brand['logo_dark'] ?? null);
         $this->brandLogoHeight = $brand['logo_height'] ?? null;
         $this->favicon = $this->resolveAssetUrl($brand['favicon'] ?? null);
+
+        // Load UI configuration
+        $ui = (array) config('siimut-theme.ui', []);
+        $this->sidebarCollapsibleOnDesktop = $ui['sidebar_collapsible'] ?? true;
+        $this->sidebarWidth = $ui['sidebar_width'] ?? '18rem';
+        $this->collapsedSidebarWidth = $ui['collapsed_sidebar_width'] ?? '7rem';
+
+        // Load authentication configuration
+        $auth = (array) config('siimut-theme.authentication', []);
+        $this->loginUrl = $auth['login_url'] ?? '/login';
+        $this->passwordResetUrl = $auth['password_reset_url'] ?? '/forgot-password';
+        $this->passwordResetResponseUrl = $auth['password_reset_response_url'] ?? '/reset-password';
+        $this->registrationUrl = $auth['registration_url'] ?? '/register';
+
+        // Load notifications configuration
+        $notifications = (array) config('siimut-theme.notifications', []);
+        $this->databaseNotifications = $notifications['database_enabled'] ?? true;
+        $this->databaseNotificationsPolling = $notifications['polling_interval'] ?? '30s';
+
+        // Load global search configuration
+        $search = (array) config('siimut-theme.global_search', []);
+        $this->globalSearch = $search['enabled'] ?? true;
+        $this->globalSearchKeyBindings = $search['key_bindings'] ?? ['cmd+k', 'ctrl+k'];
     }
 
     public static function make(): static
@@ -87,133 +100,62 @@ class SiimutTheme implements Plugin
             ->colors($this->colors)
             ->defaultThemeMode($this->defaultMode);
 
-        // Apply branding if provided
+        // Apply branding
         if ($this->brandName !== null) {
             $panel->brandName($this->brandName);
         }
-
         if ($this->brandLogo !== null) {
             $panel->brandLogo($this->brandLogo);
         }
-
         if ($this->darkBrandLogo !== null) {
             $panel->darkModeBrandLogo($this->darkBrandLogo);
         }
-
         if ($this->brandLogoHeight !== null) {
             $panel->brandLogoHeight($this->brandLogoHeight);
         }
-
         if ($this->favicon !== null) {
             $panel->favicon($this->favicon);
+        }
+
+        // Apply sidebar configuration
+        if ($this->sidebarCollapsibleOnDesktop) {
+            $panel->sidebarCollapsibleOnDesktop();
+        }
+        $panel->sidebarWidth($this->sidebarWidth);
+        $panel->collapsedSidebarWidth($this->collapsedSidebarWidth);
+
+        // Apply authentication configuration
+        if ($this->loginUrl) {
+            $panel->login(fn () => redirect()->to(url($this->loginUrl)));
+        }
+        if ($this->passwordResetUrl && $this->passwordResetResponseUrl) {
+            $panel->passwordReset(
+                fn () => redirect()->to(url($this->passwordResetUrl)),
+                fn () => redirect()->to(url($this->passwordResetResponseUrl)),
+            );
+        }
+        if ($this->registrationUrl) {
+            $panel->registration(fn () => redirect()->to(url($this->registrationUrl)));
+        }
+
+        // Apply notifications configuration
+        if ($this->databaseNotifications) {
+            $panel->databaseNotifications();
+            $panel->databaseNotificationsPolling($this->databaseNotificationsPolling);
+        }
+
+        // Apply global search configuration
+        if ($this->globalSearch) {
+            $panel->globalSearch();
+            $panel->globalSearchKeyBindings($this->globalSearchKeyBindings);
         }
     }
 
     public function boot(Panel $panel): void
     {
-        // No-op
+        // No additional setup required
     }
 
-    /**
-     * Override the theme CSS path.
-     */
-    public function viteTheme(string $path): static
-    {
-        $this->viteThemePath = $path;
-
-        return $this;
-    }
-
-    /**
-     * Set only the primary color (palette array or single hex).
-     * Similar to Resma Awin Theme's ->primaryColor().
-     *
-     * @param array<string,string>|string $color
-     */
-    public function primaryColor(array|string $color): static
-    {
-        $this->colors['primary'] = $color;
-
-        return $this;
-    }
-
-    /**
-     * Set the full color map.
-     *
-     * @param array<string, array<string,string>|string> $colors
-     */
-    public function colors(array $colors): static
-    {
-        $this->colors = $colors;
-
-        return $this;
-    }
-
-    /**
-     * Set the default theme mode.
-     */
-    public function defaultMode(ThemeMode $mode): static
-    {
-        $this->defaultMode = $mode;
-
-        return $this;
-    }
-
-    /**
-     * Set brand name displayed in the top bar when no logo is present.
-     */
-    public function brandName(string | Htmlable | Closure | null $name): static
-    {
-        $this->brandName = $name;
-
-        return $this;
-    }
-
-    /**
-     * Set brand logo (light mode). Accepts a URL or Htmlable.
-     */
-    public function brandLogo(string | Htmlable | Closure | null $logo): static
-    {
-        $this->brandLogo = is_string($logo) ? $this->resolveAssetUrl($logo) : $logo;
-
-        return $this;
-    }
-
-    /**
-     * Set brand logo for dark mode.
-     */
-    public function darkModeBrandLogo(string | Htmlable | Closure | null $logo): static
-    {
-        $this->darkBrandLogo = is_string($logo) ? $this->resolveAssetUrl($logo) : $logo;
-
-        return $this;
-    }
-
-    /**
-     * Set brand logo height (e.g. '1.5rem', '40px').
-     */
-    public function brandLogoHeight(string | Closure | null $height): static
-    {
-        $this->brandLogoHeight = $height;
-
-        return $this;
-    }
-
-    /**
-     * Set favicon URL.
-     */
-    public function favicon(string | Closure | null $url): static
-    {
-        $this->favicon = is_string($url) ? $this->resolveAssetUrl($url) : $url;
-
-        return $this;
-    }
-
-    /**
-     * Resolves an asset URL from a config value.
-     * - Absolute (http/https) or root-relative ('/...') is returned as-is.
-     * - Otherwise it is treated as public-relative and passed to asset().
-     */
     protected function resolveAssetUrl(?string $value): ?string
     {
         if ($value === null || $value === '') {

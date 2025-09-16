@@ -39,4 +39,39 @@ return [
         'logo_height' => env('SIIMUT_BRAND_LOGO_HEIGHT'),
         'favicon' => env('SIIMUT_BRAND_FAVICON'),
     ],
+
+    /**
+     * UI configuration
+     */
+    'ui' => [
+        'sidebar_collapsible' => env('SIIMUT_SIDEBAR_COLLAPSIBLE', true),
+        'sidebar_width' => env('SIIMUT_SIDEBAR_WIDTH', '18rem'),
+        'collapsed_sidebar_width' => env('SIIMUT_COLLAPSED_SIDEBAR_WIDTH', '7rem'),
+    ],
+
+    /**
+     * Authentication configuration
+     */
+    'authentication' => [
+        'login_url' => env('SIIMUT_LOGIN_URL', '/login'),
+        'password_reset_url' => env('SIIMUT_PASSWORD_RESET_URL', '/forgot-password'),
+        'password_reset_response_url' => env('SIIMUT_PASSWORD_RESET_RESPONSE_URL', '/reset-password'),
+        'registration_url' => env('SIIMUT_REGISTRATION_URL', '/register'),
+    ],
+
+    /**
+     * Notifications configuration
+     */
+    'notifications' => [
+        'database_enabled' => env('SIIMUT_DATABASE_NOTIFICATIONS', true),
+        'polling_interval' => env('SIIMUT_NOTIFICATIONS_POLLING', '30s'),
+    ],
+
+    /**
+     * Global search configuration
+     */
+    'global_search' => [
+        'enabled' => env('SIIMUT_GLOBAL_SEARCH', true),
+        'key_bindings' => ['cmd+k', 'ctrl+k'],
+    ],
 ];

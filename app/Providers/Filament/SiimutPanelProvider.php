@@ -30,23 +30,7 @@ class SiimutPanelProvider extends PanelProvider
             ->id('siimut')
             ->path('siimut')
             ->authGuard('web')
-            ->sidebarCollapsibleOnDesktop()
-            ->sidebarWidth('18rem')
-            ->collapsedSidebarWidth('7rem')
-            // Delegate authentication to Vue / Fortify routes
-            ->login(fn () => redirect()->to(url('/login')))
-            ->passwordReset(
-                fn () => redirect()->to(url('/forgot-password')),
-                fn () => redirect()->to(url('/reset-password')),
-            )
-            ->registration(fn () => redirect()->to(url('/register')))
-            // Enable database notifications in the topbar
-            ->databaseNotifications()
-            ->databaseNotificationsPolling('30s')
-            // Enable global search UI + keyboard shortcut
-            ->globalSearch()
-            ->globalSearchKeyBindings(['cmd+k', 'ctrl+k'])
-            // Use a plugin-based theme API similar to `resmatech/filament-awin-theme`.
+            // All UI configuration is now centralized in SiimutTheme plugin
             ->plugins([
                 SiimutTheme::make(),
                 ShieldLite::make(),

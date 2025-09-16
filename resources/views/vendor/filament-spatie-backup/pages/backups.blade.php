@@ -5,7 +5,7 @@
                 <livewire:backup-destination-status-list-records />
             </div>
         @endif
-        <div>
+        <div style="margin-top: 1rem">
             <livewire:backup-destination-list-records />
         </div>
 

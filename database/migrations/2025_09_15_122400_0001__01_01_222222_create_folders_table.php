@@ -16,6 +16,11 @@ return new class extends Migration
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
 
+            // Hierarchy support
+            $table->unsignedBigInteger('parent_id')->nullable()->index();
+            $table->string('path')->nullable()->index(); // For faster hierarchy queries
+            $table->unsignedInteger('depth')->default(0)->index(); // Folder depth level
+
             //Morph
             $table->string('model_type')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();
@@ -34,6 +39,9 @@ return new class extends Migration
             $table->boolean('is_favorite')->default(false)->nullable();
 
             $table->timestamps();
+
+            // Foreign key constraint for hierarchy
+            $table->foreign('parent_id')->references('id')->on('folders')->onDelete('cascade');
         });
     }
 
