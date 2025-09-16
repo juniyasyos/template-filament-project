@@ -100,19 +100,23 @@ class SiimutTheme implements Plugin
             ->colors($this->colors)
             ->defaultThemeMode($this->defaultMode);
 
-        // Apply branding
+        // Apply branding if provided
         if ($this->brandName !== null) {
             $panel->brandName($this->brandName);
         }
+
         if ($this->brandLogo !== null) {
             $panel->brandLogo($this->brandLogo);
         }
+
         if ($this->darkBrandLogo !== null) {
             $panel->darkModeBrandLogo($this->darkBrandLogo);
         }
+
         if ($this->brandLogoHeight !== null) {
             $panel->brandLogoHeight($this->brandLogoHeight);
         }
+
         if ($this->favicon !== null) {
             $panel->favicon($this->favicon);
         }
@@ -149,6 +153,9 @@ class SiimutTheme implements Plugin
             $panel->globalSearch();
             $panel->globalSearchKeyBindings($this->globalSearchKeyBindings);
         }
+
+        // Inject CSS variables for consistency with tokens.css
+        $this->injectCustomCSS($panel);
     }
 
     public function boot(Panel $panel): void
@@ -168,5 +175,47 @@ class SiimutTheme implements Plugin
         }
 
         return asset($value);
+    }
+
+    /**
+     * Inject custom CSS to ensure consistency between Filament colors and tokens.css
+     */
+    protected function injectCustomCSS(Panel $panel): void
+    {
+        // Get the primary color from Filament configuration
+        $primaryColor = $this->colors['primary'] ?? null;
+
+        if ($primaryColor) {
+            // Convert Filament Color to CSS custom property
+            $cssVariables = $this->generateCSSVariablesFromColors();
+
+            // Register CSS variables that tokens.css can use
+            $panel->renderHook('panels::body.start', function () use ($cssVariables) {
+                return '<style>:root { ' . $cssVariables . ' }</style>';
+            });
+        }
+    }
+
+    /**
+     * Generate CSS variables from Filament colors
+     */
+    protected function generateCSSVariablesFromColors(): string
+    {
+        $css = '';
+
+        // Handle primary color specifically for consistency with tokens.css
+        if (isset($this->colors['primary'])) {
+            $primary = $this->colors['primary'];
+
+            if (is_array($primary) && isset($primary[500])) {
+                // If it's a full palette, use the 500 shade as the main color
+                $css .= '--siimut-primary: ' . $primary[500] . '; ';
+            } else if (is_string($primary)) {
+                // If it's a hex color, use it directly
+                $css .= '--siimut-primary: ' . $primary . '; ';
+            }
+        }
+
+        return $css;
     }
 }

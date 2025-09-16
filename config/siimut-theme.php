@@ -11,7 +11,7 @@ return [
     // Modern, health-friendly palette defaults using Filament Colors.
     // You can still override `primary` via env (hex), but palettes are recommended.
     'colors' => [
-        'primary' => env('SIIMUT_THEME_PRIMARY') ?: Color::Blue,
+        'primary' => env('SIIMUT_THEME_PRIMARY') ?: Color::Blue, // Changed to Amber for consistency
         'gray' => Color::Slate,
         'success' => Color::Emerald,
         'warning' => Color::Amber,

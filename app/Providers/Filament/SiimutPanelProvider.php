@@ -41,6 +41,10 @@ class SiimutPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
+            ->navigationGroups([
+                'User Managements',
+                'Settings'
+            ])
             ->pages([
                 Dashboard::class,
             ])
