@@ -9,13 +9,13 @@
       <div v-if="errorType === 'single'" class="single-error">
         {{ firstError }}
       </div>
-      
+
       <ul v-else-if="errorType === 'list'" class="error-list">
         <li v-for="(error, index) in errorArray" :key="index" class="error-item">
           {{ error }}
         </li>
       </ul>
-      
+
       <div v-else-if="errorType === 'object'" class="error-object">
         <div v-for="(error, field) in processedErrors" :key="field" class="field-error">
           <strong>{{ formatFieldName(field) }}:</strong> {{ error }}
@@ -54,37 +54,37 @@ const emit = defineEmits<Emits>();
 
 const hasErrors = computed(() => {
   if (!props.errors) return false;
-  
+
   if (typeof props.errors === 'string') {
     return props.errors.trim().length > 0;
   }
-  
+
   if (Array.isArray(props.errors)) {
     return props.errors.length > 0;
   }
-  
+
   if (typeof props.errors === 'object') {
     return Object.keys(props.errors).length > 0;
   }
-  
+
   return false;
 });
 
 const errorType = computed(() => {
   if (!props.errors) return 'none';
-  
+
   if (typeof props.errors === 'string') {
     return 'single';
   }
-  
+
   if (Array.isArray(props.errors)) {
     return 'list';
   }
-  
+
   if (typeof props.errors === 'object') {
     return 'object';
   }
-  
+
   return 'none';
 });
 
@@ -106,10 +106,10 @@ const processedErrors = computed(() => {
   if (typeof props.errors === 'object' && !Array.isArray(props.errors) && props.errors) {
     const processed: Record<string, string> = {};
     let count = 0;
-    
+
     for (const [field, error] of Object.entries(props.errors)) {
       if (count >= props.maxErrors) break;
-      
+
       if (Array.isArray(error)) {
         processed[field] = error[0]; // Take first error for each field
       } else if (typeof error === 'string') {
@@ -117,7 +117,7 @@ const processedErrors = computed(() => {
       }
       count++;
     }
-    
+
     return processed;
   }
   return {};
@@ -125,7 +125,7 @@ const processedErrors = computed(() => {
 
 const formatFieldName = (fieldName: string): string => {
   if (!props.showFieldNames) return '';
-  
+
   // Convert snake_case to Title Case
   return fieldName
     .split('_')
@@ -192,7 +192,7 @@ const handleDismiss = () => {
   .error-list {
     padding-left: 1rem;
   }
-  
+
   .error-item,
   .single-error,
   .field-error {
@@ -205,7 +205,7 @@ const handleDismiss = () => {
   .field-error strong {
     font-weight: 700;
   }
-  
+
   .error-list {
     list-style-type: '• ';
   }

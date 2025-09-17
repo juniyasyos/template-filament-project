@@ -69,7 +69,7 @@ const spinnerClasses = computed(() => {
   .animate-spin {
     animation: none;
   }
-  
+
   /* Provide alternative loading indication */
   .spinner::after {
     content: '⋯';

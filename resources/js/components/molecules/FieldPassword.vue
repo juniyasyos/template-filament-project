@@ -7,7 +7,7 @@
     >
       {{ label }}
     </AppLabel>
-    
+
     <div class="relative">
       <AppInput
         :id="id"
@@ -26,7 +26,7 @@
         @input="handleInput"
         @keydown="handleKeydown"
       />
-      
+
       <button
         type="button"
         class="absolute right-0 top-0 h-full px-3 text-[var(--muted-foreground)] hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 rounded-r-[var(--radius)] transition-colors"
@@ -37,11 +37,11 @@
         <EyeOffIcon v-else class="h-4 w-4" />
       </button>
     </div>
-    
+
     <div v-if="hint && !hasError" class="text-xs text-[var(--muted-foreground)]">
       {{ hint }}
     </div>
-    
+
     <div v-if="hasError" class="text-xs text-[var(--danger)]" role="alert">
       {{ error }}
     </div>
@@ -174,7 +174,7 @@ button:focus-visible {
   .text-xs {
     font-size: 0.75rem;
   }
-  
+
   .absolute.right-0 {
     min-width: 40px;
     min-height: 40px;

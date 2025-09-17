@@ -110,7 +110,7 @@ defineProps<{
   .space-y-6 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 1rem;
   }
-  
+
   .space-y-4 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 0.75rem;
   }

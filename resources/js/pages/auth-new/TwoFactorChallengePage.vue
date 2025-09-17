@@ -201,7 +201,7 @@ button[type="submit"]:disabled {
   .space-y-6 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 1rem;
   }
-  
+
   .space-y-4 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 0.75rem;
   }
@@ -223,7 +223,7 @@ button:focus-visible {
   .font-medium {
     font-weight: 700;
   }
-  
+
   .underline {
     text-decoration-thickness: 2px;
   }

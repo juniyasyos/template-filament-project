@@ -33,12 +33,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { 
-  CheckCircle, 
-  AlertCircle, 
-  AlertTriangle, 
+import {
+  CheckCircle,
+  AlertCircle,
+  AlertTriangle,
   Info,
-  X 
+  X
 } from 'lucide-vue-next';
 
 interface Props {
@@ -152,7 +152,7 @@ button:focus-visible {
   .flex.items-start.gap-3 {
     gap: 0.5rem;
   }
-  
+
   .p-4 {
     padding: 0.75rem;
   }

@@ -18,7 +18,7 @@
             <template v-if="$slots.logo" #logo>
               <slot name="logo" />
             </template>
-            
+
             <template v-if="$slots.header" #default>
               <slot name="header" />
             </template>
@@ -153,11 +153,11 @@ const currentYear = computed(() => new Date().getFullYear());
     min-height: 100vh;
     min-height: 100svh;
   }
-  
+
   .auth-footer {
     margin-top: 1rem;
   }
-  
+
   .footer-content {
     max-width: 20rem;
   }
@@ -184,7 +184,7 @@ const currentYear = computed(() => new Date().getFullYear());
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
-  
+
   .auth-footer {
     margin-top: 1rem;
   }
@@ -219,16 +219,16 @@ const currentYear = computed(() => new Date().getFullYear());
     color: black;
     min-height: auto;
   }
-  
+
   .auth-container {
     min-height: auto;
     padding: 1rem;
   }
-  
+
   .auth-footer {
     page-break-inside: avoid;
   }
-  
+
   .auth-background {
     display: none;
   }

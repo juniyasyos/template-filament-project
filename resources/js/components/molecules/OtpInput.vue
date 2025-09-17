@@ -8,7 +8,7 @@
         {{ description }}
       </p>
     </div>
-    
+
     <div class="flex justify-center gap-2">
       <input
         v-for="(digit, index) in digits"
@@ -30,11 +30,11 @@
         @blur="handleBlur(index)"
       />
     </div>
-    
+
     <div v-if="hint && !hasError" class="text-xs text-center text-[var(--muted-foreground)]">
       {{ hint }}
     </div>
-    
+
     <div v-if="hasError" :id="`${id}-error`" class="text-xs text-center text-[var(--danger)]" role="alert">
       {{ error }}
     </div>
@@ -132,7 +132,7 @@ watch(
   (newDigits) => {
     const value = newDigits.join('');
     emit('update:modelValue', value);
-    
+
     // Auto-submit when all digits are filled
     if (props.autoSubmit && value.length === props.length && !value.includes('')) {
       emit('complete', value);
@@ -144,10 +144,10 @@ watch(
 const handleInput = (index: number, event: Event) => {
   const target = event.target as HTMLInputElement;
   const value = target.value.replace(/\D/g, ''); // Only allow digits
-  
+
   if (value.length > 0) {
     digits.value[index] = value[0];
-    
+
     // Move to next input
     if (index < props.length - 1) {
       focusInput(index + 1);
@@ -178,7 +178,7 @@ const handlePaste = (event: ClipboardEvent) => {
   event.preventDefault();
   const pastedData = event.clipboardData?.getData('text') || '';
   const digitsOnly = pastedData.replace(/\D/g, '').slice(0, props.length);
-  
+
   if (digitsOnly.length > 0) {
     const newDigits = [...digits.value];
     digitsOnly.split('').forEach((digit, index) => {
@@ -187,7 +187,7 @@ const handlePaste = (event: ClipboardEvent) => {
       }
     });
     digits.value = newDigits;
-    
+
     // Focus the next empty input or the last input
     const nextEmptyIndex = newDigits.findIndex(digit => !digit);
     const focusIndex = nextEmptyIndex === -1 ? props.length - 1 : nextEmptyIndex;
@@ -260,15 +260,15 @@ input:focus {
   .w-12 {
     width: 2.5rem;
   }
-  
+
   .h-12 {
     height: 2.5rem;
   }
-  
+
   .text-lg {
     font-size: 1rem;
   }
-  
+
   .gap-2 {
     gap: 0.375rem;
   }
@@ -279,7 +279,7 @@ input:focus {
   input {
     border-width: 2px;
   }
-  
+
   input:focus {
     border-width: 3px;
   }

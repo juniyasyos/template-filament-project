@@ -32,11 +32,11 @@
       <h1 v-if="title" :class="titleClasses">
         {{ title }}
       </h1>
-      
+
       <p v-if="subtitle" :class="subtitleClasses">
         {{ subtitle }}
       </p>
-      
+
       <!-- Additional content slot -->
       <div v-if="$slots.default" class="mt-4">
         <slot />
@@ -163,12 +163,12 @@ a:focus-visible {
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
-  
+
   .text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .space-y-6 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 1rem;
   }
@@ -179,7 +179,7 @@ a:focus-visible {
   h1 {
     font-weight: 700;
   }
-  
+
   p {
     font-weight: 500;
   }
@@ -190,7 +190,7 @@ a:focus-visible {
   .transition-transform {
     transition: none;
   }
-  
+
   .hover\:scale-105:hover {
     transform: none;
   }
@@ -201,7 +201,7 @@ a:focus-visible {
   .auth-header {
     page-break-inside: avoid;
   }
-  
+
   img {
     max-height: 2rem;
   }

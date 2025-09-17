@@ -106,7 +106,7 @@ const cardClasses = computed(() => {
   .p-8 {
     padding: 1.5rem;
   }
-  
+
   .p-10 {
     padding: 2rem;
   }
@@ -122,7 +122,7 @@ const cardClasses = computed(() => {
   .border {
     border-width: 2px;
   }
-  
+
   .border-2 {
     border-width: 3px;
   }

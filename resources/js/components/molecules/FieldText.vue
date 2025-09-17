@@ -7,7 +7,7 @@
     >
       {{ label }}
     </AppLabel>
-    
+
     <AppInput
       :id="id"
       v-model="localValue"
@@ -24,11 +24,11 @@
       @input="handleInput"
       @keydown="handleKeydown"
     />
-    
+
     <div v-if="hint && !hasError" class="text-xs text-[var(--muted-foreground)]">
       {{ hint }}
     </div>
-    
+
     <div v-if="hasError" class="text-xs text-[var(--danger)]" role="alert">
       {{ error }}
     </div>

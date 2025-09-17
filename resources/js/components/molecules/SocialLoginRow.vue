@@ -6,7 +6,7 @@
         {{ description }}
       </p>
     </div>
-    
+
     <div class="flex flex-col gap-3">
       <a
         v-for="provider in providers"
@@ -24,7 +24,7 @@
         <span class="flex-1 text-center">{{ provider.label }}</span>
       </a>
     </div>
-    
+
     <div v-if="showDivider" class="relative">
       <div class="absolute inset-0 flex items-center">
         <span class="w-full border-t border-[var(--border)]"></span>
@@ -107,9 +107,9 @@ const handleClick = (provider: SocialProvider, event: MouseEvent) => {
     event.preventDefault();
     return;
   }
-  
+
   emit('click', provider, event);
-  
+
   // If no href is provided, prevent default navigation
   if (!provider.href || provider.href === '#') {
     event.preventDefault();
@@ -168,7 +168,7 @@ a[disabled] {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
-  
+
   .py-3 {
     padding-top: 0.625rem;
     padding-bottom: 0.625rem;
@@ -186,7 +186,7 @@ a {
   a {
     border-width: 2px;
   }
-  
+
   a:focus {
     border-width: 3px;
   }

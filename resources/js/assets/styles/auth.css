@@ -1,6 +1,6 @@
 /**
  * Auth-specific styles
- * 
+ *
  * Additional styles specific to authentication pages that aren't covered
  * by the base design tokens. These should be minimal and focused.
  */
@@ -127,13 +127,13 @@
     margin: 1rem;
     padding: 1.5rem;
   }
-  
+
   .otp-input {
     width: 2.25rem;
     height: 2.25rem;
     font-size: 1rem;
   }
-  
+
   .otp-input-group {
     gap: 0.375rem;
   }
@@ -145,7 +145,7 @@
     background: white;
     color: black;
   }
-  
+
   .auth-card {
     box-shadow: none;
     border: 1px solid #ccc;

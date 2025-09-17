@@ -1,9 +1,9 @@
 /**
  * Design Tokens - Brand & Theme Variables
- * 
+ *
  * This file contains all design tokens for the authentication UI system.
  * All components should use these tokens instead of hardcoded values.
- * 
+ *
  * Usage:
  * - Use var(--token-name) in components
  * - Dark mode is handled automatically via media query

@@ -14,7 +14,7 @@
         <div class="space-y-2">
           <p class="font-medium">Email verification required</p>
           <p class="text-sm">
-            Before continuing, please check your email for a verification link. 
+            Before continuing, please check your email for a verification link.
             If you didn't receive the email, we can send you another one.
           </p>
         </div>
@@ -47,8 +47,8 @@
       <!-- Actions -->
       <div class="flex flex-col gap-3 pt-4 border-t border-[var(--border)]">
         <!-- Dashboard Link (if user has access) -->
-        <TextLink 
-          :href="dashboard()" 
+        <TextLink
+          :href="dashboard()"
           class="text-center text-sm font-medium"
           data-test="dashboard-link"
         >
@@ -153,11 +153,11 @@ button[type="submit"]:disabled {
   .space-y-6 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 1rem;
   }
-  
+
   .space-y-4 > :not([hidden]) ~ :not([hidden]) {
     margin-top: 0.75rem;
   }
-  
+
   .flex-col {
     align-items: stretch;
   }
@@ -179,7 +179,7 @@ button:focus-visible {
   .font-medium {
     font-weight: 700;
   }
-  
+
   .underline {
     text-decoration-thickness: 2px;
   }
