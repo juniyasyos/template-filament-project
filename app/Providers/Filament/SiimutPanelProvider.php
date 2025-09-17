@@ -35,9 +35,6 @@ class SiimutPanelProvider extends PanelProvider
                 SiimutTheme::make(),
                 ShieldLite::make(),
                 FilamentLaravelBackupPlugin::make(),
-                FilamentMediaManagerPlugin::make()
-                    ->allowUserAccess(true)
-                    ->allowSubFolders(true),
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
             ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
