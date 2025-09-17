@@ -2,6 +2,10 @@
 
 @import 'tw-animate-css';
 
+/* Import auth design tokens */
+@import '../js/assets/styles/tokens.css';
+@import '../js/assets/styles/auth.css';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
