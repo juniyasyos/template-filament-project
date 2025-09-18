@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ShieldSuperAdminSeeder::class,
             ShieldAdminSeeder::class,
+            \App\Domain\Drive\Database\Seeders\DriveSeeder::class,
         ]);
 
         // Optionally generate additional sample users
