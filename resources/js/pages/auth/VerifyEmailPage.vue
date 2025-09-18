@@ -83,7 +83,7 @@ import TextLink from '@/components/TextLink.vue';
 import AuthLayout from '@/components/templates/AuthLayout.vue';
 import AppAlert from '@/components/atoms/AppAlert.vue';
 import AppButton from '@/components/atoms/AppButton.vue';
-// import { dashboard } from '@/routes'; // Dashboard route disabled
+// import { dashboard } from '@/routes';
 import { Form, Head } from '@inertiajs/vue3';
 
 defineProps<{
