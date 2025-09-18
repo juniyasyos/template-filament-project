@@ -50,17 +50,3 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
-
-// Demo routes untuk membandingkan auth lama vs baru
-Route::middleware('guest')->group(function () {
-    Route::get('login-new', function () {
-        return \Inertia\Inertia::render('auth-new/LoginPage', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-            'devAutofill' => app()->environment('local') ? [
-                'email' => 'admin@gmail.com',
-                'password' => 'password',
-            ] : null,
-        ]);
-    })->name('login.new');
-});
