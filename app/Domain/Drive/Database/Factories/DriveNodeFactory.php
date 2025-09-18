@@ -64,7 +64,7 @@ class DriveNodeFactory extends Factory
                 'document', 'report', 'presentation', 'spreadsheet', 'image',
                 'photo', 'video', 'music', 'archive', 'backup', 'template',
                 'invoice', 'contract', 'manual', 'guide'
-            ]) . '_' . $this->faker->dateFormat('Y-m-d') . $this->faker->randomElement([
+            ]) . '_' . $this->faker->date('Y-m-d') . $this->faker->randomElement([
                 '.pdf', '.docx', '.xlsx', '.pptx', '.jpg', '.png', '.mp4',
                 '.mp3', '.zip', '.txt', '.csv', '.html', '.json'
             ]),
