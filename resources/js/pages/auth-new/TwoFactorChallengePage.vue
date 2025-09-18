@@ -98,7 +98,7 @@
 
 <script setup lang="ts">
 import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
-import TwoFactorAuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/TwoFactorAuthenticatedSessionController';
+import TwoFactorAuthenticatedSessionController from '@/actions/Laravel/Fortify/Http/Controllers/TwoFactorAuthenticatedSessionController';
 import AuthLayout from '@/components/templates/AuthLayout.vue';
 import AppButton from '@/components/atoms/AppButton.vue';
 import FieldText from '@/components/molecules/FieldText.vue';
