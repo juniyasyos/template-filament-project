@@ -10,39 +10,31 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Support\Facades\Gate;
+use juniyasyos\ShieldLite\Concerns\HasShieldLite;
 use BackedEnum;
 use UnitEnum;
 
 /**
  * User Resource for managing users in the application.
- * This resource is now independent from Shield Lite plugin.
+ * This resource uses Shield Lite plugin for authorization.
  */
 class UserResource extends Resource
 {
+    use HasShieldLite;
+
     protected static ?string $model = User::class;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
     protected static string|UnitEnum|null $navigationGroup = 'User Managements';
     protected static ?int $navigationSort = 1;
 
-    public static function canAccess(): bool
+    public function defineGates(): array
     {
-        return Gate::allows('viewAny', User::class);
-    }
-
-    public static function canCreate(): bool
-    {
-        return Gate::allows('create', User::class);
-    }
-
-    public static function canEdit($record): bool
-    {
-        return Gate::allows('update', $record);
-    }
-
-    public static function canDelete($record): bool
-    {
-        return Gate::allows('delete', $record);
+        return [
+            'users.viewAny' => __('Allows viewing the user list'),
+            'users.create' => __('Allows creating a new user'),
+            'users.update' => __('Allows updating users'),
+            'users.delete' => __('Allows deleting users'),
+        ];
     }
 
     public static function form(Schema $schema): Schema
