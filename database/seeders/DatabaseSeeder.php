@@ -16,8 +16,6 @@ class DatabaseSeeder extends Seeder
         // Seed predefined users
         $this->call([
             UserSeeder::class,
-            ShieldSuperAdminSeeder::class,
-            ShieldAdminSeeder::class,
             \App\Domain\Drive\Database\Seeders\DriveSeeder::class,
         ]);
 
