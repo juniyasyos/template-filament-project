@@ -3,6 +3,7 @@
 namespace App\Filament\Siimut\Resources\Users\Pages;
 
 use App\Filament\Siimut\Resources\Users\UserResource;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListUsers extends ListRecords
@@ -12,7 +13,7 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

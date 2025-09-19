@@ -2,27 +2,27 @@
 
 namespace App\Filament\Siimut\Resources\Users;
 
+use App\Filament\Siimut\Resources\Users\Pages\CreateUser;
+use App\Filament\Siimut\Resources\Users\Pages\EditUser;
+use App\Filament\Siimut\Resources\Users\Pages\ListUsers;
+use App\Filament\Siimut\Resources\Users\Schemas\UserForm;
+use App\Filament\Siimut\Resources\Users\Tables\UsersTable;
 use App\Models\User;
-use App\Filament\Siimut\Resources\Users\Pages;
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use juniyasyos\ShieldLite\Concerns\HasShieldLite;
 use BackedEnum;
 use UnitEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use juniyasyos\ShieldLite\Concerns\HasShieldLite;
 
-/**
- * User Resource - Simple Shield Lite implementation
- */
 class UserResource extends Resource
 {
-    use HasShieldLite; // Just one trait!
+    use HasShieldLite; // Shield Lite integration
 
     protected static ?string $model = User::class;
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
     protected static string|UnitEnum|null $navigationGroup = 'User Managements';
     protected static ?int $navigationSort = 1;
 
@@ -33,78 +33,46 @@ class UserResource extends Resource
     {
         return [
             'users.viewAny' => 'View users list',
+            'users.view' => 'View user details',
             'users.create' => 'Create new users',
             'users.update' => 'Update users',
             'users.delete' => 'Delete users',
+            'users.restore' => 'Restore deleted users',
+            'users.forceDelete' => 'Permanently delete users',
         ];
+    }
+
+    /**
+     * Custom role name for permission generation
+     */
+    public function roleName(): string
+    {
+        return 'users';
     }
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->columns(2)
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
-                Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->label('Email Verified At')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->dehydrateStateUsing(fn ($state) => filled($state) ? bcrypt($state) : null)
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->confirmed()
-                    ->revealable()
-                    ->maxLength(255)
-                    ->columnSpanFull(),
-            ]);
+        return UserForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                \Filament\Actions\BulkActionGroup::make([
-                    \Filament\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return UsersTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

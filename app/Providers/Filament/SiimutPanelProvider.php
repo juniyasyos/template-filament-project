@@ -29,6 +29,7 @@ class SiimutPanelProvider extends PanelProvider
         return $panel
             ->id('siimut')
             ->path('siimut')
+            ->default()
             ->authGuard('web')
             // All UI configuration is now centralized in SiimutTheme plugin
             ->plugins([
