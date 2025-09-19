@@ -3,40 +3,46 @@
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 describe('Shield Lite Spatie Integration', function () {
 
-    it('allows update via mapped permission', function () {
-        $guard = config('shield-lite.guard');
+    it('user with permission can access resource', function () {
+        $guard = config('shield-lite.guard', 'web');
         Permission::findOrCreate('posts.update', $guard);
 
         $role = Role::findOrCreate('Editor', $guard);
         $role->givePermissionTo('posts.update');
 
-        $user = \App\Models\User::factory()->create();
+        $user = User::factory()->create();
         $user->assignRole('Editor');
         app(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
-        $post = new \App\Models\Post(); // dummy model
-        expect(Gate::forUser($user)->allows('update', $post))->toBeTrue();
+        expect($user->can('posts.update'))->toBeTrue();
     });
 
     it('super admin bypasses all checks', function () {
-        $guard = config('shield-lite.guard');
-        \Spatie\Permission\Models\Role::findOrCreate('Super-Admin', $guard);
+        $guard = config('shield-lite.guard', 'web');
+        Role::findOrCreate('Super-Admin', $guard);
 
-        $user = \App\Models\User::factory()->create();
+        $user = User::factory()->create();
         $user->assignRole('Super-Admin');
         app(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
-        $someModel = new \App\Models\User();
-        expect(Gate::forUser($user)->allows('delete', $someModel))->toBeTrue();
+        // Super admin should pass any permission check
+        expect($user->can('any.permission'))->toBeTrue();
+        expect($user->can('nonexistent.permission'))->toBeTrue();
+        expect($user->isSuperAdmin())->toBeTrue();
     });
 
     it('denies without permission', function () {
-        $user = \App\Models\User::factory()->create();
-        $model = new \App\Models\Post();
-        expect(Gate::forUser($user)->allows('update', $model))->toBeFalse();
+        $user = User::factory()->create();
+        
+        // Create permission first, but don't assign to user
+        $guard = config('shield-lite.guard', 'web');
+        Permission::findOrCreate('posts.update', $guard);
+        
+        expect($user->can('posts.update'))->toBeFalse();
     });
 
     it('resets permission cache safely', function () {

@@ -15,25 +15,27 @@ use BackedEnum;
 use UnitEnum;
 
 /**
- * User Resource for managing users in the application.
- * This resource uses Shield Lite plugin for authorization.
+ * User Resource - Simple Shield Lite implementation
  */
 class UserResource extends Resource
 {
-    use HasShieldLite;
+    use HasShieldLite; // Just one trait!
 
     protected static ?string $model = User::class;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
     protected static string|UnitEnum|null $navigationGroup = 'User Managements';
     protected static ?int $navigationSort = 1;
 
+    /**
+     * Define permissions - auto-generated in database
+     */
     public function defineGates(): array
     {
         return [
-            'users.viewAny' => __('Allows viewing the user list'),
-            'users.create' => __('Allows creating a new user'),
-            'users.update' => __('Allows updating users'),
-            'users.delete' => __('Allows deleting users'),
+            'users.viewAny' => 'View users list',
+            'users.create' => 'Create new users',
+            'users.update' => 'Update users',
+            'users.delete' => 'Delete users',
         ];
     }
 

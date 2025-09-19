@@ -10,31 +10,16 @@ use juniyasyos\ShieldLite\Concerns\AuthorizesShield;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use juniyasyos\ShieldLite\Concerns\HasShield;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
+    use HasShield; // Single trait for all Shield Lite functionality
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;
-    use HasShieldRoles, HasShieldPermissions, AuthorizesShield;
-    use HasRoles {
-        // Use Spatie methods as primary
-        HasRoles::roles insteadof HasShieldRoles;
-        HasRoles::assignRole insteadof HasShieldRoles;
-        HasRoles::removeRole insteadof HasShieldRoles;
-        HasRoles::hasRole insteadof HasShieldRoles;
-        HasRoles::hasAnyRole insteadof HasShieldRoles;
-        HasRoles::hasAllRoles insteadof HasShieldRoles;
-        HasRoles::syncRoles insteadof HasShieldRoles;
-        HasRoles::getRoleNames insteadof HasShieldRoles;
-
-        // Keep Shield Lite specific methods with aliases
-        HasShieldRoles::isSuperAdmin as isShieldSuperAdmin;
-        HasShieldRoles::getDefaultRole as getShieldDefaultRole;
-    }
-
-    /**
+    use HasFactory, Notifiable, TwoFactorAuthenticatable;    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
