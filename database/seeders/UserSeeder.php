@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use juniyasyos\ShieldLite\Models\ShieldRole;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -14,24 +14,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ensure base roles exist
+        // Ensure base roles exist using Spatie Permission
         $roles = [
-            ['name' => 'Admin', 'guard' => 'web'],
-            ['name' => 'Manager', 'guard' => 'web'],
-            ['name' => 'Staff', 'guard' => 'web'],
+            ['name' => 'Super-Admin', 'guard_name' => 'web'],
+            ['name' => 'Admin', 'guard_name' => 'web'],
+            ['name' => 'Manager', 'guard_name' => 'web'],
+            ['name' => 'Staff', 'guard_name' => 'web'],
         ];
 
         $roleIdsByName = [];
         foreach ($roles as $role) {
-            $record = ShieldRole::query()->updateOrCreate(
-                [
-                    'name' => $role['name'],
-                    'guard' => $role['guard'],
-                ],
-                [
-                    'created_by_name' => 'system',
-                ]
-            );
+            $record = Role::findOrCreate($role['name'], $role['guard_name']);
             $roleIdsByName[$role['name']] = $record->id;
         }
 
@@ -41,7 +34,7 @@ class UserSeeder extends Seeder
                 'name' => 'Admin User',
                 'email' => 'admin@gmail.com',
                 'password' => 'password',
-                'role' => 'Super Admin',
+                'role' => 'Super-Admin', // Fixed: use consistent role name
             ],
             [
                 'name' => 'Manager User',
@@ -67,12 +60,9 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            $roleId = $roleIdsByName[$data['role']] ?? null;
-            if ($roleId) {
-                // Attach role and set as default
-                $user->roles()->syncWithoutDetaching([$roleId]);
-                $user->default_role_id = $roleId;
-                $user->save();
+            // Use Shield Lite's HasShield trait method
+            if (isset($data['role']) && isset($roleIdsByName[$data['role']])) {
+                $user->assignRole($data['role']); // Use Spatie's assignRole method
             }
         }
     }
