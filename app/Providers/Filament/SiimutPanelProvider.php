@@ -13,7 +13,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
-use juniyasyos\ShieldLite\ShieldLite;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -34,7 +33,6 @@ class SiimutPanelProvider extends PanelProvider
             // All UI configuration is now centralized in SiimutTheme plugin
             ->plugins([
                 SiimutTheme::make(),
-                ShieldLite::make(),
                 FilamentLaravelBackupPlugin::make(),
             ])
             ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')

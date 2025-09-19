@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2a86b2fbf469a0e5095fbc97665a0bd",
+    "content-hash": "e2780016dacab9b74f5fdd0f76c097f5",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -2411,80 +2411,6 @@
                 "filament",
                 "filament-backup",
                 "laravel-backup"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "juniyasyos/shield-lite",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "packages/juniyasyos/shield-lite",
-                "reference": "5a88c105af51eb6ff5eec4e19b854c4ca8ab2925"
-            },
-            "require": {
-                "laravel/framework": "^12.0",
-                "php": "^8.2",
-                "spatie/laravel-permission": "^6.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^9.0|^10.0|^11.0",
-                "pestphp/pest": "^3.0",
-                "pestphp/pest-plugin-laravel": "^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "juniyasyos\\ShieldLite\\ShieldLiteServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "juniyasyos\\ShieldLite\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/pest"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Asep",
-                    "email": "juniyasyos@gmail.com"
-                }
-            ],
-            "description": "Filament Shield Lite is an effortless role and permission management plugin for Filament",
-            "keywords": [
-                "Filament access control",
-                "Filament integration",
-                "Filament panel",
-                "Filament permission setup",
-                "Filament resource access",
-                "Filament widget permissions",
-                "Hexa installation",
-                "Shield Filament",
-                "Shield plugin",
-                "Shield plugin",
-                "access permissions Filament",
-                "juniyasyos ladmin",
-                "role and permission Filament",
-                "role management Filament",
-                "role management PHP"
             ],
             "transport-options": {
                 "symlink": true,
@@ -6277,16 +6203,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "11.14.0",
+            "version": "11.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "7050a0d041be8c5c5ef5886967fbbbe578a54296"
+                "reference": "9d1e9731d36817d1649bc584b2c40c0c9d4bcfac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/7050a0d041be8c5c5ef5886967fbbbe578a54296",
-                "reference": "7050a0d041be8c5c5ef5886967fbbbe578a54296",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/9d1e9731d36817d1649bc584b2c40c0c9d4bcfac",
+                "reference": "9d1e9731d36817d1649bc584b2c40c0c9d4bcfac",
                 "shasum": ""
             },
             "require": {
@@ -6324,6 +6250,7 @@
                 "phpstan/extension-installer": "^1.3.1",
                 "spatie/laravel-ray": "^1.33",
                 "spatie/pdf-to-image": "^2.2|^3.0",
+                "spatie/pest-expectations": "^1.13",
                 "spatie/pest-plugin-snapshots": "^2.1"
             },
             "suggest": {
@@ -6370,7 +6297,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.14.0"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.15.0"
             },
             "funding": [
                 {
@@ -6382,7 +6309,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-19T08:01:56+00:00"
+            "time": "2025-09-19T06:51:45+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -12998,8 +12925,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "juniyasyos/filament-backup": 20,
-        "juniyasyos/shield-lite": 20
+        "juniyasyos/filament-backup": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
