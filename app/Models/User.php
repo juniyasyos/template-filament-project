@@ -4,10 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use juniyasyos\ShieldLite\Concerns\HasShieldRoles;
-use juniyasyos\ShieldLite\Concerns\HasShieldPermissions;
-use juniyasyos\ShieldLite\Concerns\AuthorizesShield;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use juniyasyos\ShieldLite\Concerns\HasShield;
@@ -19,7 +15,9 @@ class User extends Authenticatable
     use HasShield; // Single trait for all Shield Lite functionality
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;    /**
+    use HasFactory, Notifiable, TwoFactorAuthenticatable;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
