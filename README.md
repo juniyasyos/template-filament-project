@@ -69,15 +69,6 @@
  - Panel provider: `app/Providers/Filament/PanelPanelProvider.php`
  - CSS entry: `resources/css/filament/panel/theme.css` (sudah di `vite.config.ts`)
 
- #### CSS Structure (modular)
- - `resources/css/filament/panel/theme.css` — entry yang mengimpor semua bagian
- - `resources/css/filament/panel/tokens.css` — design tokens scoped ke panel
- - `resources/css/filament/panel/base.css` — tokens dasar dan tipografi
- - `resources/css/filament/panel/layout.css` — topbar, sidebar, main area
- - `resources/css/filament/panel/components/*.css` — komponen (buttons, forms, tables, cards, modals)
- - `resources/css/filament/panel/utilities.css` — utilitas (fluid scale, progress, scrollbar)
- - `resources/css/filament/panel/overrides.css` — override lokal, dimuat paling akhir
-
  ### Konfigurasi lewat .env
  ```env
  # Panel Settings
