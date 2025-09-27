@@ -15,5 +15,5 @@ test('new users can register', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('filament.panel.pages.dashboard', absolute: false));
+    $response->assertRedirect(route('filament.' . config('panel.id', 'panel') . '.pages.dashboard', absolute: false));
 });

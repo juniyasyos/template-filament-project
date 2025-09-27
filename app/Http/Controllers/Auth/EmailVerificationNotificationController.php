@@ -14,7 +14,7 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('filament.panel.pages.dashboard', absolute: false));
+            return redirect()->intended(route('filament.' . config('panel.id', 'panel') . '.pages.dashboard', absolute: false));
         }
 
         $request->user()->sendEmailVerificationNotification();

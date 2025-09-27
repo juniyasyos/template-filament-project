@@ -25,14 +25,26 @@ class PanelPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        return $panel
-            ->id('panel')
-            ->path('panel')
+        $cfg = (array) config('panel', []);
+
+        $id = (string) ($cfg['id'] ?? 'panel');
+        $path = (string) ($cfg['path'] ?? 'panel');
+        $name = $cfg['name'] ?? null;
+        $version = $cfg['version'] ?? null;
+
+        $themePluginClass = $cfg['theme']['plugin'] ?? \App\Filament\Plugins\PanelTheme::class;
+        $themePlugin = class_exists($themePluginClass)
+            ? (method_exists($themePluginClass, 'make') ? $themePluginClass::make() : new $themePluginClass())
+            : PanelTheme::make();
+
+        $panel = $panel
+            ->id($id)
+            ->path($path)
             ->default()
             ->authGuard('web')
-            // All UI configuration is now centralized in PanelTheme plugin
+            // All UI configuration is now centralized via theme plugin
             ->plugins([
-                PanelTheme::make(),
+                $themePlugin,
                 FilamentLaravelBackupPlugin::make(),
             ])
             ->discoverResources(in: app_path('Filament/Panel/Resources'), for: 'App\Filament\Panel\Resources')
@@ -63,5 +75,15 @@ class PanelPanelProvider extends PanelProvider
             ->authMiddleware([
                 \App\Http\Middleware\Authenticate::class,
             ]);
+
+        if (! empty($name)) {
+            $panel->brandName($name);
+        }
+
+        if (! empty($version)) {
+            $panel->renderHook('panels::topbar.end', fn () => '<div class="hidden sm:flex items-center text-xs text-gray-500 dark:text-gray-400 ml-2">v' . e((string) $version) . '</div>');
+        }
+
+        return $panel;
     }
 }

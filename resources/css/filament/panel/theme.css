@@ -1,4 +1,1159 @@
 /* Panel theme entry */
 @import './tokens.css';
 /* @import './test-vue-style.css'; */
-@import './test.css';
+
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/Panel/**/*';
+@source '../../../../resources/views/filament/panel/**/*';
+
+/* @import 'login.css'; */
+
+/*
+  Base design tokens to align Filament with the Vue dashboard.
+  Tailwind v4-compatible custom properties for colors, radius, etc.
+*/
+:root {
+    /* App color system (light) */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(0 0% 3.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(0 0% 3.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(0 0% 3.9%);
+    --primary: hsl(0 0% 9%);
+    --primary-foreground: hsl(0 0% 98%);
+    --secondary: hsl(0 0% 92.1%);
+    --secondary-foreground: hsl(0 0% 9%);
+    --muted: hsl(0 0% 96.1%);
+    --muted-foreground: hsl(0 0% 45.1%);
+    --accent: hsl(0 0% 96.1%);
+    --accent-foreground: hsl(0 0% 9%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(0 0% 92.8%);
+    --input: hsl(0 0% 89.8%);
+    --ring: hsl(0 0% 3.9%);
+    --radius: 0.5rem;
+
+    /* Sidebar system */
+    --sidebar-background: hsl(0 0% 98%);
+    --sidebar-foreground: hsl(240 5.3% 26.1%);
+    --sidebar-primary: hsl(0 0% 10%);
+    --sidebar-primary-foreground: hsl(0 0% 98%);
+    --sidebar-accent: hsl(0 0% 94%);
+    --sidebar-accent-foreground: hsl(0 0% 30%);
+    --sidebar-border: hsl(0 0% 91%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+    --sidebar: hsl(0 0% 98%);
+}
+
+.dark {
+    /* App color system (dark) */
+    --background: hsl(0 0% 3.9%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(0 0% 3.9%);
+    --card-foreground: hsl(0 0% 98%);
+    --popover: hsl(0 0% 3.9%);
+    --popover-foreground: hsl(0 0% 98%);
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(0 0% 9%);
+    --secondary: hsl(0 0% 14.9%);
+    --secondary-foreground: hsl(0 0% 98%);
+    --muted: hsl(0 0% 16.08%);
+    --muted-foreground: hsl(0 0% 63.9%);
+    --accent: hsl(0 0% 14.9%);
+    --accent-foreground: hsl(0 0% 98%);
+    --destructive: hsl(0 84% 60%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(0 0% 14.9%);
+    --input: hsl(0 0% 14.9%);
+    --ring: hsl(0 0% 83.1%);
+
+    /* Sidebar system */
+    --sidebar-background: hsl(0 0% 7%);
+    --sidebar-foreground: hsl(0 0% 95.9%);
+    --sidebar-primary: hsl(360, 100%, 100%);
+    --sidebar-primary-foreground: hsl(0 0% 100%);
+    --sidebar-accent: hsl(0 0% 15.9%);
+    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-border: hsl(0 0% 15.9%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+    --sidebar: hsl(240 5.9% 10%);
+}
+
+/* Softer dark palette (eye-friendly slate + blue accents) */
+:root {
+    --ds-dark-bg-primary-color: #111827;
+    /* gray-900, but not pitch-black */
+    --ds-dark-bg-secondary-color: #1f2937;
+    /* gray-800 */
+    --ds-dark-bg-tertiary-color: #273449;
+    /* soft blue-slate surface */
+}
+
+/* Base layout harmonization */
+html.fi,
+.fi-body {
+    font-family: var(--font-sans, Instrument Sans, ui-sans-serif, system-ui, sans-serif);
+}
+
+/* Main content width: fill available space, cap to monitor/10xl */
+.fi-panel-panel .fi-main:not(.fi-width-screen) {
+    width: 100%;
+    /* 10xl-ish cap by default (100rem = 1600px); can be tuned via --fi-main-max */
+    max-width: min(100%, var(--fi-main-max, 100rem));
+}
+
+/* ------------------------------
+   Responsive/Fluid type & layout
+   ------------------------------ */
+
+/* Fluid type scale tokens */
+:root {
+    --fluid-1: clamp(0.875rem, 0.82rem + 0.30vw, 1rem);
+    --fluid-2: clamp(1rem, 0.92rem + 0.60vw, 1.25rem);
+    --fluid-3: clamp(1.125rem, 0.95rem + 1.10vw, 1.5rem);
+    --fluid-4: clamp(1.5rem, 1.1rem + 2.2vw, 2.5rem);
+}
+
+/* Topbar height & spacing scale with viewport */
+.fi-topbar {
+    min-height: clamp(3rem, 2.3rem + 1.2vw, 4rem);
+}
+
+/* Main container padding becomes fluid across breakpoints */
+.fi-main {
+    padding-inline: clamp(0.75rem, 1.2vw, 2rem);
+}
+
+/* Page header: fluid heading size and compact spacing on small screens */
+.fi-header-heading {
+    font-size: var(--fluid-4);
+    line-height: 1.2;
+}
+
+.fi-simple-header-heading {
+    font-size: var(--fluid-3);
+}
+
+.fi-header {
+    gap: clamp(0.75rem, 0.6rem + 0.6vw, 1.25rem);
+}
+
+/* Section and widget header titles scale slightly */
+.fi-section-header-heading,
+.fi-wi-widget .fi-section .fi-section-header .fi-section-header-heading {
+    font-size: var(--fluid-2);
+}
+
+/* Button sizing adapts a bit for small screens */
+@media (max-width: 640px) {
+
+    .fi-btn,
+    .fi-ac-btn {
+        padding: 0.375rem 0.75rem;
+    }
+}
+
+/* Reduce visual weight of cards/sections on very small screens */
+@media (max-width: 480px) {
+
+    .fi-section,
+    .fi-card {
+        border-radius: calc(var(--radius, 0.5rem) - 4px);
+    }
+}
+
+/* Large displays: slightly increase max content width and tighten grid gaps */
+@media (min-width: 1536px) {
+    .fi-panel-panel {
+        --fi-main-max: 110rem;
+    }
+
+    /* ~1760px */
+    .fi-page-content,
+    .fi-simple-page-content {
+        row-gap: 1.75rem;
+    }
+}
+
+/* Progres Bar */
+.progress-bar {
+    @apply h-4 w-full bg-gray-100 dark:bg-gray-800 rounded-full shadow-inner overflow-hidden
+}
+
+.progress-bar-value {
+    @apply flex h-full items-center justify-center bg-primary-600 dark:bg-primary-500 rounded-r-full shadow-inner text-xs font-bold text-white;
+}
+
+/* END */
+
+/* Start Costum Table */
+.custom-bordered-table table {
+    border: 1px solid #1B2431;
+}
+
+.custom-bordered-table th,
+.custom-bordered-table td {
+    border: 1px solid #273142;
+}
+
+.custom-bordered-table thead {
+    background-color: #1B2431;
+    color: white;
+}
+
+.custom-bordered-table tbody tr:nth-child(even) {
+    background-color: #273142;
+}
+
+.custom-bordered-table tbody tr:nth-child(odd) {
+    background-color: #323D4E;
+}
+
+/* END */
+
+/* Scrollbar Start */
+::-webkit-scrollbar {
+    /* @apply w-2 h-2 bg-gray-200 dark:bg-[var(--ds-dark-bg-primary-color)]; */
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-200 dark:bg-[var(--ds-dark-bg-primary-color)];
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-slate-700;
+}
+
+/* Scrollbar End */
+
+.fi-body {
+    @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)];
+}
+
+.fi-main {
+    @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)];
+}
+
+/* Smooth transitions between modes for core surfaces */
+html.fi,
+.fi-body,
+.fi-topbar,
+.fi-main,
+.fi-section,
+.fi-wi-widget,
+.fi-input-wrp,
+.fi-modal-window,
+.fi-dropdown-panel {
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.fi-wi-widget {
+    >.fi-section {
+        @apply ring-offset-0 ring-0 dark:ring-1 dark:ring-offset-0 dark:ring-white/10;
+        @apply rounded-md;
+        @apply dark:bg-[var(--ds-dark-bg-secondary-color)];
+
+        >.fi-section-header {
+            .fi-section-header-heading {
+                @apply text-2xl;
+            }
+        }
+
+        >.fi-section-content-ctn {
+            @apply border-0;
+        }
+    }
+}
+
+/* Topbar Start */
+.fi-topbar {
+    /* Apply directly on the nav.fi-topbar element */
+    @apply ring-0 ring-offset-0 shadow-none;
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+    @apply border-b border-b-[#E0E0E0] dark:border-white/10;
+}
+
+.fi-topbar-start {
+    align-items: center;
+    margin-inline-end: calc(var(--spacing)*10);
+    display: none;
+    min-width: auto;
+    /* allow to grow with content */
+    flex: 0 0 auto;
+    /* size to content; don't shrink */
+}
+
+@media (min-width:64rem) {
+    .fi-topbar-start {
+        display: flex
+    }
+}
+
+.fi-topbar-start .fi-logo {
+    margin-inline-start: calc(var(--spacing)*3)
+}
+
+/* Allow the anchor wrapping the logo to grow with content */
+.fi-topbar-start>a {
+    min-width: auto;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+.fi-topbar .fi-topbar-end {
+    @apply ms-auto justify-end;
+    /* push right without taking full width */
+}
+
+/* Global Search Component Start */
+.fi-topbar .fi-topbar-end>.fi-global-search {
+    @apply mr-auto;
+}
+
+.fi-topbar .fi-global-search-field>.fi-input-wrp {
+    @apply rounded-md h-10 items-center bg-[#F5F6FA] dark:bg-[var(--ds-dark-bg-tertiary-color)];
+}
+
+.fi-topbar .fi-global-search-field>.fi-input-wrp>.fi-input-wrp-prefix>.fi-input-wrp-icon {
+    @apply text-gray-600 dark:text-gray-300;
+}
+
+.fi-topbar .fi-global-search-field>.fi-input-wrp>.fi-input-wrp-input>input.fi-input {
+    @apply placeholder:text-gray-600 dark:placeholder:text-gray-300;
+    @apply w-40 sm:w-48 md:w-56 lg:w-64 xl:min-w-64;
+}
+
+.fi-topbar .fi-global-search-results-ctn {
+    @apply start-0 rounded-2xl ring-0 ring-offset-0;
+}
+
+.fi-topbar .fi-global-search-results-ctn .fi-global-search-result-group {
+    @apply p-2 bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-topbar .fi-global-search-results-ctn .fi-global-search-result-group>div:first-child {
+    @apply border-none bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-topbar .fi-global-search-results-ctn .fi-global-search-result-group>div:first-child>h3 {
+    @apply text-lg bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-topbar .fi-global-search-results-ctn .fi-global-search-result {
+    @apply rounded-xl;
+}
+
+.fi-topbar .fi-global-search-results-ctn .fi-global-search-result:not(:first-child) {
+    @apply border-none;
+}
+
+.fi-topbar .fi-global-search-no-results-message {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+/* Global Search Component End */
+
+/* Dropdown Panel Component Start */
+.fi-topbar .fi-dropdown-panel {
+    @apply rounded-2xl ring-0 ring-offset-0;
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-topbar .fi-dropdown-panel>.fi-dropdown-header,
+.fi-topbar .fi-dropdown-panel>.fi-dropdown-list {
+    @apply px-4;
+}
+
+/* Dropdown Panel Component End */
+
+/* Topbar End */
+
+/* Sidebar Colors (always on; do not scope) */
+.fi-sidebar-header {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-sidebar-nav {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+    @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+}
+
+.fi-sidebar-item>.fi-sidebar-item-btn {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+.fi-sidebar-item>.fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item>.fi-sidebar-item-btn .fi-sidebar-item-label {
+    @apply text-gray-800 dark:text-white;
+}
+
+.fi-sidebar-item.fi-active>.fi-sidebar-item-btn {
+    @apply bg-primary-600;
+}
+
+.fi-sidebar-item.fi-active>.fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item.fi-active>.fi-sidebar-item-btn .fi-sidebar-item-label {
+    @apply text-white;
+}
+
+.fi-sidebar-item.fi-active .fi-badge {
+    @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold;
+}
+
+/* Sidebar Start (behaviour tweaks; opt-in via .use-custom-sidebar-legacy) */
+
+.use-custom-sidebar-legacy .fi-sidebar.fi-sidebar-open {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        border-inline-end: 1px solid var(--border);
+        padding-block: calc(var(--spacing)*4);
+        padding-inline: 0;
+
+        >.fi-sidebar-nav-groups {
+            row-gap: var(--fi-sidebar-group-gap, calc(var(--spacing)*4));
+            margin-inline-end: 0;
+
+            >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply mt-2;
+                    /* keep compact vertical rhythm */
+                    padding-inline-start: var(--fi-sidebar-indent, calc(var(--spacing)*6));
+                    padding-inline-end: var(--fi-sidebar-padding-end, calc(var(--spacing)*4));
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative;
+                        padding-inline-start: var(--fi-sidebar-item-indent, calc(var(--spacing)*5));
+                        padding-inline-end: var(--fi-sidebar-item-padding-end, calc(var(--spacing)*3));
+
+                        /* Hover effect */
+                        &:hover::after {
+                            @apply bg-primary-600;
+                        }
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            gap: var(--fi-sidebar-item-gap, calc(var(--spacing)*3));
+                            padding-block: var(--fi-sidebar-item-py, calc(var(--spacing)*3));
+                            padding-inline: var(--fi-sidebar-item-px, calc(var(--spacing)*3));
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+                            @apply bg-primary-600;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-white;
+                            }
+
+                            .fi-badge {
+                                @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        position: absolute;
+                        inset-block: 0;
+                        inset-inline-start: 0;
+                        width: var(--fi-sidebar-active-indicator, calc(var(--spacing)*2));
+                        border-radius: var(--radius-md, 0.5rem);
+                        background: transparent;
+                        transition: background-color .25s ease;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+
+                    >.fi-sidebar-item:hover::after {
+                        @apply bg-primary-600;
+                    }
+                }
+            }
+
+            >.fi-sidebar-group:not(:first-child) {
+                @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-white/10;
+            }
+        }
+    }
+
+}
+
+.use-custom-sidebar-legacy .fi-sidebar:not(.fi-sidebar-open) {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        border-inline-end: 1px solid var(--border);
+        padding-inline: 0;
+
+        >.fi-sidebar-nav-groups {
+            row-gap: var(--fi-sidebar-group-gap, calc(var(--spacing)*4));
+            margin-inline-end: 0;
+
+            /* >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative rtl:pr-8;
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            @apply px-4 py-3 gap-x-6;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-primary-600;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+                }
+
+                &:not(:first-child) {
+                    @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-none;
+                }
+            } */
+        }
+    }
+}
+
+.use-custom-sidebar .fi-sidebar.fi-sidebar-open {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+        @apply py-4 px-0;
+
+        >.fi-sidebar-nav-groups {
+            @apply gap-y-4 -mr-4;
+
+            >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative px-10 rtl:pr-14 rtl:pl-6;
+
+                        /* Hover effect */
+                        &:hover::after {
+                            @apply bg-primary-600;
+                        }
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            @apply px-4 py-3 gap-x-6;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+                            @apply bg-primary-600;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-white;
+                            }
+
+                            .fi-badge {
+                                @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
+                        @apply bg-transparent;
+                        transition: background-color 0.3s ease;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+
+                    >.fi-sidebar-item:hover::after {
+                        @apply bg-primary-600;
+                    }
+                }
+            }
+
+            >.fi-sidebar-group:not(:first-child) {
+                @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-white/10;
+            }
+        }
+    }
+
+}
+
+.use-custom-sidebar .fi-sidebar:not(.fi-sidebar-open) {
+    .fi-sidebar-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply justify-center;
+
+        >.fi-icon-btn {
+            >.fi-icon-btn-icon {
+                @apply text-gray-600 dark:text-gray-300;
+            }
+        }
+    }
+
+    .fi-sidebar-nav {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+        @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none;
+        @apply py-4 px-0;
+
+        >.fi-sidebar-nav-groups {
+            @apply gap-y-4 -mr-4;
+
+            >.fi-sidebar-group {
+                >.fi-sidebar-group-button {
+                    @apply pl-14 pr-6 mt-2 rtl:pl-6 rtl:pr-14;
+
+                    >.fi-icon-btn,
+                    >.fi-sidebar-group-label {
+                        @apply text-gray-600 dark:text-gray-300;
+                    }
+                }
+
+                >.fi-sidebar-group-items {
+                    >.fi-sidebar-item {
+                        @apply relative rtl:pr-8;
+
+                        >.fi-sidebar-item-btn {
+                            @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+                            @apply px-4 py-3 gap-x-6;
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-gray-800 dark:text-white font-semibold;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item.fi-active {
+                        >.fi-sidebar-item-btn {
+
+                            >.fi-sidebar-item-icon,
+                            >.fi-sidebar-item-label {
+                                @apply text-primary-600;
+                            }
+                        }
+                    }
+
+                    >.fi-sidebar-item::after {
+                        content: '';
+                        @apply absolute left-0 rtl:right-4 top-0 w-4 h-full rounded-lg;
+                    }
+
+                    >.fi-sidebar-item.fi-active::after {
+                        @apply bg-primary-600;
+                    }
+                }
+
+                &:not(:first-child) {
+                    @apply border-t-[0.6px] border-t-[#E0E0E0] dark:border-none;
+                }
+            }
+        }
+    }
+}
+
+/* Sidebar End */
+
+/* Section Start */
+.fi-section {
+    @apply ring-0 dark:bg-[var(--ds-dark-bg-secondary-color)] dark:border dark:border-white/10;
+}
+
+/* Section End */
+
+/* Widget Component Start */
+.fi-wi-stats-overview-stat {
+    @apply ring-0 dark:bg-[var(--ds-dark-bg-secondary-color)] dark:border dark:border-white/10;
+
+    .fi-wi-stats-overview-stat-label {
+        @apply text-base;
+    }
+}
+
+/* Widget Component End */
+
+/** Page Component Start */
+.fi-page {
+    &:not(.fi-dashboard-page) {
+        .fi-header {
+            @apply border-b-[1px] border-b-[#E0E0E0] dark:border-white/10;
+        }
+    }
+
+    >section {
+        @apply gap-y-6;
+    }
+
+    .fi-header {
+        @apply pb-6;
+    }
+
+    /* Table Component Start */
+    .fi-ta-content {
+        >.fi-ta-table {
+            >thead {
+                @apply bg-[#FCFDFD] dark:bg-[var(--ds-dark-bg-tertiary-color)];
+            }
+
+            >tbody {
+                @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+
+                >tr.fi-ta-row {
+                    >td.fi-ta-cell {
+                        @apply py-1;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Table Component End */
+
+    /* Table Component 2 Start */
+    .fi-ta-ctn {
+        @apply ring-1 dark:bg-[var(--ds-dark-bg-secondary-color)] border-black dark:border dark:border-white/10;
+
+        .fi-ta-header-ctn {
+            .fi-ta-header-toolbar {
+                @apply border-0;
+            }
+
+            .fi-ta-header {
+                .fi-ta-header-heading {
+                    @apply text-2xl;
+                }
+            }
+        }
+
+        .fi-ta-content {
+            @apply p-3 border-0;
+
+            .fi-ta-table {
+                thead {
+                    >tr {
+
+                        .fi-ta-actions-header-cell,
+                        .fi-ta-header-cell,
+                        .fi-ta-cell {
+                            @apply bg-primary-100/10 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+                        }
+
+                        &:only-child {
+
+                            .fi-ta-header-cell:first-child,
+                            .fi-ta-cell {
+                                @apply ltr:rounded-l-2xl rtl:rounded-r-2xl;
+                            }
+
+                            .fi-ta-header-cell:last-child,
+                            .fi-ta-actions-header-cell {
+                                @apply ltr:rounded-r-2xl rtl:rounded-l-2xl;
+                            }
+                        }
+
+                        &:not(:only-child) {
+                            @apply bg-primary-100/10 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+
+                            &:first-child {
+                                >th {
+                                    @apply border-none bg-primary-100/10;
+
+                                    &:first-child {
+                                        @apply ltr:rounded-tl-2xl rtl:rounded-tr-2xl;
+                                    }
+
+                                    &:last-child {
+                                        @apply ltr:rounded-tr-2xl rtl:rounded-tl-2xl;
+                                    }
+                                }
+                            }
+
+                            &:last-child {
+                                >th {
+                                    @apply border-none;
+
+                                    &:first-child {
+                                        @apply ltr:rounded-bl-2xl rtl:rounded-br-2xl;
+                                    }
+
+                                    &:last-child {
+                                        @apply ltr:rounded-br-2xl rtl:rounded-bl-2xl;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                tbody {
+                    @apply border-0;
+
+                    .fi-ta-row:not(:first-child) {
+                        @apply border-none;
+
+                        &.fi-ta-summary-header-row {
+                            &>td:first-child {
+                                @apply ltr:rounded-l-2xl rtl:rounded-r-2xl;
+                            }
+
+                            &>td:last-child {
+                                @apply ltr:rounded-r-2xl rtl:rounded-l-2xl;
+                            }
+                        }
+                    }
+
+                    .fi-ta-cell {
+                        &:first-child {
+                            @apply ltr:rounded-l-2xl rtl:rounded-r-2xl;
+                        }
+
+                        &:last-child {
+                            @apply ltr:rounded-r-2xl rtl:rounded-l-2xl;
+                        }
+
+                        .fi-input-wrp {
+                            @apply mt-3;
+                        }
+                    }
+                }
+            }
+
+            /* Table Component 2.1 Start */
+            >div {
+                &:first-child {
+                    @apply rounded-xl bg-gray-400/10 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+                }
+
+                &:nth-child(2) {
+                    @apply border-none;
+
+                    /* Table Component 2.1.1 Start */
+                    &:not(.fi-ta-content-grid) {
+                        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+
+                        &>div {
+                            @apply rounded-xl;
+                        }
+                    }
+
+                    /* Table Component 2.1.1 End */
+
+                    /* Table Component 2.1.2 Start */
+                    &.fi-ta-content-grid {
+                        @apply gap-6;
+
+                        .fi-ta-record {
+                            @apply rounded-3xl ring-0 border shadow-sm bg-gray-50 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+                        }
+                    }
+
+                    /* Table Component 2.1.2 End */
+                }
+            }
+
+            .fi-ta-record {
+                @apply bg-white border-b dark:border-[var(--ds-dark-bg-primary-color)] hover:bg-gray-100 dark:bg-[var(--ds-dark-bg-secondary-color)] dark:hover:bg-[var(--ds-dark-bg-tertiary-color)];
+            }
+
+            /* Table Component 2.1 End */
+        }
+    }
+
+    /* Table Component 2 End */
+
+    /* Navigation Component Start */
+    .fi-pagination {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+    }
+
+    /* Navigation Component End */
+}
+
+/* Page Component End */
+
+/* Button Component Start */
+.fi-btn {
+    @apply rounded-md sm:rounded-lg;
+    @apply py-1 px-3 sm:py-2 sm:px-4;
+    @apply text-sm sm:text-base;
+
+    .fi-btn-label {
+        @apply text-sm sm:text-base;
+    }
+}
+
+/* Button Component End */
+
+/* Notification Icon Button Start */
+.fi-topbar-database-notifications-btn {
+    .fi-icon-btn-icon {
+        @apply dark:text-white/75;
+    }
+}
+
+/* Notification Icon Button End */
+
+/* Icon Button Component Start */
+.fi-icon-btn {
+    >.fi-icon-btn-badge-ctn {
+        @apply -translate-x-full -translate-y-1/3;
+    }
+}
+
+/* Icon Button Component End */
+
+/* Checkbox Component Start */
+.fi-checkbox-input {
+    @apply w-5 h-5 rounded-s-md ring-1 ring-gray-300 dark:ring-white/10 bg-white dark:bg-transparent;
+
+    &:checked {
+        @apply bg-blue-500 dark:bg-blue-500 ring-blue-500 dark:ring-blue-500;
+    }
+
+    &:focus,
+    &:active,
+    &:checked:focus {
+        @apply outline-none ring-2 ring-blue-600 dark:ring-blue-400;
+    }
+}
+
+/* Checkbox Component End */
+
+/* Brand logo/name styles: keep on one line and ellipsize if too long */
+
+/* ------------------------------
+   Sidebar Navigation Group Separator
+   ------------------------------ */
+/* Add a subtle top border before each navigation group (except the first)
+   Scoped to this panel only via .fi-panel-panel */
+/* .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+    border-top: 0.6px solid #E0E0E0;
+}
+
+.dark .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+    border-top-color: rgba(255, 255, 255, 0.1);
+} */
+
+/* Hide the separator when the group is collapsed (folded) */
+/* .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
+/* Ensure override also applies when using legacy/custom sidebar wrappers */
+/* .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
+/* .use-custom-sidebar-legacy .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+}
+
+.use-custom-sidebar .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+    border-top: 0 !important;
+    border-top-color: transparent !important;
+} */
+
+.fi-logo {
+    @apply text-xl font-bold;
+    line-height: 1;
+}
+
+.fi-topbar .fi-logo {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    /* keep brand on one line */
+    word-break: keep-all;
+    hyphens: none;
+    overflow: visible;
+    /* don't clip long names */
+    text-overflow: clip;
+    max-width: none;
+    /* allow it to expand */
+}
+
+/* Input Component Start */
+.fi-fo-field-wrp {
+    label.fi-fo-field-wrp-label {
+        >span {
+            @apply text-base;
+        }
+    }
+}
+
+.fi-input-wrp {
+    @apply bg-gray-50 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+
+    >.fi-input-wrp-input {
+        >input.fi-input {
+            @apply py-1.5 border-gray-200 dark:border-white/10;
+        }
+    }
+}
+
+/* Input Component End */
+
+/* Modal Component Start */
+.fi-modal-window {
+    @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+
+    &:not(.fi-modal-slide-over-window) {
+        >.fi-modal-header {
+            @apply rounded-tl-2xl rounded-tr-2xl;
+        }
+    }
+
+    >.fi-modal-header {
+        @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)];
+
+        .fi-modal-heading {
+            @apply text-2xl;
+
+            .fi-badge {
+                @apply ms-0;
+            }
+        }
+    }
+
+    >.fi-modal-content {
+        >div:first-child {
+
+            /* Notification Wrapper */
+            &>div {
+                @apply border-none m-2;
+
+                &::before {
+                    @apply rounded-lg w-3 -translate-x-1/2 rtl:translate-x-1/2 h-[90%] top-1/2 -translate-y-1/2 left-0;
+                }
+            }
+
+            /* Notification Wrapper End */
+        }
+
+        .fi-no-notification {
+            @apply border-0;
+        }
+    }
+}
+
+/* Modal Component End */
+
+/* Tabs Component Start */
+.fi-tabs {
+    @apply ring-0 dark:bg-[var(--ds-dark-bg-secondary-color)] rounded-t-xl;
+}
+
+.fi-fo-tabs-tab {
+    @apply ring-offset-0 ring-0 dark:ring-1 dark:ring-offset-0 dark:ring-white/10;
+    @apply dark:bg-[var(--ds-dark-bg-secondary-color)];
+}
+
+/* Tabs Component End */
+
+/* Page Header harmonization */
+.fi-header {
+    @apply border-b border-[var(--border)] pb-4;
+}
+
+.fi-header-heading {
+    @apply text-2xl font-bold tracking-tight;
+}

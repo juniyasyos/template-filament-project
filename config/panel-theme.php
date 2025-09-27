@@ -6,6 +6,9 @@ return [
     // The ID of the theme (used if you ever register a Theme asset by name)
     'id' => 'panel',
 
+    // Where the Vite theme entry lives
+    'vite_path' => 'resources/css/filament/panel/theme.css',
+
     // Brand + status colors. You can use hex (e.g. '#f59e0b') or full palettes.
     // Passing a single hex will generate the full palette automatically.
     // Modern, health-friendly palette defaults using Filament Colors.

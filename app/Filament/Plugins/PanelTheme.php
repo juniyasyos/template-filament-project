@@ -44,6 +44,7 @@ class PanelTheme implements Plugin
     public function __construct()
     {
         $this->colors = (array) config('panel-theme.colors', []);
+        $this->viteThemePath = (string) (config('panel-theme.vite_path', $this->viteThemePath));
 
         $this->defaultMode = match (strtolower((string) config('panel-theme.default_mode', 'system'))) {
             'light' => ThemeMode::Light,

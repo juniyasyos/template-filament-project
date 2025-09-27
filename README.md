@@ -1,4 +1,4 @@
- # 🚀 Laravel Filament Template — Siimut Starter
+ # 🚀 Laravel Filament Template — Panel Starter
 
  Make beautiful admin panels fast. This project is a modern Laravel + Filament v4 starter with a sleek, customizable theme and sensible defaults — perfect as your next project template or a base to build internal tools.
 
@@ -14,8 +14,8 @@
  ---
 
  ## ✨ Highlights
- - 🧩 Filament v4 Admin ready out-of-the-box (panel at `/siimut`).
- - 🎨 Theme plugin with color, dark/light/system mode, and branding (logo + favicon).
+ - 🧩 Filament v4 Admin ready out-of-the-box (panel at `/panel`).
+ - 🎨 Modular theme with colors, mode (light/dark/system), and branding (logo + favicon).
  - ⚡ Modern stack: Laravel 12, PHP 8.2, Vite, Tailwind v4, Inertia + Vue 3.
  - 🧪 Testing with Pest pre-installed.
  - 🧭 Dev DX: single command to run server, queue, logs, and Vite.
@@ -50,62 +50,62 @@
  ```
 
  5) Open the panel
- - http://localhost:8000/siimut
+ - http://localhost:8000/panel
 
  ---
 
  ## 🎨 Theming & Branding
- Theme is powered by a small plugin similar to resmatech/filament-awin-theme.
+ Konfigurasi tema dan panel dibuat modular.
 
- - Plugin: `app/Filament/Plugins/SiimutTheme.php`
- - Panel registration: `app/Providers/Filament/SiimutPanelProvider.php`
- - CSS entry: `resources/css/filament/siimut/theme.css` (already in `vite.config.ts`)
+ - Panel config: `config/panel.php`
+   - id, path, name, version
+   - theme.plugin (kelas plugin tema)
+ - Theme config: `config/panel-theme.php`
+   - colors, default_mode, brand (logo, favicon)
+   - vite_path untuk entry CSS
 
- ### Configure via .env
+ Plugin dan provider:
+ - Plugin: `app/Filament/Plugins/PanelTheme.php`
+ - Panel provider: `app/Providers/Filament/PanelPanelProvider.php`
+ - CSS entry: `resources/css/filament/panel/theme.css` (sudah di `vite.config.ts`)
+
+ ### Konfigurasi lewat .env
  ```env
- # Colors
- SIIMUT_THEME_PRIMARY=#f59e0b
- SIIMUT_THEME_MODE=system  # system | light | dark
+ # Panel Settings
+ PANEL_ID=panel
+ PANEL_PATH=panel
+ PANEL_NAME=Panel
+ # Optional version label at topbar
+ # PANEL_VERSION=1.0.0
 
- # Branding (optional)
- SIIMUT_BRAND_NAME=Siimut
- SIIMUT_BRAND_LOGO=/images/brand/logo-light.svg
- SIIMUT_BRAND_LOGO_DARK=/images/brand/logo-dark.svg
- SIIMUT_BRAND_LOGO_HEIGHT=1.5rem
- SIIMUT_BRAND_FAVICON=/favicon.ico
+ # Theme Colors & Mode
+ PANEL_THEME_PRIMARY=#f59e0b
+ PANEL_THEME_MODE=system  # system | light | dark
+
+ # Branding (opsional)
+ PANEL_BRAND_NAME=Panel
+ # PANEL_BRAND_LOGO=/images/brand/logo-light.svg
+ # PANEL_BRAND_LOGO_DARK=/images/brand/logo-dark.svg
+ # PANEL_BRAND_LOGO_HEIGHT=1.5rem
+ # PANEL_BRAND_FAVICON=/favicon.ico
  ```
- Assets under `public/` are recommended (e.g. `public/images/brand/...`).
+ Simpan aset di `public/` (mis. `public/images/brand/...`).
 
- After changes, clear config and rebuild assets if needed:
+ Setelah perubahan, clear config dan rebuild assets jika perlu:
  ```bash
  php artisan config:clear
- npm run dev # or npm run build
+ npm run dev # atau npm run build
  ```
 
- ### Configure via code (optional)
- `app/Providers/Filament/SiimutPanelProvider.php`
- ```php
- use App\Filament\Plugins\SiimutTheme;
- use Filament\Support\Colors\Color;
- use Filament\Enums\ThemeMode;
-
- ->plugins([
-     SiimutTheme::make()
-         ->primaryColor(Color::Emerald)      // or ->primaryColor('#3b82f6')
-         ->brandName('Siimut')
-         ->brandLogo('/images/brand/logo-light.svg')
-         ->darkModeBrandLogo('/images/brand/logo-dark.svg')
-         ->brandLogoHeight('1.5rem')
-         ->favicon('/favicon.ico')
-         ->defaultMode(ThemeMode::System),
- ])
- ```
+ ### Catatan
+ - Provider membaca `config('panel.*')` untuk `id`, `path`, `name`, `version`, dan `theme.plugin`.
+ - Jika `PANEL_VERSION` diset, label versi tampil di topbar.
 
  ---
 
  ## 📦 Tech Stack
  - Laravel 12, PHP 8.2
- - Filament v4 (Panel at `/siimut`)
+ - Filament v4 (Panel at `/panel`)
  - Inertia + Vue 3
  - Vite + Tailwind v4 (`@tailwindcss/vite`)
  - Pest tests
@@ -122,17 +122,18 @@
  ---
 
  ## 📁 Notable Paths
- - Panel provider: `app/Providers/Filament/SiimutPanelProvider.php`
- - Theme plugin: `app/Filament/Plugins/SiimutTheme.php`
- - Theme CSS: `resources/css/filament/siimut/theme.css`
- - Theme config: `config/siimut-theme.php`
+ - Panel provider: `app/Providers/Filament/PanelPanelProvider.php`
+ - Theme plugin: `app/Filament/Plugins/PanelTheme.php`
+ - Theme CSS: `resources/css/filament/panel/theme.css`
+ - Panel config: `config/panel.php`
+ - Theme config: `config/panel-theme.php`
 
  ---
 
  ## 🙌 Tips
- - Need a different primary palette? Use any `Filament\Support\Colors\Color::*`.
- - Want a custom look? Extend `resources/css/filament/siimut/*` or add new partials.
- - Prefer MySQL/PostgreSQL? Update `.env` and rerun migrations.
+ - Butuh palette lain? Gunakan `Filament\Support\Colors\Color::*` atau hex.
+ - Ingin tampilan kustom? Ubah `resources/css/filament/panel/*` atau tambahkan partial baru.
+ - Prefer MySQL/PostgreSQL? Update `.env` dan rerun migrations.
 
  ---
 
