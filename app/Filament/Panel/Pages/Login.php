@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Siimut\Pages;
+namespace App\Filament\Panel\Pages;
 
 use Filament\Auth\Pages\Login as BaseLogin;
 use Illuminate\Support\Facades\App as AppFacade;
@@ -20,4 +20,3 @@ class Login extends BaseLogin
         }
     }
 }
-

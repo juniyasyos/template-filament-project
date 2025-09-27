@@ -9,7 +9,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.ts',
-                'resources/css/filament/siimut/theme.css',
+                'resources/css/filament/panel/theme.css',
             ],
             ssr: 'resources/js/ssr.ts',
             refresh: true,

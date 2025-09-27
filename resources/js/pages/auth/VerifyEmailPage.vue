@@ -48,7 +48,7 @@
       <div class="flex flex-col gap-3 pt-4 border-t border-[var(--border)]">
         <!-- Dashboard Link (if user has access) -->
         <TextLink
-          href="/siimut"
+          href="/panel"
           class="text-center text-sm font-medium"
           data-test="dashboard-link"
         >

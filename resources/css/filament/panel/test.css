@@ -1,7 +1,7 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 
-@source '../../../../app/Filament/Siimut/**/*';
-@source '../../../../resources/views/filament/siimut/**/*';
+@source '../../../../app/Filament/Panel/**/*';
+@source '../../../../resources/views/filament/panel/**/*';
 
 /* @import 'login.css'; */
 
@@ -92,7 +92,7 @@ html.fi,
 }
 
 /* Main content width: fill available space, cap to monitor/10xl */
-.fi-panel-siimut .fi-main:not(.fi-width-screen) {
+.fi-panel-panel .fi-main:not(.fi-width-screen) {
     width: 100%;
     /* 10xl-ish cap by default (100rem = 1600px); can be tuned via --fi-main-max */
     max-width: min(100%, var(--fi-main-max, 100rem));
@@ -160,7 +160,7 @@ html.fi,
 
 /* Large displays: slightly increase max content width and tighten grid gaps */
 @media (min-width: 1536px) {
-    .fi-panel-siimut {
+    .fi-panel-panel {
         --fi-main-max: 110rem;
     }
 
@@ -1002,33 +1002,33 @@ html.fi, .fi-body, .fi-topbar, .fi-main, .fi-section, .fi-wi-widget, .fi-input-w
    Sidebar Navigation Group Separator
    ------------------------------ */
 /* Add a subtle top border before each navigation group (except the first)
-   Scoped to this panel only via .fi-panel-siimut */
-/* .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+   Scoped to this panel only via .fi-panel-panel */
+/* .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
     border-top: 0.6px solid #E0E0E0;
 }
 
-.dark .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
+.dark .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group:not(:first-child) {
     border-top-color: rgba(255, 255, 255, 0.1);
 } */
 
 /* Hide the separator when the group is collapsed (folded) */
-/* .fi-panel-siimut .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+/* .fi-panel-panel .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
     border-top: 0 !important;
     border-top-color: transparent !important;
 } */
 
 /* Ensure override also applies when using legacy/custom sidebar wrappers */
-/* .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+/* .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
     border-top: 0 !important;
     border-top-color: transparent !important;
 } */
 
-/* .use-custom-sidebar-legacy .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+/* .use-custom-sidebar-legacy .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
     border-top: 0 !important;
     border-top-color: transparent !important;
 }
 
-.use-custom-sidebar .fi-panel-siimut .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
+.use-custom-sidebar .fi-panel-panel .fi-sidebar.fi-sidebar-open .fi-sidebar-nav > .fi-sidebar-nav-groups > .fi-sidebar-group.fi-collapsed {
     border-top: 0 !important;
     border-top-color: transparent !important;
 } */

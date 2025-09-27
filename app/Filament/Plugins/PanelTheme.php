@@ -8,10 +8,10 @@ use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use Illuminate\Contracts\Support\Htmlable;
 
-class SiimutTheme implements Plugin
+class PanelTheme implements Plugin
 {
-    protected string $id = 'siimut-theme';
-    protected string $viteThemePath = 'resources/css/filament/siimut/theme.css';
+    protected string $id = 'panel-theme';
+    protected string $viteThemePath = 'resources/css/filament/panel/theme.css';
     protected array $colors = [];
     protected ThemeMode $defaultMode;
 
@@ -43,16 +43,16 @@ class SiimutTheme implements Plugin
 
     public function __construct()
     {
-        $this->colors = (array) config('siimut-theme.colors', []);
+        $this->colors = (array) config('panel-theme.colors', []);
 
-        $this->defaultMode = match (strtolower((string) config('siimut-theme.default_mode', 'system'))) {
+        $this->defaultMode = match (strtolower((string) config('panel-theme.default_mode', 'system'))) {
             'light' => ThemeMode::Light,
             'dark' => ThemeMode::Dark,
             default => ThemeMode::System,
         };
 
         // Load branding configuration
-        $brand = (array) config('siimut-theme.brand', []);
+        $brand = (array) config('panel-theme.brand', []);
         $this->brandName = $brand['name'] ?? null;
         $this->brandLogo = $this->resolveAssetUrl($brand['logo'] ?? null);
         $this->darkBrandLogo = $this->resolveAssetUrl($brand['logo_dark'] ?? null);
@@ -60,25 +60,25 @@ class SiimutTheme implements Plugin
         $this->favicon = $this->resolveAssetUrl($brand['favicon'] ?? null);
 
         // Load UI configuration
-        $ui = (array) config('siimut-theme.ui', []);
+        $ui = (array) config('panel-theme.ui', []);
         $this->sidebarCollapsibleOnDesktop = $ui['sidebar_collapsible'] ?? true;
         $this->sidebarWidth = $ui['sidebar_width'] ?? '18rem';
         $this->collapsedSidebarWidth = $ui['collapsed_sidebar_width'] ?? '7rem';
 
         // Load authentication configuration
-        $auth = (array) config('siimut-theme.authentication', []);
+        $auth = (array) config('panel-theme.authentication', []);
         $this->loginUrl = $auth['login_url'] ?? '/login';
         $this->passwordResetUrl = $auth['password_reset_url'] ?? '/forgot-password';
         $this->passwordResetResponseUrl = $auth['password_reset_response_url'] ?? '/reset-password';
         $this->registrationUrl = $auth['registration_url'] ?? '/register';
 
         // Load notifications configuration
-        $notifications = (array) config('siimut-theme.notifications', []);
+        $notifications = (array) config('panel-theme.notifications', []);
         $this->databaseNotifications = $notifications['database_enabled'] ?? true;
         $this->databaseNotificationsPolling = $notifications['polling_interval'] ?? '30s';
 
         // Load global search configuration
-        $search = (array) config('siimut-theme.global_search', []);
+        $search = (array) config('panel-theme.global_search', []);
         $this->globalSearch = $search['enabled'] ?? true;
         $this->globalSearchKeyBindings = $search['key_bindings'] ?? ['cmd+k', 'ctrl+k'];
     }
@@ -209,10 +209,10 @@ class SiimutTheme implements Plugin
 
             if (is_array($primary) && isset($primary[500])) {
                 // If it's a full palette, use the 500 shade as the main color
-                $css .= '--siimut-primary: ' . $primary[500] . '; ';
+                $css .= '--panel-primary: ' . $primary[500] . '; ';
             } else if (is_string($primary)) {
                 // If it's a hex color, use it directly
-                $css .= '--siimut-primary: ' . $primary . '; ';
+                $css .= '--panel-primary: ' . $primary . '; ';
             }
         }
 

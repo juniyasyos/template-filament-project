@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return to_route('filament.siimut.pages.dashboard');
+        return to_route('filament.panel.pages.dashboard');
     }
 }

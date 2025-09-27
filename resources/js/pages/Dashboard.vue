@@ -8,7 +8,7 @@ import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
-        href: '/siimut', // Using Filament panel as dashboard
+        href: '/panel', // Using Filament panel as dashboard
     },
 ];
 </script>

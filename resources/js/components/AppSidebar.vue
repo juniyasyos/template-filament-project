@@ -12,7 +12,7 @@ import AppLogo from './AppLogo.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/siimut', // Using Filament panel as dashboard
+        href: '/panel', // Using Filament panel as dashboard
         icon: LayoutGrid,
     },
 ];
@@ -37,7 +37,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link href="/siimut">
+                        <Link href="/panel">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

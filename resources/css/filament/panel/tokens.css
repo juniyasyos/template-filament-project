@@ -1,7 +1,7 @@
-/* Scoped design tokens for the Siimut panel, Tailwind v4 compatible */
+/* Scoped design tokens for the Panel panel, Tailwind v4 compatible */
 
 /* Light mode tokens */
-.fi-panel-siimut {
+.fi-panel-panel {
   /* Surfaces */
   --bg: hsl(0 0% 98%);
   --bg-elev: hsl(0 0% 100%);
@@ -11,14 +11,14 @@
   /* Borders & Rings */
   --border: hsl(0 0% 90%);
   --border-soft: hsl(0 0% 92%);
-  --ring: var(--siimut-primary, hsl(217 91% 60%)); /* Use Filament primary or fallback to blue */
+  --ring: var(--panel-primary, hsl(217 91% 60%)); /* Use Filament primary or fallback to blue */
 
   /* Text */
   --text: hsl(0 0% 15%);
   --text-dim: hsl(0 0% 38%);
 
   /* Accent - Now consistent with Filament theme configuration */
-  --primary: var(--siimut-primary, hsl(217 91% 60%)); /* Use Filament primary color */
+  --primary: var(--panel-primary, hsl(217 91% 60%)); /* Use Filament primary color */
   --primary-contrast: hsl(0 0% 0%);
 
   /* Rounding */
@@ -34,7 +34,7 @@
 }
 
 /* Dark mode tokens — softer, eye-friendly slate + blue accents */
-.dark .fi-panel-siimut {
+.dark .fi-panel-panel {
   /* Gentle dark surfaces (not fully black) */
   --bg: hsl(222 28% 18%);       /* between slate-800/900 */
   --bg-elev: hsl(222 28% 20%);

@@ -23,7 +23,7 @@ test('does not send verification notification if email is verified', function ()
 
     $this->actingAs($user)
         ->post(route('verification.send'))
-        ->assertRedirect(route('filament.siimut.pages.dashboard', absolute: false));
+        ->assertRedirect(route('filament.panel.pages.dashboard', absolute: false));
 
     Notification::assertNothingSent();
 });

@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
 
         $intended = $request->session()->pull(
             'url.intended',
-            route('filament.siimut.pages.dashboard', absolute: true)
+            route('filament.panel.pages.dashboard', absolute: true)
         );
 
         return Inertia::location($intended);

@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Plugins\SiimutTheme;
+use App\Filament\Plugins\PanelTheme;
 use Juniyasyos\FilamentMediaManager\FilamentMediaManagerPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -21,22 +21,22 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Juniyasyos\FilamentLaravelBackup\FilamentLaravelBackupPlugin;
 
-class SiimutPanelProvider extends PanelProvider
+class PanelPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('siimut')
-            ->path('siimut')
+            ->id('panel')
+            ->path('panel')
             ->default()
             ->authGuard('web')
-            // All UI configuration is now centralized in SiimutTheme plugin
+            // All UI configuration is now centralized in PanelTheme plugin
             ->plugins([
-                SiimutTheme::make(),
+                PanelTheme::make(),
                 FilamentLaravelBackupPlugin::make(),
             ])
-            ->discoverResources(in: app_path('Filament/Siimut/Resources'), for: 'App\Filament\Siimut\Resources')
-            ->discoverPages(in: app_path('Filament/Siimut/Pages'), for: 'App\Filament\Siimut\Pages')
+            ->discoverResources(in: app_path('Filament/Panel/Resources'), for: 'App\Filament\Panel\Resources')
+            ->discoverPages(in: app_path('Filament/Panel/Pages'), for: 'App\Filament\Panel\Pages')
             ->navigationGroups([
                 'User Managements',
                 'Settings'
@@ -44,7 +44,7 @@ class SiimutPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Siimut/Widgets'), for: 'App\Filament\Siimut\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Panel/Widgets'), for: 'App\Filament\Panel\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
