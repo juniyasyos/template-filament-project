@@ -1,0 +1,8 @@
+/* Cards / sections */
+
+/* Reduce visual weight of cards/sections on very small screens */
+@media (max-width: 480px) {
+  .fi-section,
+  .fi-card { border-radius: calc(var(--radius, 0.5rem) - 4px); }
+}
+

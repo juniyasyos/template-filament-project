@@ -1,0 +1,36 @@
+/* Layout and structure for the Filament panel */
+
+/* Main content width: fill available space, cap to monitor/10xl */
+.fi-panel-panel .fi-main:not(.fi-width-screen) {
+  width: 100%;
+  /* 10xl-ish cap by default (100rem = 1600px); can be tuned via --fi-main-max */
+  max-width: min(100%, var(--fi-main-max, 100rem));
+}
+
+/* Topbar height & spacing scale with viewport */
+.fi-topbar {
+  min-height: clamp(3rem, 2.3rem + 1.2vw, 4rem);
+}
+
+/* Main container padding becomes fluid across breakpoints */
+.fi-main {
+  padding-inline: clamp(0.75rem, 1.2vw, 2rem);
+}
+
+/* Page header: fluid heading size and compact spacing on small screens */
+.fi-header-heading { font-size: var(--fluid-4); line-height: 1.2; }
+.fi-simple-header-heading { font-size: var(--fluid-3); }
+.fi-header { gap: clamp(0.75rem, 0.6rem + 0.6vw, 1.25rem); }
+
+/* Large displays: increase max content width and tighten grid gaps */
+@media (min-width: 1536px) {
+  .fi-panel-panel { --fi-main-max: 110rem; }
+
+  /* ~1760px */
+  .fi-page-content, .fi-simple-page-content { row-gap: 1.75rem; }
+}
+
+/* Panel background colors */
+.fi-body { @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)]; }
+.fi-main { @apply bg-[#F7F8FB] dark:bg-[var(--ds-dark-bg-primary-color)]; }
+

@@ -1,0 +1,8 @@
+/* Button tweaks */
+
+/* Button sizing adapts a bit for small screens */
+@media (max-width: 640px) {
+  .fi-btn,
+  .fi-ac-btn { padding: 0.375rem 0.75rem; }
+}
+

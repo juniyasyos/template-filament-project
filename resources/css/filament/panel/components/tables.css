@@ -1,0 +1,9 @@
+/* Tables */
+
+.custom-bordered-table table { border: 1px solid #1B2431; }
+.custom-bordered-table th,
+.custom-bordered-table td { border: 1px solid #273142; }
+.custom-bordered-table thead { background-color: #1B2431; color: white; }
+.custom-bordered-table tbody tr:nth-child(even) { background-color: #273142; }
+.custom-bordered-table tbody tr:nth-child(odd) { background-color: #323D4E; }
+
