@@ -1,0 +1,51 @@
+/* Konten tabel responsif */
+.fi-page .fi-ta-content{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.fi-page .fi-ta-table{ width:max-content; min-width:100%; }
+.fi-page .fi-ta-table thead{ @apply bg-[#FCFDFD] dark:bg-[var(--ds-dark-bg-tertiary-color)]; }
+.fi-page .fi-ta-table tbody{ @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)]; }
+.fi-page .fi-ta-table tbody > tr.fi-ta-row > td.fi-ta-cell{ @apply py-1; }
+
+/* Wrap teks panjang */
+.fi-page .fi-ta-table th, .fi-page .fi-ta-table td{ white-space:normal; word-break:break-word; }
+
+/* Kontainer modern */
+.fi-ta-ctn{ @apply ring-1 dark:bg-[var(--ds-dark-bg-secondary-color)] border-black dark:border dark:border-white/10; }
+.fi-ta-ctn .fi-ta-header-ctn .fi-ta-header-toolbar{ @apply border-0; }
+.fi-ta-ctn .fi-ta-header-ctn .fi-ta-header .fi-ta-header-heading{ @apply text-2xl; }
+.fi-ta-ctn .fi-ta-content{ @apply p-3 border-0; }
+
+.fi-ta-ctn .fi-ta-content .fi-ta-table thead > tr .fi-ta-actions-header-cell,
+.fi-ta-ctn .fi-ta-content .fi-ta-table thead > tr .fi-ta-header-cell,
+.fi-ta-ctn .fi-ta-content .fi-ta-table thead > tr .fi-ta-cell{
+  @apply bg-primary-100/10 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+}
+
+/* Grid card view */
+.fi-ta-content.fi-ta-content-grid{ @apply gap-6; }
+.fi-ta-content.fi-ta-content-grid .fi-ta-record{
+  @apply rounded-3xl ring-0 border shadow-sm bg-gray-50 dark:bg-[var(--ds-dark-bg-tertiary-color)];
+}
+
+/* Row default look */
+.fi-ta-content .fi-ta-record{
+  @apply bg-white border-b dark:border-[var(--ds-dark-bg-primary-color)]
+         hover:bg-gray-100 dark:bg-[var(--ds-dark-bg-secondary-color)]
+         dark:hover:bg-[var(--ds-dark-bg-tertiary-color)];
+}
+
+/* Pagination bg */
+.fi-pagination{ @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)]; }
+
+/* Kolom aksi ramping di layar kecil */
+@media (max-width:768px){
+  .fi-page .fi-ta-actions-cell{ width:1%; white-space:nowrap; }
+}
+
+/* Rata kanan kolom terakhir & toggle (mobile di file responsive.mobile.css ditambah scale) */
+@media (max-width:639.98px){
+  .fi-page .fi-ta-table th:last-child,
+  .fi-page .fi-ta-table td:last-child{ text-align:right; white-space:nowrap; }
+  .fi-page .fi-ta-table td:has([role="switch"]),
+  .fi-page .fi-ta-table td:has(.fi-switch),
+  .fi-page .fi-ta-table td:has(.fi-fo-toggle){ text-align:right; }
+}

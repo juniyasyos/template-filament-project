@@ -2,57 +2,138 @@
 
 /* Light mode tokens */
 .fi-panel-panel {
-  /* Surfaces */
-  --bg: hsl(0 0% 98%);
-  --bg-elev: hsl(0 0% 100%);
-  --bg-panel: hsl(0 0% 100%);
-  --bg-hover: hsl(0 0% 96%);
+    /* Surfaces */
+    --bg: hsl(0 0% 98%);
+    --bg-elev: hsl(0 0% 100%);
+    --bg-panel: hsl(0 0% 100%);
+    --bg-hover: hsl(0 0% 96%);
 
-  /* Borders & Rings */
-  --border: hsl(0 0% 90%);
-  --border-soft: hsl(0 0% 92%);
-  --ring: var(--panel-primary, hsl(217 91% 60%)); /* Use Filament primary or fallback to blue */
+    /* Borders & Rings */
+    --border: hsl(0 0% 90%);
+    --border-soft: hsl(0 0% 92%);
+    --ring: var(--panel-primary, hsl(217 91% 60%));
+    /* Use Filament primary or fallback to blue */
 
-  /* Text */
-  --text: hsl(0 0% 15%);
-  --text-dim: hsl(0 0% 38%);
+    /* Text */
+    --text: hsl(0 0% 15%);
+    --text-dim: hsl(0 0% 38%);
 
-  /* Accent - Now consistent with Filament theme configuration */
-  --primary: var(--panel-primary, hsl(217 91% 60%)); /* Use Filament primary color */
-  --primary-contrast: hsl(0 0% 0%);
+    /* Accent - Now consistent with Filament theme configuration */
+    --primary: var(--panel-primary, hsl(217 91% 60%));
+    /* Use Filament primary color */
+    --primary-contrast: hsl(0 0% 0%);
 
-  /* Rounding */
-  --radius-xl: 14px;
-  --radius-lg: 12px;
-  --radius-md: 10px;
+    /* Rounding */
+    --radius-xl: 14px;
+    --radius-lg: 12px;
+    --radius-md: 10px;
 
-  /* Optional pattern control */
-  --panel-pattern-opacity: 0.02; /* set to 0 to disable */
+    /* Optional pattern control */
+    --panel-pattern-opacity: 0.02;
+    /* set to 0 to disable */
 
-  /* Font */
-  --font-sans: Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    /* Font */
+    --font-sans: Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 /* Dark mode tokens — softer, eye-friendly slate + blue accents */
 .dark .fi-panel-panel {
-  /* Gentle dark surfaces (not fully black) */
-  --bg: hsl(222 28% 18%);       /* between slate-800/900 */
-  --bg-elev: hsl(222 28% 20%);
-  --bg-panel: hsl(222 28% 22%);
-  --bg-hover: hsl(222 28% 26%);
+    /* Gentle dark surfaces (not fully black) */
+    --bg: hsl(222 28% 18%);
+    /* between slate-800/900 */
+    --bg-elev: hsl(222 28% 20%);
+    --bg-panel: hsl(222 28% 22%);
+    --bg-hover: hsl(222 28% 26%);
 
-  /* Softer borders for smooth separation */
-  --border: hsl(222 20% 32%);
-  --border-soft: hsl(222 18% 26%);
-  --ring: hsl(217 85% 66%);     /* slightly lighter ring */
+    /* Softer borders for smooth separation */
+    --border: hsl(222 20% 32%);
+    --border-soft: hsl(222 18% 26%);
+    --ring: hsl(217 85% 66%);
+    /* slightly lighter ring */
 
-  /* Comfortable contrast */
-  --text: hsl(0 0% 96%);
-  --text-dim: hsl(0 0% 78%);
+    /* Comfortable contrast */
+    --text: hsl(0 0% 96%);
+    --text-dim: hsl(0 0% 78%);
 
-  /* Primary accent is handled by Filament palette; keep contrast mapping */
-  --primary: hsl(217 91% 60%);
-  --primary-contrast: hsl(0 0% 10%);
+    /* Primary accent is handled by Filament palette; keep contrast mapping */
+    --primary: hsl(217 91% 60%);
+    --primary-contrast: hsl(0 0% 10%);
 
-  --panel-pattern-opacity: 0.018;
+    --panel-pattern-opacity: 0.018;
+}
+
+/* Design tokens (Light/Dark) + skala fluid (dipakai di file lain) */
+:root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(0 0% 3.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(0 0% 3.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(0 0% 3.9%);
+    --primary: hsl(0 0% 9%);
+    --primary-foreground: hsl(0 0% 98%);
+    --secondary: hsl(0 0% 92.1%);
+    --secondary-foreground: hsl(0 0% 9%);
+    --muted: hsl(0 0% 96.1%);
+    --muted-foreground: hsl(0 0% 45.1%);
+    --accent: hsl(0 0% 96.1%);
+    --accent-foreground: hsl(0 0% 9%);
+    --destructive: hsl(0 84% 60%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(0 0% 92.8%);
+    --input: hsl(0 0% 89.8%);
+    --ring: hsl(0 0% 3.9%);
+    --radius: .5rem;
+
+    /* Sidebar palette */
+    --sidebar-background: hsl(0 0% 98%);
+    --sidebar-foreground: hsl(240 5.3% 26.1%);
+    --sidebar-primary: hsl(0 0% 10%);
+    --sidebar-primary-foreground: hsl(0 0% 98%);
+    --sidebar-accent: hsl(0 0% 94%);
+    --sidebar-accent-foreground: hsl(0 0% 30%);
+    --sidebar-border: hsl(0 0% 91%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+
+    /* Topbar + fluid type */
+    --fi-topbar-h: clamp(3rem, 2.3rem + 1.2vw, 4rem);
+    --fluid-1: clamp(.875rem, .82rem + .30vw, 1rem);
+    --fluid-2: clamp(1rem, .92rem + .60vw, 1.25rem);
+    --fluid-3: clamp(1.125rem, .95rem + 1.10vw, 1.5rem);
+    --fluid-4: clamp(1.5rem, 1.1rem + 2.2vw, 2.5rem);
+
+    /* Dark surfaces */
+    --ds-dark-bg-primary-color: #111827;
+    --ds-dark-bg-secondary-color: #1f2937;
+    --ds-dark-bg-tertiary-color: #273449;
+}
+
+.dark {
+    --background: hsl(0 0% 3.9%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(0 0% 3.9%);
+    --card-foreground: hsl(0 0% 98%);
+    --popover: hsl(0 0% 3.9%);
+    --popover-foreground: hsl(0 0% 98%);
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(0 0% 9%);
+    --secondary: hsl(0 0% 14.9%);
+    --secondary-foreground: hsl(0 0% 98%);
+    --muted: hsl(0 0% 16.08%);
+    --muted-foreground: hsl(0 0% 63.9%);
+    --accent: hsl(0 0% 14.9%);
+    --accent-foreground: hsl(0 0% 98%);
+    --destructive: hsl(0 84% 60%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(0 0% 14.9%);
+    --input: hsl(0 0% 14.9%);
+    --ring: hsl(0 0% 83.1%);
+    --sidebar-background: hsl(0 0% 7%);
+    --sidebar-foreground: hsl(0 0% 95.9%);
+    --sidebar-primary: hsl(0 0% 100%);
+    --sidebar-primary-foreground: hsl(0 0% 0%);
+    --sidebar-accent: hsl(0 0% 15.9%);
+    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-border: hsl(0 0% 15.9%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }

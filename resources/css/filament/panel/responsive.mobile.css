@@ -1,0 +1,129 @@
+@media (max-width:639.98px) {
+
+    /* Global font scale ringan */
+    html.fi {
+        font-size: 14px;
+    }
+
+    :root {
+        --sw-h: 1.125rem;
+        /* 18px */
+        --sw-w: 2.25rem;
+        /* 36px */
+        --sw-pad: .125rem;
+    }
+    
+    :root {
+        --fi-topbar-h: clamp(2.5rem, 2.2rem + 1vw, 3rem);
+        --fluid-4: clamp(1.125rem, .95rem + 2vw, 1.5rem);
+        --fluid-3: clamp(1rem, .9rem + 1.6vw, 1.25rem);
+        --fluid-2: clamp(.9375rem, .85rem + 1vw, 1.125rem);
+        --fluid-1: clamp(.8125rem, .78rem + .5vw, .9375rem);
+    }
+
+
+    .fi-main {
+        padding-inline: .75rem;
+    }
+
+    .fi-header {
+        @apply pb-3;
+        gap: .75rem;
+    }
+
+    .fi-header-heading {
+        font-size: var(--fluid-3);
+        line-height: 1.25;
+    }
+
+    .fi-simple-header-heading,
+    .fi-section-header-heading {
+        font-size: var(--fluid-2);
+    }
+
+    /* Topbar search */
+    .fi-topbar .fi-global-search-field>.fi-input-wrp {
+        @apply h-9;
+    }
+
+    .fi-topbar .fi-global-search-field>.fi-input-wrp>.fi-input-wrp-input>input.fi-input {
+        max-width: 12rem;
+        font-size: var(--fluid-1);
+    }
+
+    /* Sections/Card padding */
+    .fi-section>.fi-section-header,
+    .fi-section>.fi-section-content-ctn {
+        @apply px-4 py-3;
+    }
+
+    /* Buttons compact & tidak terlalu rounded */
+    .fi-btn,
+    .fi-ac-btn {
+        @apply rounded-md py-1 px-3 text-sm;
+    }
+
+    .fi-btn .fi-btn-label {
+        @apply text-sm;
+    }
+
+    /* Inputs */
+    .fi-input-wrp>.fi-input-wrp-input>input.fi-input {
+        @apply py-1;
+        font-size: var(--fluid-1);
+    }
+
+    .fi-fo-field-wrp label.fi-fo-field-wrp-label>span {
+        font-size: var(--fluid-1);
+    }
+
+    /* Sidebar items */
+    .fi-sidebar-item>.fi-sidebar-item-btn {
+        @apply py-2 px-3;
+    }
+
+    .fi-sidebar-item>.fi-sidebar-item-btn .fi-sidebar-item-label {
+        font-size: .9375rem;
+    }
+
+    /* Table text & row height */
+    .fi-page .fi-ta-table th,
+    .fi-page .fi-ta-table td {
+        font-size: .875rem;
+    }
+
+    .fi-page .fi-ta-table tbody>tr.fi-ta-row>td.fi-ta-cell {
+        @apply py-2;
+    }
+
+    .fi-pagination {
+        font-size: .875rem;
+    }
+
+    /* Toggle & aksi rata kanan + sedikit mengecil */
+    .fi-page .fi-ta-table th:last-child,
+    .fi-page .fi-ta-table td:last-child {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .fi-page .fi-ta-table td:has([role="switch"]),
+    .fi-page .fi-ta-table td:has(.fi-switch),
+    .fi-page .fi-ta-table td:has(.fi-fo-toggle) {
+        text-align: right;
+    }
+
+    [role="switch"],
+    .fi-switch,
+    .fi-fo-toggle {
+        transform: scale(.9);
+        transform-origin: center right;
+    }
+
+    /* Kurangi kebulatan umum */
+    .fi-card,
+    .fi-section,
+    .fi-input-wrp {
+        border-radius: .5rem;
+    }
+}

@@ -1,0 +1,20 @@
+@media (min-width:640px) and (max-width:1023.98px){
+  :root{
+    --fi-topbar-h: clamp(2.75rem, 2.4rem + 1vw, 3.25rem);
+    --fluid-4: clamp(1.25rem, 1.05rem + 1.6vw, 1.75rem);
+    --fluid-3: clamp(1.0625rem, .95rem + 1.2vw, 1.375rem);
+    --fluid-2: clamp(1rem, .9rem + .8vw, 1.125rem);
+  }
+  .fi-main{ padding-inline:1rem; }
+  .fi-topbar .fi-global-search-field > .fi-input-wrp{ @apply h-10; }
+  .fi-topbar .fi-global-search-field > .fi-input-wrp > .fi-input-wrp-input > input.fi-input{ max-width:14rem; }
+  .fi-header{ @apply pb-4; gap:1rem; }
+  .fi-header-heading{ font-size:var(--fluid-3); }
+  .fi-simple-header-heading{ font-size:var(--fluid-2); }
+  .fi-section > .fi-section-header,
+  .fi-section > .fi-section-content-ctn{ @apply px-5 py-4; }
+  .fi-btn{ @apply py-1.5 px-3.5 text-[0.95rem]; }
+  .fi-btn .fi-btn-label{ @apply text-[0.95rem]; }
+  .fi-page .fi-ta-table th, .fi-page .fi-ta-table td{ font-size:.9375rem; }
+  .fi-page .fi-ta-table tbody > tr.fi-ta-row > td.fi-ta-cell{ @apply py-2.5; }
+}

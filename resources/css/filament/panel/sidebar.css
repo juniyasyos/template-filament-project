@@ -1,0 +1,35 @@
+/* Tampilan sidebar */
+.fi-sidebar-header,
+.fi-sidebar-nav,
+.fi-sidebar-item > .fi-sidebar-item-btn { @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)]; }
+
+.fi-sidebar-nav{ @apply border-r-[0.9px] border-r-[#E0E0E0] dark:border-none; }
+.fi-sidebar-item > .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item > .fi-sidebar-item-btn .fi-sidebar-item-label{ @apply text-gray-800 dark:text-white; }
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn{ @apply bg-primary-600; }
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label{ @apply text-white; }
+.fi-sidebar-item.fi-active .fi-badge{ @apply dark:bg-primary-700 dark:text-white ring-white font-extrabold; }
+
+/* Sticky pada desktop */
+.fi-panel-panel .fi-sidebar{
+  position: sticky; top: var(--fi-topbar-h);
+  height: calc(100vh - var(--fi-topbar-h));
+  overflow-y: auto; overscroll-behavior: contain;
+}
+@supports (height:100dvh){
+  .fi-panel-panel .fi-sidebar{ height: calc(100dvh - var(--fi-topbar-h)); }
+}
+
+/* Drawer mobile 100vh (tidak mengubah desktop) */
+@media (max-width:1023.98px){
+  .fi-panel-panel .fi-sidebar{
+    @apply fixed inset-0 h-screen bg-white dark:bg-[var(--ds-dark-bg-secondary-color)] shadow-xl;
+    width: min(82vw, var(--sb-w, 18rem));
+    transform: translateX(-100%); transition: transform .2s ease-out;
+    z-index: 50; display:flex; flex-direction:column;
+  }
+  .fi-panel-panel .fi-sidebar.fi-sidebar-open{ transform: translateX(0); }
+  .fi-panel-panel .fi-sidebar-header{ @apply shrink-0; }
+  .fi-panel-panel .fi-sidebar-nav{ @apply h-screen overflow-y-auto; }
+}

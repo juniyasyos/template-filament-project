@@ -69,6 +69,10 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "setup": [
+            "@php artisan migrate:fresh --seed",
+            "@php artisan optimize:cl"
         ]
     },
     "extra": {

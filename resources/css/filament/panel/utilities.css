@@ -1,19 +1,10 @@
-/* Utilities: fluid scales, progress bar, scrollbars */
+/* Progress bar */
+.progress-bar{ @apply h-4 w-full bg-gray-100 dark:bg-gray-800 rounded-full shadow-inner overflow-hidden; }
+.progress-bar-value{ @apply flex h-full items-center justify-center bg-primary-600 dark:bg-primary-500 rounded-r-full shadow-inner text-xs font-bold text-white; }
 
-/* Fluid type scale tokens */
-:root {
-  --fluid-1: clamp(0.875rem, 0.82rem + 0.30vw, 1rem);
-  --fluid-2: clamp(1rem, 0.92rem + 0.60vw, 1.25rem);
-  --fluid-3: clamp(1.125rem, 0.95rem + 1.10vw, 1.5rem);
-  --fluid-4: clamp(1.5rem, 1.1rem + 2.2vw, 2.5rem);
-}
-
-/* Progress Bar */
-.progress-bar { @apply h-4 w-full bg-gray-100 dark:bg-gray-800 rounded-full shadow-inner overflow-hidden }
-.progress-bar-value { @apply flex h-full items-center justify-center bg-primary-600 dark:bg-primary-500 rounded-r-full shadow-inner text-xs font-bold text-white; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 0px; height: 0px; }
-::-webkit-scrollbar-track { @apply bg-gray-200 dark:bg-[var(--ds-dark-bg-primary-color)]; }
-::-webkit-scrollbar-thumb { @apply bg-gray-300 dark:bg-slate-700; }
-
+/* Tema tabel bergaris (opsional) */
+.custom-bordered-table table{ border:1px solid #1B2431; }
+.custom-bordered-table th, .custom-bordered-table td{ border:1px solid #273142; }
+.custom-bordered-table thead{ background:#1B2431; color:#fff; }
+.custom-bordered-table tbody tr:nth-child(even){ background:#273142; }
+.custom-bordered-table tbody tr:nth-child(odd){ background:#323D4E; }
