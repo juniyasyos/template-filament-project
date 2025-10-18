@@ -1,0 +1,127 @@
+@layer components {
+    .welcome-page {
+        @apply flex min-h-screen items-start justify-center bg-gradient-to-br from-slate-100 via-white to-slate-100 px-4 py-10 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-black dark:text-slate-100;
+    }
+
+    .welcome-shell {
+        @apply flex w-full max-w-6xl flex-col gap-12;
+    }
+
+    .welcome-nav {
+        @apply flex flex-col gap-6 rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-lg backdrop-blur lg:flex-row lg:items-center lg:justify-between dark:border-white/10 dark:bg-white/5 dark:shadow-black/30;
+    }
+
+    .welcome-brand {
+        @apply flex items-center gap-4;
+    }
+
+    .welcome-brand-mark {
+        @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-sm font-semibold uppercase text-white shadow-lg dark:from-slate-100 dark:via-slate-200 dark:to-slate-100 dark:text-slate-900;
+    }
+
+    .welcome-brand-label {
+        @apply text-base font-semibold text-slate-900 dark:text-white;
+    }
+
+    .welcome-brand-caption {
+        @apply text-sm text-slate-500 dark:text-slate-400;
+    }
+
+    .welcome-nav-actions {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .welcome-link {
+        @apply inline-flex items-center justify-center rounded-full border border-transparent px-5 py-2 text-sm font-medium text-slate-700 transition hover:text-slate-900 dark:text-slate-200 dark:hover:text-white;
+    }
+
+    .welcome-link--primary {
+        @apply border-slate-900 bg-slate-900 text-white hover:bg-slate-800 hover:text-white dark:border-transparent dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100;
+    }
+
+    .welcome-layout {
+        @apply grid gap-10 rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md lg:grid-cols-2 dark:border-white/10 dark:bg-white/5 dark:shadow-black/40 lg:p-12;
+    }
+
+    .welcome-content {
+        @apply flex flex-col gap-6;
+    }
+
+    .welcome-badge {
+        @apply inline-flex items-center gap-2 self-start rounded-full bg-slate-900 px-4 py-1 text-xs font-semibold uppercase text-white shadow-sm dark:bg-white/10;
+    }
+
+    .welcome-heading {
+        @apply text-4xl font-semibold tracking-tight text-slate-900 dark:text-white lg:text-5xl;
+    }
+
+    .welcome-subheading {
+        @apply max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-300;
+    }
+
+    .welcome-actions {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .welcome-button {
+        @apply inline-flex items-center justify-center rounded-full border border-transparent px-6 py-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20 dark:focus-visible:ring-white/30;
+    }
+
+    .welcome-button--primary {
+        @apply bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100;
+    }
+
+    .welcome-button--ghost {
+        @apply border border-slate-300 bg-transparent text-slate-700 hover:border-slate-400 hover:bg-white dark:border-white/20 dark:text-slate-200 dark:hover:border-white/30 dark:hover:bg-white/10;
+    }
+
+    .welcome-highlights {
+        @apply grid gap-6 sm:grid-cols-2;
+    }
+
+    .welcome-highlight {
+        @apply rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-black/30;
+    }
+
+    .welcome-highlight dt {
+        @apply text-xs font-semibold uppercase tracking-widest text-slate-800 dark:text-slate-200;
+    }
+
+    .welcome-highlight dd {
+        @apply mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300;
+    }
+
+    .welcome-aside {
+        @apply flex items-stretch;
+    }
+
+    .welcome-aside-card {
+        @apply relative flex flex-col overflow-hidden rounded-3xl bg-slate-900 px-8 py-10 text-white shadow-2xl dark:bg-slate-800;
+    }
+
+    .welcome-aside-card::before {
+        content: '';
+        @apply pointer-events-none absolute inset-x-0 -top-32 h-40 bg-gradient-to-b from-white/30 via-transparent to-transparent;
+    }
+
+    .welcome-aside-heading {
+        @apply text-2xl font-semibold;
+    }
+
+    .welcome-aside-list {
+        @apply mt-6 space-y-4 text-sm leading-relaxed text-slate-200;
+    }
+
+    .welcome-aside-list li {
+        @apply relative pl-6;
+    }
+
+    .welcome-aside-list li::before {
+        content: '';
+        @apply absolute left-0 top-2 h-2 w-2 rounded-full bg-white/60;
+    }
+
+    .welcome-aside-footer {
+        @apply mt-8 text-sm text-slate-200/80;
+    }
+}

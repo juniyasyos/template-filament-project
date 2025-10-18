@@ -50,6 +50,7 @@ return [
         'sidebar_collapsible' => env('PANEL_SIDEBAR_COLLAPSIBLE', true),
         'sidebar_width' => env('PANEL_SIDEBAR_WIDTH', '18rem'),
         'collapsed_sidebar_width' => env('PANEL_COLLAPSED_SIDEBAR_WIDTH', '7rem'),
+        'max_content_width' => env('PANEL_MAX_CONTENT_WIDTH', '100rem'), // Set to very wide by default
     ],
 
     /**

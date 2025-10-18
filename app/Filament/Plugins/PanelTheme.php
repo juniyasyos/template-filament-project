@@ -1,97 +1,225 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Plugins;
 
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Enums\ThemeMode;
 use Filament\Panel;
+use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 
-class PanelTheme implements Plugin
+final class PanelTheme implements Plugin
 {
-    protected string $id = 'panel-theme';
-    protected string $viteThemePath = 'resources/css/filament/panel/theme.css';
-    protected array $colors = [];
-    protected ThemeMode $defaultMode;
+    private const DEFAULT_ID = 'panel-theme';
 
-    // Branding properties
-    protected string | Htmlable | Closure | null $brandName = null;
-    protected $brandLogo = null;
-    protected $darkBrandLogo = null;
-    protected $brandLogoHeight = null;
-    protected $favicon = null;
+    private string $id = self::DEFAULT_ID;
 
-    // Sidebar properties
-    protected bool $sidebarCollapsibleOnDesktop = true;
-    protected string $sidebarWidth = '18rem';
-    protected string $collapsedSidebarWidth = '7rem';
+    /** @var non-empty-string */
+    private string $viteThemePath = 'resources/css/filament/panel/theme.css';
 
-    // Authentication properties
-    protected string | Closure | null $loginUrl = null;
-    protected string | Closure | null $passwordResetUrl = null;
-    protected string | Closure | null $passwordResetResponseUrl = null;
-    protected string | Closure | null $registrationUrl = null;
+    /**
+     * @var array{
+     *   primary?: string|array<int,string>|Color,
+     *   danger?: string|array<int,string>|Color,
+     *   gray?: string|array<int,string>|Color,
+     *   info?: string|array<int,string>|Color,
+     *   success?: string|array<int,string>|Color,
+     *   warning?: string|array<int,string>|Color
+     * }
+     */
+    private array $colors = [];
 
-    // Notifications properties
-    protected bool $databaseNotifications = true;
-    protected string $databaseNotificationsPolling = '30s';
+    private ThemeMode $defaultMode;
 
-    // Global search properties
-    protected bool $globalSearch = true;
-    protected array $globalSearchKeyBindings = ['cmd+k', 'ctrl+k'];
+    // Branding
+    private string|Htmlable|Closure|null $brandName = null;
+    private string|null $brandLogo = null;
+    private string|null $darkBrandLogo = null;
+    /** @var non-empty-string|null */
+    private ?string $brandLogoHeight = null;
+    private string|null $favicon = null;
+
+    // Sidebar
+    private bool $sidebarCollapsibleOnDesktop = true;
+    /** @var non-empty-string */
+    private string $sidebarWidth = '18rem';
+    /** @var non-empty-string */
+    private string $collapsedSidebarWidth = '7rem';
+
+    // Content
+    private ?string $maxContentWidth = null;
+
+    // Auth URLs
+    private string|Closure|null $loginUrl = null;
+    private string|Closure|null $passwordResetUrl = null;
+    private string|Closure|null $passwordResetResponseUrl = null;
+    private string|Closure|null $registrationUrl = null;
+
+    // Notifications
+    private bool $databaseNotifications = true;
+    /** @var non-empty-string */
+    private string $databaseNotificationsPolling = '30s';
+
+    // Global Search
+    private bool $globalSearch = true;
+    /** @var list<non-empty-string> */
+    private array $globalSearchKeyBindings = ['cmd+k', 'ctrl+k'];
 
     public function __construct()
     {
+        // Colors & theme path
         $this->colors = (array) config('panel-theme.colors', []);
-        $this->viteThemePath = (string) (config('panel-theme.vite_path', $this->viteThemePath));
+        $this->viteThemePath = (string) config('panel-theme.vite_path', $this->viteThemePath);
 
+        // Mode
         $this->defaultMode = match (strtolower((string) config('panel-theme.default_mode', 'system'))) {
             'light' => ThemeMode::Light,
-            'dark' => ThemeMode::Dark,
+            'dark'  => ThemeMode::Dark,
             default => ThemeMode::System,
         };
 
-        // Load branding configuration
-        $brand = (array) config('panel-theme.brand', []);
-        $this->brandName = $brand['name'] ?? null;
-        $this->brandLogo = $this->resolveAssetUrl($brand['logo'] ?? null);
-        $this->darkBrandLogo = $this->resolveAssetUrl($brand['logo_dark'] ?? null);
-        $this->brandLogoHeight = $brand['logo_height'] ?? null;
-        $this->favicon = $this->resolveAssetUrl($brand['favicon'] ?? null);
+        // Branding
+        $brand                = (array) config('panel-theme.brand', []);
+        $this->brandName      = Arr::get($brand, 'name');
+        $this->brandLogo      = $this->resolveAssetUrl(Arr::get($brand, 'logo'));
+        $this->darkBrandLogo  = $this->resolveAssetUrl(Arr::get($brand, 'logo_dark'));
+        $this->brandLogoHeight = Arr::get($brand, 'logo_height');
+        $this->favicon        = $this->resolveAssetUrl(Arr::get($brand, 'favicon'));
 
-        // Load UI configuration
-        $ui = (array) config('panel-theme.ui', []);
-        $this->sidebarCollapsibleOnDesktop = $ui['sidebar_collapsible'] ?? true;
-        $this->sidebarWidth = $ui['sidebar_width'] ?? '18rem';
-        $this->collapsedSidebarWidth = $ui['collapsed_sidebar_width'] ?? '7rem';
+        // UI
+        $ui                           = (array) config('panel-theme.ui', []);
+        $this->sidebarCollapsibleOnDesktop = (bool) Arr::get($ui, 'sidebar_collapsible', true);
+        $this->sidebarWidth           = (string) Arr::get($ui, 'sidebar_width', '18rem');
+        $this->collapsedSidebarWidth  = (string) Arr::get($ui, 'collapsed_sidebar_width', '7rem');
+        $this->maxContentWidth        = Arr::get($ui, 'max_content_width');
 
-        // Load authentication configuration
-        $auth = (array) config('panel-theme.authentication', []);
-        $this->loginUrl = $auth['login_url'] ?? '/login';
-        $this->passwordResetUrl = $auth['password_reset_url'] ?? '/forgot-password';
-        $this->passwordResetResponseUrl = $auth['password_reset_response_url'] ?? '/reset-password';
-        $this->registrationUrl = $auth['registration_url'] ?? '/register';
+        // Auth
+        $auth                           = (array) config('panel-theme.authentication', []);
+        $this->loginUrl                 = Arr::get($auth, 'login_url', '/login');
+        $this->passwordResetUrl         = Arr::get($auth, 'password_reset_url', '/forgot-password');
+        $this->passwordResetResponseUrl = Arr::get($auth, 'password_reset_response_url', '/reset-password');
+        $this->registrationUrl          = Arr::get($auth, 'registration_url', '/register');
 
-        // Load notifications configuration
-        $notifications = (array) config('panel-theme.notifications', []);
-        $this->databaseNotifications = $notifications['database_enabled'] ?? true;
-        $this->databaseNotificationsPolling = $notifications['polling_interval'] ?? '30s';
+        // Notifications
+        $notifications                       = (array) config('panel-theme.notifications', []);
+        $this->databaseNotifications         = (bool) Arr::get($notifications, 'database_enabled', true);
+        $this->databaseNotificationsPolling  = (string) Arr::get($notifications, 'polling_interval', '30s');
 
-        // Load global search configuration
-        $search = (array) config('panel-theme.global_search', []);
-        $this->globalSearch = $search['enabled'] ?? true;
-        $this->globalSearchKeyBindings = $search['key_bindings'] ?? ['cmd+k', 'ctrl+k'];
+        // Global Search
+        $search                        = (array) config('panel-theme.global_search', []);
+        $this->globalSearch            = (bool) Arr::get($search, 'enabled', true);
+        $this->globalSearchKeyBindings = array_values((array) Arr::get($search, 'key_bindings', ['cmd+k', 'ctrl+k']));
     }
 
-    public static function make(): static
+    public static function make(): self
     {
-        return new static();
+        return new self();
     }
 
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /** Fluent overrides (opsional, untuk dipakai di ServiceProvider jika perlu) */
+    public function id(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+    public function viteThemePath(string $path): self
+    {
+        $this->viteThemePath = $path;
+        return $this;
+    }
+    public function colors(array $colors): self
+    {
+        $this->colors = $colors;
+        return $this;
+    }
+    public function defaultMode(ThemeMode $mode): self
+    {
+        $this->defaultMode = $mode;
+        return $this;
+    }
+    public function brandName(string|Htmlable|Closure|null $name): self
+    {
+        $this->brandName = $name;
+        return $this;
+    }
+    public function brandLogo(?string $url): self
+    {
+        $this->brandLogo = $this->resolveAssetUrl($url);
+        return $this;
+    }
+    public function darkBrandLogo(?string $url): self
+    {
+        $this->darkBrandLogo = $this->resolveAssetUrl($url);
+        return $this;
+    }
+    public function brandLogoHeight(?string $height): self
+    {
+        $this->brandLogoHeight = $height;
+        return $this;
+    }
+    public function favicon(?string $url): self
+    {
+        $this->favicon = $this->resolveAssetUrl($url);
+        return $this;
+    }
+    public function sidebarCollapsibleOnDesktop(bool $on = true): self
+    {
+        $this->sidebarCollapsibleOnDesktop = $on;
+        return $this;
+    }
+    public function sidebarWidth(string $width): self
+    {
+        $this->sidebarWidth = $width;
+        return $this;
+    }
+    public function collapsedSidebarWidth(string $width): self
+    {
+        $this->collapsedSidebarWidth = $width;
+        return $this;
+    }
+    public function maxContentWidth(?string $width): self
+    {
+        $this->maxContentWidth = $width;
+        return $this;
+    }
+    public function loginUrl(string|Closure|null $url): self
+    {
+        $this->loginUrl = $url;
+        return $this;
+    }
+    public function passwordResetUrls(string|Closure|null $requestUrl, string|Closure|null $responseUrl): self
+    {
+        $this->passwordResetUrl = $requestUrl;
+        $this->passwordResetResponseUrl = $responseUrl;
+        return $this;
+    }
+    public function registrationUrl(string|Closure|null $url): self
+    {
+        $this->registrationUrl = $url;
+        return $this;
+    }
+    public function databaseNotifications(bool $on = true, string $poll = '30s'): self
+    {
+        $this->databaseNotifications = $on;
+        $this->databaseNotificationsPolling = $poll;
+        return $this;
+    }
+    public function globalSearch(bool $on = true, array $bindings = ['cmd+k', 'ctrl+k']): self
+    {
+        $this->globalSearch = $on;
+        $this->globalSearchKeyBindings = array_values($bindings);
+        return $this;
     }
 
     public function register(Panel $panel): void
@@ -101,122 +229,169 @@ class PanelTheme implements Plugin
             ->colors($this->colors)
             ->defaultThemeMode($this->defaultMode);
 
-        // Apply branding if provided
+        // Branding
         if ($this->brandName !== null) {
             $panel->brandName($this->brandName);
         }
-
         if ($this->brandLogo !== null) {
             $panel->brandLogo($this->brandLogo);
         }
-
         if ($this->darkBrandLogo !== null) {
             $panel->darkModeBrandLogo($this->darkBrandLogo);
         }
-
-        if ($this->brandLogoHeight !== null) {
+        if (!empty($this->brandLogoHeight)) {
             $panel->brandLogoHeight($this->brandLogoHeight);
         }
-
         if ($this->favicon !== null) {
             $panel->favicon($this->favicon);
         }
 
-        // Apply sidebar configuration
+        // Sidebar
         if ($this->sidebarCollapsibleOnDesktop) {
             $panel->sidebarCollapsibleOnDesktop();
         }
         $panel->sidebarWidth($this->sidebarWidth);
         $panel->collapsedSidebarWidth($this->collapsedSidebarWidth);
 
-        // Apply authentication configuration
+        // Content
+        if ($this->maxContentWidth !== null) {
+            $panel->maxContentWidth($this->maxContentWidth);
+        }
+
+        // Auth redirects ( Closure|string -> RedirectResponse )
         if ($this->loginUrl) {
-            $panel->login(fn () => redirect()->to(url($this->loginUrl)));
+            $panel->login(fn(): RedirectResponse => redirect($this->resolveUrl($this->loginUrl)));
         }
         if ($this->passwordResetUrl && $this->passwordResetResponseUrl) {
             $panel->passwordReset(
-                fn () => redirect()->to(url($this->passwordResetUrl)),
-                fn () => redirect()->to(url($this->passwordResetResponseUrl)),
+                fn(): RedirectResponse => redirect($this->resolveUrl($this->passwordResetUrl)),
+                fn(): RedirectResponse => redirect($this->resolveUrl($this->passwordResetResponseUrl)),
             );
         }
         if ($this->registrationUrl) {
-            $panel->registration(fn () => redirect()->to(url($this->registrationUrl)));
+            $panel->registration(fn(): RedirectResponse => redirect($this->resolveUrl($this->registrationUrl)));
         }
 
-        // Apply notifications configuration
+        // Notifications
         if ($this->databaseNotifications) {
             $panel->databaseNotifications();
             $panel->databaseNotificationsPolling($this->databaseNotificationsPolling);
         }
 
-        // Apply global search configuration
+        // Global Search
         if ($this->globalSearch) {
             $panel->globalSearch();
-            $panel->globalSearchKeyBindings($this->globalSearchKeyBindings);
+            if (!empty($this->globalSearchKeyBindings)) {
+                $panel->globalSearchKeyBindings($this->globalSearchKeyBindings);
+            }
         }
 
-        // Inject CSS variables for consistency with tokens.css
+        // CSS Variables injection (sinkron dengan tokens.css)
         $this->injectCustomCSS($panel);
     }
 
     public function boot(Panel $panel): void
     {
-        // No additional setup required
+        // Reserved: tambahkan hook lain bila diperlukan
     }
 
-    protected function resolveAssetUrl(?string $value): ?string
+    private function resolveAssetUrl(?string $value): ?string
     {
         if ($value === null || $value === '') {
             return null;
         }
 
-        $lower = strtolower($value);
-        if (str_starts_with($lower, 'http://') || str_starts_with($lower, 'https://') || str_starts_with($value, '/')) {
-            return $value;
+        $v = trim($value);
+        $lower = strtolower($v);
+
+        if (str_starts_with($lower, 'http://') || str_starts_with($lower, 'https://') || str_starts_with($v, '/')) {
+            return $v;
         }
 
-        return asset($value);
+        return asset($v);
     }
 
-    /**
-     * Inject custom CSS to ensure consistency between Filament colors and tokens.css
-     */
-    protected function injectCustomCSS(Panel $panel): void
+    /** @return non-empty-string */
+    private function hookBodyStart(): string
     {
-        // Get the primary color from Filament configuration
-        $primaryColor = $this->colors['primary'] ?? null;
-
-        if ($primaryColor) {
-            // Convert Filament Color to CSS custom property
-            $cssVariables = $this->generateCSSVariablesFromColors();
-
-            // Register CSS variables that tokens.css can use
-            $panel->renderHook('panels::body.start', function () use ($cssVariables) {
-                return '<style>:root { ' . $cssVariables . ' }</style>';
-            });
-        }
+        // Gunakan constant Filament v4 jika tersedia, fallback ke string hook name
+        return defined(PanelsRenderHook::class . '::BODY_START')
+            ? PanelsRenderHook::BODY_START
+            : 'panels::body.start';
     }
 
     /**
-     * Generate CSS variables from Filament colors
+     * Inject custom CSS variables untuk menyamakan warna Filament & tokens.css
      */
-    protected function generateCSSVariablesFromColors(): string
+    private function injectCustomCSS(Panel $panel): void
+    {
+        $cssVariables = $this->generateCSSVariablesFromColors();
+        if ($cssVariables === '') {
+            return;
+        }
+
+        $panel->renderHook($this->hookBodyStart(), static fn(): string => '<style>:root{' . $cssVariables . '}</style>');
+    }
+
+    /**
+     * Generate CSS variables dari konfigurasi warna Filament.
+     * Saat palette array diberikan, shade 500 dipakai sebagai warna utama.
+     *
+     * @return string CSS custom properties (tanpa selector)
+     */
+    private function generateCSSVariablesFromColors(): string
     {
         $css = '';
 
-        // Handle primary color specifically for consistency with tokens.css
+        // Primary
         if (isset($this->colors['primary'])) {
-            $primary = $this->colors['primary'];
+            $css .= $this->cssVar('--panel-primary', $this->extractColorHex($this->colors['primary']));
+        }
 
-            if (is_array($primary) && isset($primary[500])) {
-                // If it's a full palette, use the 500 shade as the main color
-                $css .= '--panel-primary: ' . $primary[500] . '; ';
-            } else if (is_string($primary)) {
-                // If it's a hex color, use it directly
-                $css .= '--panel-primary: ' . $primary . '; ';
+        // (Opsional) kamu bisa tambahkan mapping lain bila perlu:
+        // success / warning / danger / info / gray → tokens yang kamu gunakan di tokens.css
+        // Contoh:
+        foreach (['success', 'warning', 'danger', 'info', 'gray'] as $key) {
+            if (isset($this->colors[$key])) {
+                $css .= $this->cssVar("--panel-{$key}", $this->extractColorHex($this->colors[$key]));
             }
         }
 
         return $css;
+    }
+
+    private function cssVar(string $name, ?string $value): string
+    {
+        return $value ? sprintf('%s:%s;', $name, $value) : '';
+    }
+
+    /**
+     * Terima string hex / Color / array palette → pulangkan hex utama (shade 500 bila ada).
+     * @param mixed $color
+     */
+    private function extractColorHex(mixed $color): ?string
+    {
+        // if ($color instanceof Color) {
+        //     // Filament\Support\Colors\Color::getHex() digunakan untuk mengambil nilai hex utama
+        //     return $color->getHex();
+        // }
+
+        if (is_array($color)) {
+            // shade 500 paling umum sebagai "main"
+            return $color[500] ?? $color['500'] ?? (is_string(reset($color)) ? (string) reset($color) : null);
+        }
+
+        if (is_string($color) && $color !== '') {
+            return $color;
+        }
+
+        return null;
+    }
+
+    /** string|Closure -> string (URL absolute/relative) */
+    private function resolveUrl(string|Closure $url): string
+    {
+        $value = $url instanceof Closure ? (string) $url() : $url;
+        return url($value);
     }
 }

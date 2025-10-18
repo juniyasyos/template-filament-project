@@ -1,0 +1,153 @@
+/**
+ * Auth-specific styles
+ *
+ * Additional styles specific to authentication pages that aren't covered
+ * by the base design tokens. These should be minimal and focused.
+ */
+
+/* Auth Layout Enhancements */
+.auth-layout {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Auth Card */
+.auth-card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: var(--auth-card-width);
+  padding: var(--auth-card-padding);
+}
+
+/* Focus management for better accessibility */
+.auth-form {
+  /* Ensure focus outline is visible */
+  --focus-ring-color: var(--focus-ring);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
+.auth-form *:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Status messages */
+.auth-status-message {
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.auth-status-message.success {
+  background: hsl(var(--success) / 0.1);
+  color: var(--success);
+  border: 1px solid hsl(var(--success) / 0.2);
+}
+
+.auth-status-message.info {
+  background: hsl(var(--info) / 0.1);
+  color: var(--info);
+  border: 1px solid hsl(var(--info) / 0.2);
+}
+
+/* Loading states */
+.auth-loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Two-factor specific styles */
+.otp-input-group {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.otp-input {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--input);
+  color: var(--input-foreground);
+}
+
+.otp-input:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 1px var(--ring);
+}
+
+.otp-input.error {
+  border-color: var(--danger);
+  background: hsl(var(--danger) / 0.05);
+}
+
+/* Social login enhancements */
+.social-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-login-button:hover {
+  background: var(--muted);
+  border-color: var(--border);
+}
+
+.social-login-button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .auth-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .otp-input {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1rem;
+  }
+
+  .otp-input-group {
+    gap: 0.375rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .auth-layout {
+    background: white;
+    color: black;
+  }
+
+  .auth-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
