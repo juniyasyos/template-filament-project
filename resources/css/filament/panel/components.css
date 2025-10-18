@@ -50,6 +50,141 @@
 .fi-tabs{ @apply ring-0 dark:bg-[var(--ds-dark-bg-secondary-color)] rounded-t-xl; }
 .fi-fo-tabs-tab{ @apply ring-offset-0 ring-0 dark:ring-1 dark:ring-offset-0 dark:ring-white/10 dark:bg-[var(--ds-dark-bg-secondary-color)]; }
 
+/* Toggle Switches - Enhanced visibility and contrast */
+.fi-toggle,
+.fi-fo-toggle,
+[role="switch"] {
+  @apply ring-2 ring-gray-300 dark:ring-gray-500 shadow-lg;
+  border: 2px solid transparent !important;
+  background-color: #e5e7eb !important; /* Light gray background when off */
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add subtle gradient for better depth */
+.fi-toggle,
+.fi-fo-toggle,
+[role="switch"] {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%) !important;
+}
+
+.fi-toggle:hover,
+.fi-fo-toggle:hover,
+[role="switch"]:hover {
+  @apply ring-gray-400 dark:ring-gray-400;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode toggle background */
+.fi-toggle:where(.dark, .dark *),
+.fi-fo-toggle:where(.dark, .dark *),
+[role="switch"]:where(.dark, .dark *) {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%) !important;
+  @apply ring-gray-500;
+}
+
+/* Active/checked state with vibrant colors */
+.fi-toggle[aria-checked="true"],
+.fi-fo-toggle[aria-checked="true"],
+[role="switch"][aria-checked="true"] {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  @apply ring-blue-400 shadow-lg;
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 0.3), 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.fi-toggle[aria-checked="true"]:where(.dark, .dark *),
+.fi-fo-toggle[aria-checked="true"]:where(.dark, .dark *),
+[role="switch"][aria-checked="true"]:where(.dark, .dark *) {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  @apply ring-blue-400;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.4), 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Toggle knob/handle styling with enhanced shadow and border */
+.fi-toggle > :first-child,
+.fi-fo-toggle > :first-child,
+[role="switch"] > :first-child {
+  @apply shadow-xl ring-2 ring-gray-200 dark:ring-gray-600;
+  background-color: #ffffff !important;
+  border: 2px solid #f3f4f6;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* Knob styling when active */
+.fi-toggle[aria-checked="true"] > :first-child,
+.fi-fo-toggle[aria-checked="true"] > :first-child,
+[role="switch"][aria-checked="true"] > :first-child {
+  @apply shadow-xl ring-2 ring-white/30;
+  background-color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Focus states for better accessibility */
+.fi-toggle:focus-visible,
+.fi-fo-toggle:focus-visible,
+[role="switch"]:focus-visible {
+  @apply ring-4 ring-blue-200 dark:ring-blue-800;
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 0.2);
+}
+
+/* Disabled state with reduced opacity and muted colors */
+.fi-toggle:disabled,
+.fi-fo-toggle:disabled,
+[role="switch"]:disabled {
+  @apply opacity-40 cursor-not-allowed ring-gray-200 dark:ring-gray-700;
+  background: #f9fafb !important;
+  box-shadow: none;
+}
+
+.fi-toggle:disabled:where(.dark, .dark *),
+.fi-fo-toggle:disabled:where(.dark, .dark *),
+[role="switch"]:disabled:where(.dark, .dark *) {
+  background: #111827 !important;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .fi-toggle,
+  .fi-fo-toggle,
+  [role="switch"] {
+    transform: scale(0.95);
+    @apply ring-1;
+  }
+
+  .fi-toggle:hover,
+  .fi-fo-toggle:hover,
+  [role="switch"]:hover {
+    transform: scale(0.98);
+  }
+}
+
+/* Main Container - Max width control */
+.fi-main {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Override for specific width classes if needed */
+.fi-main:not([class*="fi-width-"]) {
+  @apply max-w-7xl;
+}
+
+/* Responsive max-width adjustments */
+@media (min-width: 1280px) {
+  .fi-main:not([class*="fi-width-"]) {
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .fi-main:not([class*="fi-width-"]) {
+    max-width: 1600px;
+  }
+}
+
 /* Branding */
 .fi-logo{ @apply text-xl font-bold; line-height:1; }
 .fi-topbar .fi-logo{ display:inline-flex; align-items:center; white-space:nowrap; word-break:keep-all; hyphens:none; overflow:visible; text-overflow:clip; max-width:none; }

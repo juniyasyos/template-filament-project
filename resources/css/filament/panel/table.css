@@ -1,12 +1,200 @@
 /* Konten tabel responsif */
-.fi-page .fi-ta-content{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
-.fi-page .fi-ta-table{ width:max-content; min-width:100%; }
+.fi-page .fi-ta-content{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  /* Ensure container allows proper scrolling */
+  position:relative;
+  width:100%;
+  /* Enhanced scrollbar for better visibility */
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+}
+
+/* Enhanced scrollbar styling for table container */
+.fi-page .fi-ta-content::-webkit-scrollbar {
+  height: 12px;
+  background-color: transparent;
+}
+
+.fi-page .fi-ta-content::-webkit-scrollbar-track {
+  background: linear-gradient(90deg,
+    rgba(229, 231, 235, 0.3) 0%,
+    rgba(229, 231, 235, 0.6) 50%,
+    rgba(229, 231, 235, 0.3) 100%);
+  border-radius: 6px;
+  margin: 0 8px;
+}
+
+.fi-page .fi-ta-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #64748b, #475569);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s ease;
+}
+
+.fi-page .fi-ta-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #475569, #334155);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+/* Dark mode scrollbar */
+.fi-page .fi-ta-content::-webkit-scrollbar-track:where(.dark, .dark *) {
+  background: linear-gradient(90deg,
+    rgba(55, 65, 81, 0.3) 0%,
+    rgba(55, 65, 81, 0.6) 50%,
+    rgba(55, 65, 81, 0.3) 100%);
+}
+
+.fi-page .fi-ta-content::-webkit-scrollbar-thumb:where(.dark, .dark *) {
+  background: linear-gradient(90deg, #6b7280, #9ca3af);
+}
+
+.fi-page .fi-ta-content::-webkit-scrollbar-thumb:hover:where(.dark, .dark *) {
+  background: linear-gradient(90deg, #9ca3af, #d1d5db);
+}
+
+/* Scroll indicators - Gradient shadows */
+.fi-page .fi-ta-content::before,
+.fi-page .fi-ta-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 12px; /* Account for scrollbar height */
+  width: 20px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+/* Left scroll indicator */
+.fi-page .fi-ta-content::before {
+  left: 0;
+  background: linear-gradient(to right,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.4),
+    transparent);
+  opacity: 0;
+}
+
+/* Right scroll indicator */
+.fi-page .fi-ta-content::after {
+  right: 0;
+  background: linear-gradient(to left,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.4),
+    transparent);
+  opacity: 1;
+}
+
+/* Dark mode scroll indicators */
+.fi-page .fi-ta-content::before:where(.dark, .dark *) {
+  background: linear-gradient(to right,
+    rgba(31, 41, 55, 0.8),
+    rgba(31, 41, 55, 0.4),
+    transparent);
+}
+
+.fi-page .fi-ta-content::after:where(.dark, .dark *) {
+  background: linear-gradient(to left,
+    rgba(31, 41, 55, 0.8),
+    rgba(31, 41, 55, 0.4),
+    transparent);
+}
+
+/* Show/hide scroll indicators based on scroll position */
+.fi-page .fi-ta-content:not([data-scroll-position="start"])::before {
+  opacity: 1;
+}
+
+.fi-page .fi-ta-content[data-scroll-position="end"]::after {
+  opacity: 0;
+}
+
+/* Visual cue for scrollable content */
+.fi-page .fi-ta-content[data-scrollable="true"] {
+  border-left: 2px solid rgba(59, 130, 246, 0.2);
+  border-right: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+.fi-page .fi-ta-content[data-scrollable="true"]:where(.dark, .dark *) {
+  border-left: 2px solid rgba(99, 102, 241, 0.3);
+  border-right: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+/* Enhanced hover effect for scroll indication */
+.fi-page .fi-ta-content:hover {
+  scrollbar-color: #475569 rgba(229, 231, 235, 0.8);
+}
+
+.fi-page .fi-ta-content:hover:where(.dark, .dark *) {
+  scrollbar-color: #9ca3af rgba(55, 65, 81, 0.8);
+}
+
+/* Scroll hint animation */
+@keyframes scroll-hint {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.fi-page .fi-ta-content::after {
+  animation: scroll-hint 2s ease-in-out infinite;
+}
+
+/* Stop animation when content is being scrolled */
+.fi-page .fi-ta-content:hover::after,
+.fi-page .fi-ta-content:focus-within::after {
+  animation: none;
+  opacity: 1;
+}
+
+/* Alternative scroll indicator using box-shadow */
+.fi-page .fi-ta-content {
+  box-shadow:
+    inset -10px 0 10px -10px rgba(0, 0, 0, 0.1),
+    inset 10px 0 10px -10px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease;
+}
+
+.fi-page .fi-ta-content:where(.dark, .dark *) {
+  box-shadow:
+    inset -10px 0 10px -10px rgba(255, 255, 255, 0.05),
+    inset 10px 0 10px -10px rgba(255, 255, 255, 0);
+}
+.fi-page .fi-ta-table{
+  width:max-content;
+  min-width:100%;
+  table-layout:auto;
+  /* Force table to maintain minimum column widths */
+  border-collapse:separate;
+  border-spacing:0;
+}
 .fi-page .fi-ta-table thead{ @apply bg-[#FCFDFD] dark:bg-[var(--ds-dark-bg-tertiary-color)]; }
 .fi-page .fi-ta-table tbody{ @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)]; }
 .fi-page .fi-ta-table tbody > tr.fi-ta-row > td.fi-ta-cell{ @apply py-1; }
 
-/* Wrap teks panjang */
-.fi-page .fi-ta-table th, .fi-page .fi-ta-table td{ white-space:normal; word-break:break-word; }
+/* Wrap teks panjang - Kecuali action columns */
+.fi-page .fi-ta-table th:not(.fi-ta-actions-header-cell),
+.fi-page .fi-ta-table td:not(.fi-ta-actions-cell) {
+  white-space:normal;
+  word-break:break-word;
+}
+
+/* Action columns - Prevent wrapping and ensure adequate space */
+.fi-page .fi-ta-table .fi-ta-actions-header-cell,
+.fi-page .fi-ta-table .fi-ta-actions-cell {
+  white-space:nowrap;
+  min-width:120px;
+  width:auto;
+  text-align:right;
+}
+
+/* Updated/Date columns - Prevent shrinking too much */
+.fi-page .fi-ta-table th:nth-last-child(2),
+.fi-page .fi-ta-table td:nth-last-child(2) {
+  min-width:150px;
+  white-space:nowrap;
+}
 
 /* Kontainer modern */
 .fi-ta-ctn{ @apply ring-1 dark:bg-[var(--ds-dark-bg-secondary-color)] border-black dark:border dark:border-white/10; }
@@ -36,16 +224,38 @@
 /* Pagination bg */
 .fi-pagination{ @apply bg-white dark:bg-[var(--ds-dark-bg-secondary-color)]; }
 
-/* Kolom aksi ramping di layar kecil */
+/* Action columns - Better responsive behavior */
 @media (max-width:768px){
-  .fi-page .fi-ta-actions-cell{ width:1%; white-space:nowrap; }
+  .fi-page .fi-ta-actions-cell{
+    width:auto;
+    min-width:100px;
+    white-space:nowrap;
+  }
+
+  /* Ensure actions don't get too cramped */
+  .fi-page .fi-ta-table .fi-ta-actions-cell .fi-ta-actions {
+    display:flex;
+    gap:0.25rem;
+    justify-content:flex-end;
+  }
 }
 
-/* Rata kanan kolom terakhir & toggle (mobile di file responsive.mobile.css ditambah scale) */
+/* Rata kanan kolom terakhir & toggle */
 @media (max-width:639.98px){
   .fi-page .fi-ta-table th:last-child,
   .fi-page .fi-ta-table td:last-child{ text-align:right; white-space:nowrap; }
   .fi-page .fi-ta-table td:has([role="switch"]),
   .fi-page .fi-ta-table td:has(.fi-switch),
   .fi-page .fi-ta-table td:has(.fi-fo-toggle){ text-align:right; }
+
+  /* Further reduce action cell spacing on mobile */
+  .fi-page .fi-ta-actions-cell{
+    min-width:80px;
+  }
+
+  /* Stack actions vertically on very small screens if needed */
+  .fi-page .fi-ta-table .fi-ta-actions-cell .fi-ta-actions {
+    flex-direction:column;
+    gap:0.125rem;
+  }
 }
