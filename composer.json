@@ -10,7 +10,7 @@
         "andreiio/blade-remix-icon": "^3.6",
         "filament/filament": "~4.0",
         "inertiajs/inertia-laravel": "^2.0",
-        "juniyasyos/filament-backup": "dev-main",
+        "juniyasyos/filament-backup": "v2.0.0",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -80,13 +80,6 @@
             "dont-discover": []
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/juniyasyos/filament-backup",
-            "options": { "symlink": true }
-        }
-    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
